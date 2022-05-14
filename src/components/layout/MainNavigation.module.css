@@ -1,0 +1,90 @@
+.header {
+  width: 100%;
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #323943;
+  padding: 24px 2%;
+}
+
+.logo {
+  width: 186px;
+  height: 88px;
+  margin-top: 8px;
+}
+
+.header ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: baseline;
+}
+
+.header a {
+  text-decoration: none;
+  font-size: 1.5rem;
+  color: white;
+}
+
+.header a:hover,
+.header a:active,
+.header a.active {
+  color: white;
+}
+
+.badge {
+  background-color: #cc2062;
+  color: white;
+  border-radius: 12px;
+  padding: 0 1rem;
+  margin-left: 0.5rem;
+}
+
+.button {
+  background-color: #323943;
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  text-align: center;
+  margin: 4px 2px;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 24px;
+  border: 1px solid #e77773;
+}
+
+.button:hover {
+  background-color: #e77773;
+}
+
+.button1 {
+  background-color: #323943;
+  border: none;
+  color: white;
+  padding: 12px 24px;
+  text-align: center;
+  margin: 4px 2px;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  border-radius: 24px;
+}
+
+.button1:hover {
+  background-color: #93949c;
+}
+
+.searchBox {
+  font-size: 16px;
+  line-height: 24px;
+  padding: 8px 20px;
+  max-width: 350px;
+  width: 100%;
+  border: 0px;
+  border-radius: 43px;
+}
