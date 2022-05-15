@@ -5,16 +5,17 @@ import LoginPage from "./pages/Login";
 import SignUpPage from "./pages/SignUp";
 import Start from "./pages/Start";
 import Layout from "./components/layout/Layout";
+import Rating from "./components/companyPost/Rating";
 
 function App() {
   return (
     <Switch>
-      <Route path="/" exact>
+      <Route path="/home" exact>
         <Layout>
           <Home />
         </Layout>
       </Route>
-      <Route path="/home" exact>
+      <Route path="/" exact>
         <Layout>
           <Start />
         </Layout>
@@ -24,6 +25,11 @@ function App() {
       </Route>
       <Route path="/signup">
         <SignUpPage />
+      </Route>
+      <Route path="/rating">
+        <Layout>
+          <Rating />
+        </Layout>
       </Route>
     </Switch>
   );

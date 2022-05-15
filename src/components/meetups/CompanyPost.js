@@ -3,15 +3,14 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { BiLike } from "react-icons/bi";
 import { BiDislike } from "react-icons/bi";
 import { BiFlag } from "react-icons/bi";
+import ReactReadMoreReadLess from "react-read-more-read-less";
+
 function CompanyPost() {
   return (
     <div className={classes.container}>
       <div className={classes.row}>
         <div className={classes.detailLeft}>
           <div className={classes.title}>
-            <div>
-              <h1 className={classes.companyName}>FPT Software</h1>
-            </div>
             <div className={classes.logoWrapper}>
               <img
                 className={classes.logo}
@@ -19,16 +18,126 @@ function CompanyPost() {
                 alt="Background"
               ></img>
             </div>
+            <div>
+              <h1 className={classes.companyName}>FPT Software</h1>
+              <div className={classes.locationWrapper}>
+                <HiOutlineLocationMarker color="#ccc" fontSize="1.3em" />
+                <div className={classes.location}>
+                  FPT Complex, Khu đô thị FPT City, Ngũ Hành Sơn, Đà Nẵng
+                </div>
+              </div>
+            </div>
           </div>
-          <div className={classes.locationWrapper}>
+          {/* <div className={classes.locationWrapper}>
             <HiOutlineLocationMarker color="#ccc" fontSize="1.3em" />
             <div className={classes.location}>
               FPT Complex, Khu đô thị FPT City, Ngũ Hành Sơn, Đà Nẵng
             </div>
-          </div>
+          </div> */}
           <div>
             <div className={classes.description}>
-              <p>
+              <h2>Giới thiệu</h2>
+              <ReactReadMoreReadLess
+                charLimit={800}
+                readMoreText={"Read more"}
+                readLessText={"Read less"}
+                readMoreClassName="read-more-less--more"
+                readLessClassName="read-more-less--less"
+              >
+                Sau 12 năm hoạt động (từ 13/08/2005), FPT Software Đà Nẵng đã
+                không ngừng lớn mạnh và trở thành công ty công nghệ thông tin có
+                quy mô lớn nhất miền Trung. Công ty đang hướng tới mục tiêu 5001
+                nhân sự vào năm 2020. Sau 12 năm hoạt động (từ 13/08/2005), FPT
+                Software Đà Nẵng đã không ngừng lớn mạnh và trở thành công ty
+                công nghệ thông tin có quy mô lớn nhất miền Trung. Công ty đang
+                hướng tới mục tiêu 5001 nhân sự vào năm 2020. Sau 12 năm hoạt
+                động (từ 13/08/2005), FPT Software Đà Nẵng đã không ngừng lớn
+                mạnh và trở thành công ty công nghệ thông tin có quy mô lớn nhất
+                miền Trung. Công ty đang hướng tới mục tiêu 5001 nhân sự vào năm
+                2020. Sau 12 năm hoạt động (từ 13/08/2005), FPT Software Đà Nẵng
+                đã không ngừng lớn mạnh và trở thành công ty công nghệ thông tin
+                có quy mô lớn nhất miền Trung. Công ty đang hướng tới mục tiêu
+                5001 nhân sự vào năm 2020. Sau 12 năm hoạt động (từ 13/08/2005),
+                FPT Software Đà Nẵng đã không ngừng lớn mạnh và trở thành công
+                ty công nghệ thông tin có quy mô lớn nhất miền Trung. Công ty
+                đang hướng tới mục tiêu 5001 nhân sự vào năm 2020. Sau 12 năm
+                hoạt động (từ 13/08/2005), FPT Software Đà Nẵng đã không ngừng
+                lớn mạnh và trở thành công ty công nghệ thông tin có quy mô lớn
+                nhất miền Trung. Công ty đang hướng tới mục tiêu 5001 nhân sự
+                vào năm 2020. Sau 12 năm hoạt động (từ 13/08/2005), FPT Software
+                Đà Nẵng đã không ngừng lớn mạnh và trở thành công ty công nghệ
+                thông tin có quy mô lớn nhất miền Trung. Công ty đang hướng tới
+                mục tiêu 5001 nhân sự vào năm 2020. Sau 12 năm hoạt động (từ
+                13/08/2005), FPT Software Đà Nẵng đã không ngừng lớn mạnh và trở
+                thành công ty công nghệ thông tin có quy mô lớn nhất miền Trung.
+                Công ty đang hướng tới mục tiêu 5001 nhân sự vào năm 2020. Sau
+                12 năm hoạt động (từ 13/08/2005), FPT Software Đà Nẵng đã không
+                ngừng lớn mạnh và trở thành công ty công nghệ thông tin có quy
+                mô lớn nhất miền Trung. Công ty đang hướng tới mục tiêu 5001
+                nhân sự vào năm 2020. Sau 12 năm hoạt động (từ 13/08/2005), FPT
+                Software Đà Nẵng đã không ngừng lớn mạnh và trở thành công ty
+                công nghệ thông tin có quy mô lớn nhất miền Trung. Công ty đang
+                hướng tới mục tiêu 5001 nhân sự vào năm 2020. Sau 12 năm hoạt
+                động (từ 13/08/2005), FPT Software Đà Nẵng đã không ngừng lớn
+                mạnh và trở thành công ty công nghệ thông tin có quy mô lớn nhất
+                miền Trung. Công ty đang hướng tới mục tiêu 5001 nhân sự vào năm
+                2020. Sau 12 năm hoạt động (từ 13/08/2005), FPT Software Đà Nẵng
+                đã không ngừng lớn mạnh và trở thành công ty công nghệ thông tin
+                có quy mô lớn nhất miền Trung. Công ty đang hướng tới mục tiêu
+                5001 nhân sự vào năm 2020. Sau 12 năm hoạt động (từ 13/08/2005),
+                FPT Software Đà Nẵng đã không ngừng lớn mạnh và trở thành công
+                ty công nghệ thông tin có quy mô lớn nhất miền Trung. Công ty
+                đang hướng tới mục tiêu 5001 nhân sự vào năm 2020. Sau 12 năm
+                hoạt động (từ 13/08/2005), FPT Software Đà Nẵng đã không ngừng
+                lớn mạnh và trở thành công ty công nghệ thông tin có quy mô lớn
+                nhất miền Trung. Công ty đang hướng tới mục tiêu 5001 nhân sự
+                vào năm 2020. Sau 12 năm hoạt động (từ 13/08/2005), FPT Software
+                Đà Nẵng đã không ngừng lớn mạnh và trở thành công ty công nghệ
+                thông tin có quy mô lớn nhất miền Trung. Công ty đang hướng tới
+                mục tiêu 5001 nhân sự vào năm 2020. Sau 12 năm hoạt động (từ
+                13/08/2005), FPT Software Đà Nẵng đã không ngừng lớn mạnh và trở
+                thành công ty công nghệ thông tin có quy mô lớn nhất miền Trung.
+                Công ty đang hướng tới mục tiêu 5001 nhân sự vào năm 2020. Sau
+                12 năm hoạt động (từ 13/08/2005), FPT Software Đà Nẵng đã không
+                ngừng lớn mạnh và trở thành công ty công nghệ thông tin có quy
+                mô lớn nhất miền Trung. Công ty đang hướng tới mục tiêu 5001
+                nhân sự vào năm 2020. Sau 12 năm hoạt động (từ 13/08/2005), FPT
+                Software Đà Nẵng đã không ngừng lớn mạnh và trở thành công ty
+                công nghệ thông tin có quy mô lớn nhất miền Trung. Công ty đang
+                hướng tới mục tiêu 5001 nhân sự vào năm 2020. Sau 12 năm hoạt
+                động (từ 13/08/2005), FPT Software Đà Nẵng đã không ngừng lớn
+                mạnh và trở thành công ty công nghệ thông tin có quy mô lớn nhất
+                miền Trung. Công ty đang hướng tới mục tiêu 5001 nhân sự vào năm
+                2020. Sau 12 năm hoạt động (từ 13/08/2005), FPT Software Đà Nẵng
+                đã không ngừng lớn mạnh và trở thành công ty công nghệ thông tin
+                có quy mô lớn nhất miền Trung. Công ty đang hướng tới mục tiêu
+                5001 nhân sự vào năm 2020. Sau 12 năm hoạt động (từ 13/08/2005),
+                FPT Software Đà Nẵng đã không ngừng lớn mạnh và trở thành công
+                ty công nghệ thông tin có quy mô lớn nhất miền Trung. Công ty
+                đang hướng tới mục tiêu 5001 nhân sự vào năm 2020. Sau 12 năm
+                hoạt động (từ 13/08/2005), FPT Software Đà Nẵng đã không ngừng
+                lớn mạnh và trở thành công ty công nghệ thông tin có quy mô lớn
+                nhất miền Trung. Công ty đang hướng tới mục tiêu 5001 nhân sự
+                vào năm 2020. Sau 12 năm hoạt động (từ 13/08/2005), FPT Software
+                Đà Nẵng đã không ngừng lớn mạnh và trở thành công ty công nghệ
+                thông tin có quy mô lớn nhất miền Trung. Công ty đang hướng tới
+                mục tiêu 5001 nhân sự vào năm 2020. Sau 12 năm hoạt động (từ
+                13/08/2005), FPT Software Đà Nẵng đã không ngừng lớn mạnh và trở
+                thành công ty công nghệ thông tin có quy mô lớn nhất miền Trung.
+                Công ty đang hướng tới mục tiêu 5001 nhân sự vào năm 2020. Sau
+                12 năm hoạt động (từ 13/08/2005), FPT Software Đà Nẵng đã không
+                ngừng lớn mạnh và trở thành công ty công nghệ thông tin có quy
+                mô lớn nhất miền Trung. Công ty đang hướng tới mục tiêu 5001
+                nhân sự vào năm 2020. Sau 12 năm hoạt động (từ 13/08/2005), FPT
+                Software Đà Nẵng đã không ngừng lớn mạnh và trở thành công ty
+                công nghệ thông tin có quy mô lớn nhất miền Trung. Công ty đang
+                hướng tới mục tiêu 5001 nhân sự vào năm 2020. Sau 12 năm hoạt
+                động (từ 13/08/2005), FPT Software Đà Nẵng đã không ngừng lớn
+                mạnh và trở thành công ty công nghệ thông tin có quy mô lớn nhất
+                miền Trung. Công ty đang hướng tới mục tiêu 5001 nhân sự vào năm
+                2020.
+              </ReactReadMoreReadLess>
+              {/* <p>
                 Sau 12 năm hoạt động (từ 13/08/2005), FPT Software Đà Nẵng đã
                 không ngừng lớn mạnh và trở thành công ty công nghệ thông tin có
                 quy mô lớn nhất miền Trung. Công ty đang hướng tới mục tiêu 5001
@@ -77,8 +186,11 @@ function CompanyPost() {
                 Campus của FPT Software tại Đà Nẵng được xem là địa điểm làm
                 việc hiện đại của miền Trung. Tòa nhà nằm bên dòng sông Cổ Cò,
                 giữa cung đường du lịch Đà Nẵng – Hội An.
-              </p>
+              </p> */}
             </div>
+          </div>
+          <div className={classes.ratingWrapper}>
+            <p className={classes.numRatingCount}>5 Ratings</p>
           </div>
         </div>
 
@@ -151,6 +263,11 @@ function CompanyPost() {
               <div className={classes.rateCount}>5</div>
             </div>
           </div>
+          <div className={classes.rateButtonWrapper}>
+            <a href="/rating" className={classes.rateButton}>
+              Rate This Company
+            </a>
+          </div>
         </div>
       </div>
 
@@ -167,9 +284,6 @@ function CompanyPost() {
                 <div className={classes.nameWrapper}>
                   <p className={classes.commentName}>Anonymous</p>
                 </div>
-                {/* <div className={classes.greatRatingLabel}>
-                  <span>😎 AWESOME</span>
-                </div> */}
               </div>
               <div className={classes.dateRating}>May 12th, 2022</div>
             </div>
@@ -208,7 +322,6 @@ function CompanyPost() {
             </div>
           </div>
         </div>
-        {/* ============================================= */}
         <div className={classes.ratingBody}>
           <div className={classes.ratingTextWrapper}>
             <div className={classes.ratingTitle}>QUALITY</div>
@@ -221,9 +334,6 @@ function CompanyPost() {
                 <div className={classes.nameWrapper}>
                   <p className={classes.commentName}>Anonymous</p>
                 </div>
-                {/* <div className={classes.greatRatingLabel}>
-                  <span>🥳 Greate</span>
-                </div> */}
               </div>
               <div className={classes.dateRating}>May 12th, 2022</div>
             </div>
@@ -275,9 +385,6 @@ function CompanyPost() {
                 <div className={classes.nameWrapper}>
                   <p className={classes.commentName}>Anonymous</p>
                 </div>
-                {/* <div className={classes.goodRatingLabel}>
-                  <span>😐 Good</span>
-                </div> */}
               </div>
               <div className={classes.dateRating}>May 12th, 2022</div>
             </div>
@@ -329,9 +436,6 @@ function CompanyPost() {
                 <div className={classes.nameWrapper}>
                   <p className={classes.commentName}>Anonymous</p>
                 </div>
-                {/* <div className={classes.badRatingLabel}>
-                  <span>🥱 OK</span>
-                </div> */}
               </div>
               <div className={classes.dateRating}>May 12th, 2022</div>
             </div>
@@ -383,9 +487,6 @@ function CompanyPost() {
                 <div className={classes.nameWrapper}>
                   <p className={classes.commentName}>Anonymous</p>
                 </div>
-                {/* <div className={classes.badRatingLabel}>
-                  <span>😣 AWFUL</span>
-                </div> */}
               </div>
               <div className={classes.dateRating}>May 12th, 2022</div>
             </div>
@@ -424,7 +525,6 @@ function CompanyPost() {
             </div>
           </div>
         </div>
-        {/* ================================================== */}
       </div>
     </div>
   );

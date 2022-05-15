@@ -2,7 +2,6 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: Luxstay;
 }
 .container {
   margin: 0 auto;
@@ -17,7 +16,7 @@
 }
 .wrapper {
   display: grid;
-  grid-template-columns: 1.2fr 3fr 0.5fr;
+  grid-template-columns: 1.4fr 3fr 0.5fr;
   height: 40px;
   align-items: center;
 }
@@ -72,31 +71,31 @@
 }
 .title {
   display: grid;
-  grid-template-columns: 4fr 1fr;
+  grid-template-columns: 1fr 4fr;
   justify-content: space-between;
+  gap: 16px;
 }
 .logo {
-  width: 64px;
-  height: 64px;
-  border-radius: 50%;
+  height: 152px;
+  aspect-ratio: auto 170 / 152;
+  width: 170px;
+  /* border-radius: 50%; */
   border-color: #ddd;
   border-width: 1px;
   border-style: solid;
 }
 .companyName {
-  font-size: 2rem;
-  font-family: Luxstay;
+  font-size: 3rem;
   color: #222;
-  font-weight: 900;
+  font-weight: bold;
   line-height: 1.25;
   display: block;
   -webkit-font-smoothing: antialiased;
 }
 
 .location {
-  font-family: Luxstay;
   color: #222;
-  font-size: 0.875rem;
+  font-size: 1rem;
   font-weight: 700;
 }
 
@@ -107,7 +106,6 @@
 }
 .description {
   margin-top: 36px;
-  font-family: Luxstay;
   font-weight: 500;
   font-size: 1rem;
   color: #222;
@@ -145,7 +143,6 @@ p {
   color: rgb(21, 21, 21);
   font-size: 80px;
   margin-right: 11px;
-  font-family: Poppins, sans-serif;
   font-weight: 900;
 }
 
@@ -153,18 +150,14 @@ p {
   color: rgb(152, 152, 152);
   font-size: 24px;
   font-weight: 700;
-  font-family: HelveticaNeue, arial;
   position: relative;
-  top: 30px;
+  top: 20px;
 }
 
 .numRating {
-  margin-bottom: 25px;
-  padding-top: 10px;
   font-weight: 700;
   color: rgb(21, 21, 21);
   font-size: 14px;
-  text-align: center;
 }
 .rateBarTitle {
   font-weight: 700;
@@ -213,7 +206,7 @@ p {
   margin-bottom: 4px;
   text-transform: uppercase;
   color: rgb(21, 21, 21);
-  font-family: HelveticaNeue, arial;
+  /* font-family: HelveticaNeue, arial; */
   padding: 0 8px;
 }
 
@@ -239,7 +232,7 @@ p {
   padding: 14px 24px;
   width: 72px;
   font-size: 32px;
-  font-family: Poppins, sans-serif;
+  /* font-family: Poppins, sans-serif; */
   font-weight: 900;
 }
 
@@ -252,7 +245,7 @@ p {
   padding: 14px 24px;
   width: 72px;
   font-size: 32px;
-  font-family: Poppins, sans-serif;
+  /* font-family: Poppins, sans-serif; */
   font-weight: 900;
 }
 
@@ -338,7 +331,7 @@ p {
   font-size: 16px;
   padding-right: 22px;
   text-transform: uppercase;
-  font-family: Poppins, sans-serif;
+  /* font-family: Poppins, sans-serif; */
   font-weight: 900;
 }
 
@@ -358,7 +351,7 @@ p {
   padding: 5px 20px;
   text-align: left;
   text-transform: uppercase;
-  font-family: Poppins, sans-serif;
+  /* font-family: Poppins, sans-serif; */
   font-weight: 700;
 }
 
@@ -371,7 +364,7 @@ p {
   padding: 5px 20px;
   text-align: left;
   text-transform: uppercase;
-  font-family: Poppins, sans-serif;
+  /* font-family: Poppins, sans-serif; */
   font-weight: 700;
 }
 
@@ -384,7 +377,7 @@ p {
   padding: 5px 20px;
   text-align: left;
   text-transform: uppercase;
-  font-family: Poppins, sans-serif;
+  /* font-family: Poppins, sans-serif; */
   font-weight: 700;
 }
 
@@ -407,5 +400,50 @@ p {
 .commentName {
   margin: 0;
   font-size: 20px;
+  font-weight: bold;
+}
+
+.rateButtonWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.rateButton {
+  min-width: 220px;
+  text-decoration: none;
+  width: fit-content;
+  background: #323943;
+  border: 0px;
+  border-radius: 100px;
+  color: white;
+  display: flex;
+  font-stretch: normal;
+  font-weight: 700;
+  -webkit-box-pack: center;
+  justify-content: center;
+  letter-spacing: normal;
+  line-height: 1.54;
+  outline: none;
+  padding: 11px 46px;
+  transition: transform 0.2s ease 0s;
+  align-items: center;
+}
+
+.rateButton:hover {
+  cursor: pointer;
+  background: #242c38;
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
+}
+
+.ratingWrapper {
+  width: 100%;
+  border-bottom: 2px solid rgb(21, 21, 21);
+  margin-top: 24px;
+}
+.numRatingCount {
+  margin-bottom: 8px;
   font-weight: bold;
 }

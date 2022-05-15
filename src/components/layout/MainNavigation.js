@@ -13,7 +13,7 @@ function MainNavigation() {
           <Logo className={classes.logo} />
         </Link>
       </div>
-      {!(location.pathname === "/home") && (
+      {!(location.pathname === "/") && !(location.pathname === "/rating") && (
         <input
           type="text"
           placeholder="Company Name"

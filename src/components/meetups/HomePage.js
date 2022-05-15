@@ -36,8 +36,8 @@ function Homepage() {
       </div>
 
       <div className={classes.sloganWrapper}>
-        <p className={classes.sloganTitle}>Slogan title</p>
-        <p className={classes.sloganDescription}>Slogan description</p>
+        <p className={classes.sloganTitle}>Join the RMC </p>
+        <p className={classes.sloganDescription}>Rate for your second home</p>
       </div>
 
       <div className={classes.bottomImageWrapper}>
