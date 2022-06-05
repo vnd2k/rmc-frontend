@@ -172,6 +172,20 @@ function Rating() {
             </div>
           </form>
         </div>
+        <div className={classes.roleWrapper}>
+          <div className={classes.roleContent}>
+            <div className={classes.titleRole}>
+              <h3>RATING ROLE</h3>
+            </div>
+            <ul>
+              <li>Không sử dụng từ ngữ mang ý xúc phạm, miệt thị</li>
+              <li>Không cung cấp thông tin cá nhân</li>
+              <li>
+                Không cung cấp thông tin bảo mật, bí mật kinh doanh của công ty
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   );

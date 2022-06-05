@@ -1,30 +1,41 @@
-import { useRef } from "react";
-
+import { useState, useRef, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import classes from "./LoginForm.module.css";
+import { signUp, reset } from "../../stores/auth/authSlice";
+import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 
 function SignUpForm(props) {
-  const titleInputRef = useRef();
-  const imageInputRef = useRef();
-  const addressInputRef = useRef();
-  const descriptionInputRef = useRef();
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  );
+  const history = useHistory();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const password = useRef({});
+  password.current = watch("password", "");
+  const dispatch = useDispatch();
 
-  function submitHandler(event) {
-    event.preventDefault();
+  const handle = (data) => {
+    const role = "MEMBER";
+    dispatch(signUp({ role, ...data }));
+  };
 
-    const enteredTitle = titleInputRef.current.value;
-    const enteredImage = imageInputRef.current.value;
-    const enteredAddress = addressInputRef.current.value;
-    const enteredDescription = descriptionInputRef.current.value;
+  useEffect(() => {
+    if (isError) {
+      // toast.error(message);
+    }
 
-    const meetupData = {
-      title: enteredTitle,
-      image: enteredImage,
-      address: enteredAddress,
-      description: enteredDescription,
-    };
+    if (isSuccess || user) {
+      history.push("/confirm");
+    }
 
-    props.onAddMeetup(meetupData);
-  }
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, history, dispatch]);
 
   return (
     <div className={classes.container}>
@@ -34,46 +45,91 @@ function SignUpForm(props) {
 
           <div className={classes.heading}></div>
 
-          <form onSubmit={submitHandler}>
+          <form onSubmit={handleSubmit(handle)}>
             <div className={classes.formGroup}>
-              <label for="email" className={classes.formLabel}>
-                Email
-              </label>
-              <input type="email" className={classes.formControl} />
-            </div>
-
-            <div className={classes.formGroup}>
-              <label for="nickname" className={classes.formLabel}>
+              <label htmlFor="nickname" className={classes.formLabel}>
                 Nickname
               </label>
-              <input type="text" className={classes.formControl} />
+              <input
+                type="text"
+                id="nickname"
+                className={classes.formControl}
+                {...register("nickname", {
+                  required: "You must specify a nickname",
+                })}
+              />
+              <p className={classes.errorMsg}>
+                {errors?.nickname && errors.nickname.message}
+              </p>
             </div>
 
             <div className={classes.formGroup}>
-              <label for="password" className={classes.formLabel}>
+              <label htmlFor="email" className={classes.formLabel}>
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                className={classes.formControl}
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value:
+                      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                    message: "Email is invalid",
+                  },
+                })}
+              />
+              <p className={classes.errorMsg}>
+                {errors?.email && errors.email.message}
+              </p>
+            </div>
+
+            <div className={classes.formGroup}>
+              <label htmlFor="password" className={classes.formLabel}>
                 Password
               </label>
               <input
                 type="password"
+                id="password"
                 className={classes.formControl}
                 name="password"
+                {...register("password", {
+                  required: "You must specify a password",
+                  minLength: {
+                    value: 8,
+                    message: "Password must have at least 8 characters",
+                  },
+                })}
               />
+
+              <p className={classes.errorMsg}>
+                {errors?.password && errors.password.message}
+              </p>
             </div>
 
             <div className={classes.formGroup}>
-              <label for="rePassword" className={classes.formLabel}>
+              <label htmlFor="rePassword" className={classes.formLabel}>
                 Confirm Password
               </label>
               <input
-                type="rePassword"
+                type="password"
+                id="rePassword"
                 className={classes.formControl}
                 name="rePassword"
+                {...register("rePassword", {
+                  validate: (value) =>
+                    value === password.current || "The passwords do not match",
+                })}
               />
+              <p className={classes.errorMsg}>
+                {errors?.rePassword && errors.rePassword.message}
+              </p>
             </div>
 
             <div className={classes.formGroup}>
               <button
-                type="button"
+                type="submit"
                 className={`${classes.btn} ${classes.btnPrimary} ${classes.signInBtn} `}
               >
                 Sign up

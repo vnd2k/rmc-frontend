@@ -100,12 +100,13 @@
 }
 
 .locationWrapper {
+  margin-top: 12px;
   display: flex;
   gap: 8px;
   align-items: center;
 }
 .description {
-  margin-top: 36px;
+  margin-top: 12px;
   font-weight: 500;
   font-size: 1rem;
   color: #222;
@@ -446,4 +447,26 @@ p {
 .numRatingCount {
   margin-bottom: 8px;
   font-weight: bold;
+}
+
+.descriptionDetail {
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin: 0;
+}
+
+.descriptionLess {
+  margin: 0;
+}
+
+.btnReadMore {
+  background: transparent;
+  border-width: 0;
+  cursor: pointer;
+}
+
+.descriptionWrapper {
+  margin-top: 12px;
 }

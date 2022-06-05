@@ -181,6 +181,7 @@
 }
 .signInBtn {
   font-weight: 500;
+  margin-top: 12px;
 }
 
 .awesomeDiv {
@@ -203,4 +204,18 @@
   top: -10px;
   font-size: 12px;
   color: #9b9b9b;
+}
+
+.errorMsg {
+  font-size: small;
+  color: #e71410;
+  margin: 0;
+  margin-top: 4px;
+}
+
+.confirm {
+  font-size: 12px;
+  color: #1a1a1a;
+  margin-top: -16px;
+  margin-bottom: 16px;
 }

@@ -1,29 +1,8 @@
-import { useRef } from "react";
 import classes from "./LoginForm.module.css";
+import { Link } from "react-router-dom";
 
 function LoginForm(props) {
-  const titleInputRef = useRef();
-  const imageInputRef = useRef();
-  const addressInputRef = useRef();
-  const descriptionInputRef = useRef();
-
-  function submitHandler(event) {
-    event.preventDefault();
-
-    const enteredTitle = titleInputRef.current.value;
-    const enteredImage = imageInputRef.current.value;
-    const enteredAddress = addressInputRef.current.value;
-    const enteredDescription = descriptionInputRef.current.value;
-
-    const meetupData = {
-      title: enteredTitle,
-      image: enteredImage,
-      address: enteredAddress,
-      description: enteredDescription,
-    };
-
-    props.onAddMeetup(meetupData);
-  }
+  function submitHandler(event) {}
 
   return (
     <div className={classes.container}>
@@ -70,9 +49,9 @@ function LoginForm(props) {
             <div className={classes.link}>
               <div>
                 Don't have an account?{" "}
-                <a className={classes.link} href="/signup">
+                <Link to="/signup" className={classes.link}>
                   Sign up
-                </a>
+                </Link>
               </div>
             </div>
           </div>
