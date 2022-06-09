@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import classes from "./LoginForm.module.css";
 import { signUp, reset } from "../../stores/auth/authSlice";
@@ -9,7 +9,6 @@ function SignUpForm(props) {
   const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
-  const history = useHistory();
   const {
     register,
     handleSubmit,
@@ -18,13 +17,14 @@ function SignUpForm(props) {
   } = useForm();
   const password = useRef({});
   password.current = watch("password", "");
-  const dispatch = useDispatch();
 
+  const dispatch = useDispatch();
   const handle = (data) => {
     const role = "MEMBER";
     dispatch(signUp({ role, ...data }));
   };
 
+  const history = useHistory();
   useEffect(() => {
     if (isError) {
       // toast.error(message);
@@ -102,7 +102,6 @@ function SignUpForm(props) {
                   },
                 })}
               />
-
               <p className={classes.errorMsg}>
                 {errors?.password && errors.password.message}
               </p>

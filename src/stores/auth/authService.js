@@ -5,11 +5,6 @@ const endpoint = "http://localhost:8080/auth";
 // Register user
 const register = async (userData) => {
   const response = await apiService().post(`${endpoint}/register`, userData);
-  if (response.data) {
-    const { token } = response.data;
-    authStorageService().setToken(token);
-  }
-  console.log(response.data);
   return response.data;
 };
 
@@ -17,8 +12,8 @@ const register = async (userData) => {
 const login = async (userData) => {
   const response = await apiService().post(`${endpoint}/login`, userData);
   if (response.data) {
-    const { token } = response.data;
-    authStorageService().setToken(token);
+    const { accessToken } = response.data;
+    authStorageService().setToken(accessToken);
   }
   return response.data;
 };
