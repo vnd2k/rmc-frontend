@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 
 function SignUpForm(props) {
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
+  const { user, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
   const {
@@ -46,23 +46,6 @@ function SignUpForm(props) {
           <div className={classes.heading}></div>
 
           <form onSubmit={handleSubmit(handle)}>
-            <div className={classes.formGroup}>
-              <label htmlFor="nickname" className={classes.formLabel}>
-                Nickname
-              </label>
-              <input
-                type="text"
-                id="nickname"
-                className={classes.formControl}
-                {...register("nickname", {
-                  required: "You must specify a nickname",
-                })}
-              />
-              <p className={classes.errorMsg}>
-                {errors?.nickname && errors.nickname.message}
-              </p>
-            </div>
-
             <div className={classes.formGroup}>
               <label htmlFor="email" className={classes.formLabel}>
                 Email

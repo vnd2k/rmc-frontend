@@ -10,7 +10,7 @@ const apiService = (moreOptions) => {
       Authorization: token ? `Bearer ${token}` : "",
     },
   };
-
+  console.log(moreOptions);
   return {
     get: (url) => axios.get(url, options),
     post: (url, data) => axios.post(url, data, options),

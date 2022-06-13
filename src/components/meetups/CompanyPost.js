@@ -1,9 +1,8 @@
 import classes from "./CompanyPost.module.css";
 import React, { useState } from "react";
 import { HiOutlineLocationMarker, HiOutlineCog } from "react-icons/hi";
-import { BiLike } from "react-icons/bi";
-import { BiDislike } from "react-icons/bi";
-import { BiFlag } from "react-icons/bi";
+import { BiFlag, BiBuildings, BiDislike, BiLike, BiLink } from "react-icons/bi";
+import { BsPeople } from "react-icons/bs";
 
 function CompanyPost() {
   const [isRead, setRead] = useState(true);
@@ -22,7 +21,7 @@ function CompanyPost() {
                 alt="Background"
               ></img>
             </div>
-            <div>
+            <div className={classes.infoContainer}>
               <h1 className={classes.companyName}>FPT Software</h1>
               <div className={classes.locationWrapper}>
                 <HiOutlineLocationMarker color="#ccc" fontSize="1.3em" />
@@ -31,9 +30,30 @@ function CompanyPost() {
                 </div>
               </div>
 
+              <div className={classes.infoWrapper}>
+                <div className={classes.locationWrapper}>
+                  <HiOutlineCog color="#ccc" fontSize="1.3em" />
+                  <div className={classes.location}>Outsourcing</div>
+                </div>
+
+                <div className={classes.locationWrapper}>
+                  <BsPeople color="#ccc" fontSize="1.3em" />
+                  <div className={classes.location}>1000+</div>
+                </div>
+
+                <div className={classes.locationWrapper}>
+                  <BiBuildings color="#ccc" fontSize="1.3em" />
+                  <div className={classes.location}>Viet Nam</div>
+                </div>
+              </div>
               <div className={classes.locationWrapper}>
-                <HiOutlineCog color="#ccc" fontSize="1.3em" />
-                <div className={classes.location}>Outsourcing</div>
+                <BiLink color="#ccc" fontSize="1.3em" />
+                <a
+                  className={classes.location}
+                  href="https://www.fpt-software.com"
+                >
+                  <span>https://www.fpt-software.com</span>
+                </a>
               </div>
             </div>
           </div>

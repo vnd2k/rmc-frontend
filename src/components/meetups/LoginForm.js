@@ -7,7 +7,7 @@ import { login, reset } from "../../stores/auth/authSlice";
 import { useEffect } from "react";
 
 function LoginForm(props) {
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
+  const { user, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
 

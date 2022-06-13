@@ -1,15 +1,9 @@
 import classes from "./CreatePostForm.module.css";
-import React, { useState } from "react";
+import React from "react";
 
 function CreatePostForm() {
   return (
     <div>
-      {/* <div className={classes.headerWrapper}>
-        <p className={classes.title}>
-          Rate: <span className={classes.companyName}>FPT Software</span>
-        </p>
-      </div> */}
-
       <div className={classes.formWrapper}>
         <div className={classes.formCard}>
           <form className={classes.formContent}>

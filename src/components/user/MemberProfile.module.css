@@ -12,6 +12,7 @@
 .avatar {
   border-radius: 50%;
   width: 80px;
+  height: 80px;
 }
 .avatar:hover {
   cursor: pointer;
@@ -19,15 +20,62 @@
 .pickAvatar {
   display: none;
 }
+.pickNickname {
+  margin-top: 24px;
+  margin-bottom: 16px;
+}
 .nicknameInput {
-  width: 90%;
+  width: 50%;
   box-shadow: none;
-  font-size: 12px;
+  font-size: 16px;
   color: #222222;
   padding: 8px 16px;
   border: 1px solid #d4d4d4;
   border-radius: 4px;
 }
 .nicknameLabel {
+  display: flex;
   margin: 0px;
+  font-weight: 600;
+  font-size: 16px;
+  color: rgb(107, 107, 107);
+  align-items: center;
+}
+
+.nicknameDetail {
+  color: rgb(107, 107, 107);
+  font-size: 12px;
+  line-height: 16px;
+  margin: 0px;
+  margin-bottom: 4px;
+}
+
+.formWrapper {
+  display: grid;
+  grid-template-columns: 0.5fr 4fr;
+  margin-left: 20px;
+}
+
+.editAvatar {
+  display: flex;
+  align-items: center;
+}
+
+.btnItem {
+  background-color: #e67772;
+  font-size: 12px;
+  line-height: 1.334;
+  height: 32px;
+  padding: 0px 12px;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  width: 140px;
+  margin-left: 20px;
+  margin-top: 20px;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
 }

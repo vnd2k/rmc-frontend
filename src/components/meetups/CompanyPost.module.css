@@ -74,6 +74,7 @@
   grid-template-columns: 1fr 4fr;
   justify-content: space-between;
   gap: 16px;
+  align-items: center;
 }
 .logo {
   height: 152px;
@@ -469,4 +470,13 @@ p {
 
 .descriptionWrapper {
   margin-top: 12px;
+}
+.infoContainer {
+  align-items: center;
+  margin-top: -16px;
+}
+
+.infoWrapper {
+  display: flex;
+  justify-content: space-between;
 }
