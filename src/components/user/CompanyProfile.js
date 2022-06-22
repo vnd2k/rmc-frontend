@@ -1,14 +1,23 @@
 import classes from "./CompanyProfile.module.css";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateCompanyInfo } from "../../stores/company/companySlice";
+import {
+  updateCompanyInfo,
+  updateCompanyLogo,
+} from "../../stores/company/companySlice";
 import { useForm } from "react-hook-form";
 
 function CompanyProfile(props) {
   const { user } = useSelector((state) => state.auth);
   const { company } = useSelector((state) => state.company);
+  const [inputLogo, setInputLogo] = useState();
+  const [previewLogo, setPreviewLogo] = useState("");
   const dispatch = useDispatch();
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const handle = (data) => {
     const companyId = user?.userDetails?.id;
@@ -20,9 +29,7 @@ function CompanyProfile(props) {
     const nation = data?.nation;
     const description = data?.description;
 
-    console.log(companyId);
     if (companyId !== "") {
-      console.log("ok");
       dispatch(
         updateCompanyInfo({
           companyId,
@@ -37,7 +44,42 @@ function CompanyProfile(props) {
       );
     }
   };
-  console.log(company);
+
+  const handleInputLogo = (e) => {
+    const file = e.target.files[0];
+    if (!file) {
+      return;
+    }
+    previewFile(file);
+    setInputLogo(e.target.value);
+    handleSubmitLogo(file);
+  };
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewLogo(reader.result);
+    };
+  };
+
+  const handleSubmitLogo = (file) => {
+    if (!file) {
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      if (reader.result) {
+        const companyId = user?.userDetails?.id;
+        const logo = reader?.result;
+        console.log(logo);
+        dispatch(updateCompanyLogo({ companyId, logo }));
+      }
+    };
+    reader.onerror = () => {};
+  };
 
   return (
     <div>
@@ -47,6 +89,36 @@ function CompanyProfile(props) {
             {" "}
             <div className={classes.title}>
               <h1 className={classes.titleText}>Company Profile</h1>
+            </div>
+            <div className={classes.editAvatar}>
+              <label htmlFor="logo">
+                {!company?.logoImage && !previewLogo && (
+                  <img src="/logo.png" alt="logo" className={classes.avatar} />
+                )}
+                {company?.logoImage && !previewLogo && (
+                  <img
+                    className={classes.avatar}
+                    src={company?.logoImage}
+                    alt="logo"
+                  />
+                )}
+                {previewLogo && (
+                  <img
+                    src={previewLogo}
+                    alt="logo"
+                    className={classes.avatar}
+                  />
+                )}
+              </label>
+              <input
+                className={classes.pickAvatar}
+                type={"file"}
+                id="logo"
+                name="logo"
+                accept="image/png, image/jpeg"
+                value={inputLogo}
+                onChange={handleInputLogo}
+              ></input>
             </div>
             <div className={classes.infoWrapper}>
               <div className={classes.pickNickname}>
@@ -69,6 +141,9 @@ function CompanyProfile(props) {
                     required: "Name is required",
                   })}
                 ></input>
+                <p className={classes.errorMsg}>
+                  {errors?.name && errors.name.message}
+                </p>
               </div>
               <div className={classes.pickNickname}>
                 <span>
@@ -90,6 +165,9 @@ function CompanyProfile(props) {
                     required: "Address is required",
                   })}
                 ></input>
+                <p className={classes.errorMsg}>
+                  {errors?.address && errors.address.message}
+                </p>
               </div>
               <div className={classes.pickNickname}>
                 <span>
@@ -111,6 +189,9 @@ function CompanyProfile(props) {
                   <option value="product">Product</option>
                   <option value="outsourcing">Outsourcing</option>
                 </select>
+                <p className={classes.errorMsg}>
+                  {errors?.type && errors.type.message}
+                </p>
               </div>
               <div className={classes.pickNickname}>
                 <span>
@@ -137,14 +218,18 @@ function CompanyProfile(props) {
                     },
                   })}
                 ></input>
+                <p className={classes.errorMsg}>
+                  {errors?.website && errors.website.message}
+                </p>
               </div>
               <div className={classes.pickNickname}>
                 <span>
                   <label className={classes.nicknameLabel} htmlFor="nickname">
                     Nation
                   </label>
-                  <p className={classes.nicknameDetail}></p>
-                  Nation of your company.
+                  <p className={classes.nicknameDetail}>
+                    Nation of your company.
+                  </p>
                 </span>
                 <input
                   className={classes.nicknameInput}
@@ -157,6 +242,9 @@ function CompanyProfile(props) {
                     required: "Nation is required",
                   })}
                 ></input>
+                <p className={classes.errorMsg}>
+                  {errors?.nation && errors.nation.message}
+                </p>
               </div>
               <div className={classes.pickNickname}>
                 <span>
@@ -180,6 +268,9 @@ function CompanyProfile(props) {
                   <option value="100+">100+</option>
                   <option value="1000+">1000+</option>
                 </select>
+                <p className={classes.errorMsg}>
+                  {errors?.companySize && errors.companySize.message}
+                </p>
               </div>
             </div>
             <div className={classes.pickNickname}>
@@ -201,6 +292,9 @@ function CompanyProfile(props) {
                   required: "Description is required",
                 })}
               ></textarea>
+              <p className={classes.errorMsg}>
+                {errors?.description && errors.description.message}
+              </p>
             </div>
             <div className={classes.btnWrapper}>
               <button type="submit" className={classes.btnItem}>

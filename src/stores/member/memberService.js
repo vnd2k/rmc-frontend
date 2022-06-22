@@ -1,5 +1,7 @@
 import apiService from "../api";
-const endpoint = "http://localhost:8080";
+import { ENDPOINT } from "../../shared/constants/constants";
+
+const endpoint = ENDPOINT;
 
 // Get member info
 const getMemberInfo = async (id) => {

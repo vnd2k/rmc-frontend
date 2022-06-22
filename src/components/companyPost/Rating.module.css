@@ -16,8 +16,6 @@
   margin: 0;
   font-size: 28px;
   font-weight: 500;
-  /* padding-top: 12px;
-  padding-bottom: 12px; */
 }
 
 .companyName {
@@ -97,42 +95,6 @@
   -webkit-box-pack: center;
   justify-content: center;
 }
-.content1 {
-  color: rgb(158, 158, 158);
-  font-family: HelveticaNeue, arial;
-  font-size: 16px;
-  line-height: 24px;
-  margin-top: 8px;
-  opacity: 1;
-  overflow: hidden;
-  text-align: right;
-  transition: opacity 200ms ease-out 0s;
-  width: 113px;
-}
-.content2 {
-  color: rgb(158, 158, 158);
-  font-family: HelveticaNeue, arial;
-  font-size: 16px;
-  line-height: 24px;
-  margin-top: 8px;
-  opacity: 0;
-  overflow: hidden;
-  text-align: center;
-  transition: opacity 200ms ease-out 0s;
-  width: 278px;
-}
-.content3 {
-  color: rgb(158, 158, 158);
-  font-family: HelveticaNeue, arial;
-  font-size: 16px;
-  line-height: 24px;
-  margin-top: 8px;
-  opacity: 1;
-  overflow: hidden;
-  text-align: left;
-  transition: opacity 200ms ease-out 0s;
-  width: 113px;
-}
 
 .spanItem {
   color: rgb(255, 89, 89);
@@ -140,7 +102,6 @@
 }
 .titleInput {
   width: 90%;
-  box-shadow: none;
   font-size: 12px;
   color: #222222;
   padding: 8px 16px;
@@ -150,8 +111,7 @@
 .areaInput {
   width: 90%;
   box-shadow: none;
-  font-size: 12px;
-  color: #222222;
+  font-size: 14px;
   padding: 8px 16px;
   border: 1px solid #d4d4d4;
   border-radius: 4px;
@@ -174,8 +134,8 @@
   align-items: center;
   gap: 24px;
 }
-.likeThings {
-  margin-top: 36px;
+.unlikeThings {
+  margin-top: 24px;
 }
 
 .rateButton {
@@ -218,7 +178,6 @@
 }
 
 .titleRole {
-  /* font-size: 18px; */
   font-weight: 500;
   color: #3d3d3d;
   text-align: center;
@@ -238,4 +197,12 @@
 
 li {
   margin-top: 12px;
+}
+.errorMsg {
+  font-size: small;
+  color: #e71410;
+  margin: 0;
+  margin-top: 4px;
+  margin-left: 64px;
+  font-weight: 500;
 }

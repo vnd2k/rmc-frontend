@@ -5,6 +5,7 @@ const initialState = {
   member: null,
   isError: false,
   isSuccess: false,
+  isChecked: null,
   isLoading: false,
   message: "",
 };
@@ -40,7 +41,6 @@ export const updateMemberInfo = createAsyncThunk(
 export const updateMemberAvatar = createAsyncThunk(
   "updateAvatar",
   async (request, thunkAPI) => {
-    console.log(request);
     try {
       return await memberService.updateMemberAvatar(request);
     } catch (error) {
@@ -68,7 +68,7 @@ export const memberSlice = createSlice({
       })
       .addCase(getMemberInfo.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
+        state.isChecked = "getMember";
         state.member = action.payload;
       })
       .addCase(getMemberInfo.rejected, (state, action) => {

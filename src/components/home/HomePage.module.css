@@ -27,27 +27,7 @@
   font-weight: bold;
   color: #e77373;
 }
-.backgroundSearch {
-  display: flex;
-  align-items: center;
-}
-.backgroundIcon {
-  position: absolute;
-  display: flex;
-  font-size: x-large;
-  align-items: center;
-  margin-left: 12px;
-}
 
-.searchBox {
-  font-size: 16px;
-  line-height: 24px;
-  padding: 16px 20px;
-  padding-left: 50px;
-  width: 100%;
-  border: 0px;
-  border-radius: 43px;
-}
 .bottomImageWrapper {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -66,7 +46,6 @@
   font-size: 26px;
   line-height: 26px;
   color: rgb(21, 21, 21);
-  /* font-family: Poppins, sans-serif; */
   font-weight: 700;
   text-align: center;
 }

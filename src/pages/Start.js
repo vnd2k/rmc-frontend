@@ -1,4 +1,5 @@
-import Homepage from "../components/meetups/HomePage";
+import Homepage from "../components/home/HomePage";
+
 function Start() {
   return <Homepage></Homepage>;
 }

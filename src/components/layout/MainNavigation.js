@@ -3,6 +3,7 @@ import classes from "./MainNavigation.module.css";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../../stores/auth/authSlice";
+import SearchCompany from "../../shared/components/SearchCompany";
 
 function MainNavigation() {
   const location = useLocation();
@@ -24,11 +25,14 @@ function MainNavigation() {
         </Link>
       </div>
       {!(location.pathname === "/") && !(location.pathname === "/rating") && (
-        <input
-          type="text"
-          placeholder="Company Name"
-          className={classes.searchBox}
-        ></input>
+        // <input
+        //   type="text"
+        //   placeholder="Company Name"
+        //   className={classes.searchBox}
+        // ></input>
+        <div className={classes.searchBox}>
+          <SearchCompany></SearchCompany>
+        </div>
       )}
 
       <nav>

@@ -1,6 +1,9 @@
 import classes from "./HomePage.module.css";
-import { HiOutlineOfficeBuilding } from "react-icons/hi";
+import SearchCompany from "../../shared/components/SearchCompany";
+import { useSelector, useDispatch } from "react-redux";
+
 function Homepage() {
+  const { member } = useSelector((state) => state.member);
   return (
     <div className={classes.container}>
       <img
@@ -23,16 +26,7 @@ function Homepage() {
           Enter your <span className={classes.companyText}> company </span> to
           get started
         </p>
-        <div className={classes.backgroundSearch}>
-          <HiOutlineOfficeBuilding
-            className={classes.backgroundIcon}
-          ></HiOutlineOfficeBuilding>
-          <input
-            type="text"
-            placeholder="Your company"
-            className={classes.searchBox}
-          ></input>
-        </div>
+        <SearchCompany></SearchCompany>
       </div>
 
       <div className={classes.sloganWrapper}>

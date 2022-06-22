@@ -50,6 +50,7 @@
   padding: 8px 16px;
   border: 1px solid #d4d4d4;
   border-radius: 4px;
+  margin-left: -4px;
 }
 .nicknameLabel {
   display: flex;
@@ -91,4 +92,28 @@
 .infoWrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+.errorMsg {
+  font-size: small;
+  color: #e71410;
+  margin: 0;
+  margin-top: 4px;
+  margin-left: 4px;
+}
+.avatar {
+  height: 152px;
+  aspect-ratio: auto 170 / 152;
+  width: 170px;
+  border-color: #ddd;
+  border-width: 1px;
+  border-style: solid;
+}
+.avatar:hover {
+  cursor: pointer;
+}
+.pickAvatar {
+  display: none;
+}
+.editAvatar {
+  margin-bottom: 24px;
 }

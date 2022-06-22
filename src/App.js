@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../src/stores/auth/authSlice";
 import { getMemberInfo } from "../src/stores/member/memberSlice";
 import { getCompanyInfo } from "../src/stores/company/companySlice";
-import Home from "./pages/Home";
+import Company from "./pages/Company";
 import LoginPage from "./pages/Login";
 import SignUpPage from "./pages/SignUp";
 import Start from "./pages/Start";
 import Layout from "./components/layout/Layout";
 import Rating from "./components/companyPost/Rating";
 import CreatePost from "./components/companyPost/CreatePostForm";
-import ConfirmEmail from "./components/meetups/ConfirmEmail";
+import ConfirmEmail from "./components/auth/ConfirmEmail";
 import EditUser from "./components/user/EditMember";
 import MemberProfile from "./components/user/MemberProfile";
 import MemberRatings from "./components/user/MemberRatings";
@@ -21,7 +21,6 @@ import CompanyProfile from "./components/user/CompanyProfile";
 
 function App() {
   const { user } = useSelector((state) => state.auth);
-  console.log(user?.userDetails?.role);
   const token = authStorageService().getToken();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -39,9 +38,9 @@ function App() {
 
   return (
     <Switch>
-      <Route path="/home" exact>
+      <Route path="/company/:id">
         <Layout>
-          <Home />
+          <Company />
         </Layout>
       </Route>
       <Route path="/" exact>
@@ -58,7 +57,7 @@ function App() {
       <Route path="/signup">
         <SignUpPage />
       </Route>
-      <Route path="/rating">
+      <Route path="/rating/:id">
         <Layout>
           <Rating />
         </Layout>

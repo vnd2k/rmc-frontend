@@ -1,4 +1,4 @@
-import CompanyPost from "../components/meetups/CompanyPost";
+import CompanyPost from "../components/post/CompanyPost";
 function Home() {
   return (
     <section>

@@ -1,28 +1,9 @@
-import { useHistory } from "react-router-dom";
-
-import SignUpForm from "../components/meetups/SignUpForm";
+import SignUpForm from "../components/auth/SignUpForm";
 
 function SignUp() {
-  const history = useHistory();
-
-  function addMeetupHandler(meetupData) {
-    fetch(
-      "https://react-getting-started-48dec-default-rtdb.firebaseio.com/meetups.json",
-      {
-        method: "POST",
-        body: JSON.stringify(meetupData),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    ).then(() => {
-      history.replace("/");
-    });
-  }
-
   return (
     <section>
-      <SignUpForm onAddMeetup={addMeetupHandler} />
+      <SignUpForm />
     </section>
   );
 }

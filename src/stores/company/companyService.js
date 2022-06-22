@@ -1,9 +1,19 @@
 import apiService from "../api";
-const endpoint = "http://localhost:8080";
+import { ENDPOINT } from "../../shared/constants/constants";
+const endpoint = ENDPOINT;
 
 // Get company info
 const getCompanyInfo = async (id) => {
   const response = await apiService().get(`${endpoint}/company/${id}`);
+  return response.data;
+};
+
+// Search company
+const searchCompany = async (character) => {
+  const response = await apiService().get(
+    `${endpoint}/company/search/${character}`
+  );
+  console.log(response);
   return response.data;
 };
 
@@ -24,6 +34,22 @@ const updateCompanyInfo = async (request) => {
   return response.data;
 };
 
-const companyService = { getCompanyInfo, updateCompanyInfo };
+// Update company logo
+const updateCompanyLogo = async (request) => {
+  const response = await apiService().put(
+    `${endpoint}/company/${request.companyId}/logo`,
+    {
+      logoImage: request.logo,
+    }
+  );
+  return response.data;
+};
+
+const companyService = {
+  getCompanyInfo,
+  searchCompany,
+  updateCompanyInfo,
+  updateCompanyLogo,
+};
 
 export default companyService;

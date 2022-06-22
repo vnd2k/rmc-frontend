@@ -1,43 +1,68 @@
+import React, { useState, useEffect } from "react";
 import classes from "./Rating.module.css";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { BsFillStarFill } from "react-icons/bs";
-import React, { useState } from "react";
-function Rating() {
-  const [star, setStar] = useState();
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import { getCompanyById, reset } from "../../stores/company/companySlice";
+import { useForm } from "react-hook-form";
+import { postRating } from "../../stores/rating/ratingSlice";
+import { useHistory } from "react-router-dom";
 
+function Rating() {
+  const { member } = useSelector((state) => state.member);
+  const { companyById } = useSelector((state) => state.company);
+  const { isSuccess } = useSelector((state) => state.rating);
+  const [star, setStar] = useState(5);
+  const { id = "" } = useParams();
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const handle = (data) => {
+    if (member) {
+      const ratingPoint = star;
+      const memberId = member?.id;
+      dispatch(postRating({ data, memberId, ratingPoint, id }));
+    }
+  };
+
+  useEffect(() => {
+    if (isSuccess === "postSuccess") {
+      reset();
+      history.push(`/company/${id}`);
+    }
+  }, [isSuccess, dispatch]);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(getCompanyById(id));
+    }
+  }, [id, dispatch]);
   const onStarChange = (event) => {
     setStar(event.target.value);
   };
-  console.log(star);
   return (
     <div>
       <div className={classes.headerWrapper}>
         <p className={classes.title}>
-          Rate: <span className={classes.companyName}>FPT Software</span>
+          Rate: <span className={classes.companyName}>{companyById?.name}</span>
         </p>
         <div className={classes.locationWrapper}>
           <HiOutlineLocationMarker color="#ccc" fontSize="1.3em" />
-          <div className={classes.location}>
-            FPT Complex, Khu đô thị FPT City, Ngũ Hành Sơn, Đà Nẵng
-          </div>
+          <div className={classes.location}>{companyById?.address}</div>
         </div>
       </div>
 
       <div className={classes.formWrapper}>
         <div className={classes.formCard}>
-          <form className={classes.formContent}>
-            <div className={classes.titleRating}>
-              <p className={classes.titleRate}>
-                Title<span className={classes.spanItem}>*</span>
-              </p>
-              <input
-                className={classes.titleInput}
-                placeholder="Title: Summarize your rating. Example: 'Greate Culture' or 'Good company for young Developer'"
-              ></input>
-            </div>
-
-            <div className={classes.likeThings}>
+          <form onSubmit={handleSubmit(handle)} className={classes.formContent}>
+            <div>
               <p className={classes.titleRate}>
                 What you like about the company?
                 <span className={classes.spanItem}>*</span>
@@ -46,10 +71,17 @@ function Rating() {
                 rows={4}
                 className={classes.areaInput}
                 placeholder="What makes this company stand out? Example: 'Great office', 'Awesome company culture', 'Good remuneration'"
+                {...register("positivePoint", {
+                  required: "PositivePoint is required",
+                  maxLength: 500,
+                })}
               ></textarea>
+              <p className={classes.errorMsg}>
+                {errors?.positivePoint && errors.positivePoint.message}
+              </p>
             </div>
 
-            <div className={classes.likeThings}>
+            <div className={classes.unlikeThings}>
               <p className={classes.titleRate}>
                 What the company needs to improve?
                 <span className={classes.spanItem}>*</span>
@@ -58,7 +90,14 @@ function Rating() {
                 rows={4}
                 className={classes.areaInput}
                 placeholder="What do you think the company needs to improve on? For example: 'When there is a project, the OT is a bit too much, putting pressure on the staff, so the estimation step needs to be improved. Meetings and reports take a lot of time, so these should be reduced.'"
+                {...register("pointsToImprove", {
+                  required: "PointsToImprove is required",
+                  maxLength: 500,
+                })}
               ></textarea>
+              <p className={classes.errorMsg}>
+                {errors?.pointsToImprove && errors.pointsToImprove.message}
+              </p>
             </div>
 
             <div className={classes.rateStar}>

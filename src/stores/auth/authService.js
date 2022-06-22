@@ -1,6 +1,7 @@
 import authStorageService from "../authStorageService";
 import apiService from "../api";
-const endpoint = "http://localhost:8080";
+import { ENDPOINT } from "../../shared/constants/constants";
+const endpoint = ENDPOINT;
 
 // Register user
 const register = async (userData) => {
