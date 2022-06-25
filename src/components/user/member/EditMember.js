@@ -2,7 +2,7 @@ import classes from "./EditMember.module.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-function EditUser(props) {
+function EditMember(props) {
   const { member } = useSelector((state) => state.member);
   return (
     <div className={classes.container}>
@@ -28,17 +28,17 @@ function EditUser(props) {
           <nav>
             <ul className={classes.tabWrapper}>
               <li className={classes.tabItem}>
-                <Link to="/profile" className={classes.item}>
+                <Link to="/member-profile" className={classes.item}>
                   Profile
                 </Link>
               </li>
               <li className={classes.tabItem}>
-                <Link to="/ratings" className={classes.item}>
+                <Link to="/member-ratings" className={classes.item}>
                   Ratings
                 </Link>
               </li>
               <li className={classes.tabItem}>
-                <Link to="/saved" className={classes.item}>
+                <Link to="/member-saved" className={classes.item}>
                   Saved Companies
                 </Link>
               </li>
@@ -51,4 +51,4 @@ function EditUser(props) {
   );
 }
 
-export default EditUser;
+export default EditMember;

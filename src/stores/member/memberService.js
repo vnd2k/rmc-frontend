@@ -9,6 +9,28 @@ const getMemberInfo = async (id) => {
   return response.data;
 };
 
+// Get saved company status
+const getSavedStatus = async (companyId) => {
+  const response = await apiService().get(
+    `${endpoint}/member/saved/${companyId}/check`
+  );
+  return response.data;
+};
+
+// Get list saved
+const getListSaved = async () => {
+  const response = await apiService().get(`${endpoint}/member/list-saved`);
+  return response.data;
+};
+
+// Post save
+const postSave = async (companyId) => {
+  const response = await apiService().post(
+    `${endpoint}/member/save/${companyId}`
+  );
+  return response.data;
+};
+
 // Update member info
 const updateMemberInfo = async (request) => {
   const response = await apiService().put(
@@ -35,6 +57,9 @@ const memberService = {
   getMemberInfo,
   updateMemberInfo,
   updateMemberAvatar,
+  getSavedStatus,
+  postSave,
+  getListSaved,
 };
 
 export default memberService;

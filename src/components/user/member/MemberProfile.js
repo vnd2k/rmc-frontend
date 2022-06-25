@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   updateMemberInfo,
   updateMemberAvatar,
-} from "../../stores/member/memberSlice";
+} from "../../../stores/member/memberSlice";
 import { useForm } from "react-hook-form";
 
 function MemberProfile(props) {

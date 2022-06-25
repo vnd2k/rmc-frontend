@@ -4,9 +4,11 @@ import companyService from "./companyService";
 const initialState = {
   company: null,
   isError: false,
-  isSuccess: false,
+  isSuccess: null,
   isLoading: false,
   companySearch: [],
+  jobList: [],
+  job: null,
   companyById: null,
   message: "",
 };
@@ -76,13 +78,69 @@ export const updateCompanyLogo = createAsyncThunk(
   }
 );
 
+// Get list jobs
+export const getListJob = createAsyncThunk("getListJob", async (thunkAPI) => {
+  try {
+    return await companyService.getListJob();
+  } catch (error) {
+    const message = error?.response?.data?.message;
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
+// Get jobs
+export const getJob = createAsyncThunk("getJob", async (jobId, thunkAPI) => {
+  try {
+    return await companyService.getJob(jobId);
+  } catch (error) {
+    const message = error?.response?.data?.message;
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
+// Post job
+export const postJob = createAsyncThunk(
+  "postJob",
+  async (request, thunkAPI) => {
+    try {
+      return await companyService.postJob(request);
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Update job
+export const putJob = createAsyncThunk("putJob", async (request, thunkAPI) => {
+  try {
+    return await companyService.putJob(request);
+  } catch (error) {
+    const message = error?.response?.data?.message;
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
+// Delete job
+export const deleteJob = createAsyncThunk(
+  "deleteJob",
+  async (jobId, thunkAPI) => {
+    try {
+      return await companyService.deleteJob(jobId);
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const companySlice = createSlice({
   name: "company",
   initialState,
   reducers: {
     reset: (state) => {
       state.isLoading = false;
-      state.isSuccess = false;
+      state.isSuccess = null;
       state.isError = false;
       state.message = "";
     },
@@ -94,7 +152,7 @@ export const companySlice = createSlice({
       })
       .addCase(getCompanyInfo.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
+        state.isSuccess = "getInfoSuccess";
         state.company = action.payload;
       })
       .addCase(getCompanyInfo.rejected, (state, action) => {
@@ -108,7 +166,7 @@ export const companySlice = createSlice({
       })
       .addCase(updateCompanyInfo.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
+        state.isSuccess = "updateInfoSuccess";
         state.company = action.payload;
       })
       .addCase(updateCompanyInfo.rejected, (state, action) => {
@@ -122,7 +180,7 @@ export const companySlice = createSlice({
       })
       .addCase(updateCompanyLogo.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
+        state.isSuccess = "updateLogoSuccess";
         state.company = action.payload;
       })
       .addCase(updateCompanyLogo.rejected, (state, action) => {
@@ -150,7 +208,7 @@ export const companySlice = createSlice({
       })
       .addCase(getCompanyById.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
+        state.isSuccess = "getByIdSuccess";
         state.companyById = action.payload;
       })
       .addCase(getCompanyById.rejected, (state, action) => {
@@ -158,6 +216,74 @@ export const companySlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         state.companyById = null;
+      })
+
+      .addCase(deleteJob.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteJob.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = "deleteJobSuccess";
+      })
+      .addCase(deleteJob.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+
+      .addCase(putJob.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(putJob.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = "updateJobSuccess";
+      })
+      .addCase(putJob.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+
+      .addCase(postJob.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(postJob.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = "postJobSuccess";
+      })
+      .addCase(postJob.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+
+      .addCase(getListJob.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getListJob.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = "getListJobSuccess";
+        state.jobList = action.payload;
+      })
+      .addCase(getListJob.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.company = null;
+      })
+      .addCase(getJob.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getJob.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = "getJobSuccess";
+        state.job = action.payload;
+      })
+      .addCase(getJob.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.company = null;
       });
   },
 });

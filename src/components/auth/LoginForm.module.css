@@ -219,3 +219,11 @@
   margin-top: -16px;
   margin-bottom: 16px;
 }
+.formLabelRadio {
+  margin-left: 4px;
+  margin-right: 8px;
+}
+
+.buttonRadio {
+  margin-left: 8px;
+}

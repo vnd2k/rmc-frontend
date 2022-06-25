@@ -2,11 +2,14 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import memberService from "./memberService";
 
 const initialState = {
+  savedList: [],
   member: null,
+  saved: null,
   isError: false,
-  isSuccess: false,
+  isSuccess: null,
   isChecked: null,
   isLoading: false,
+  isSaved: null,
   message: "",
 };
 
@@ -16,6 +19,45 @@ export const getMemberInfo = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       return await memberService.getMemberInfo(id);
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Get saved company status
+export const getSavedStatus = createAsyncThunk(
+  "getSavedStatus",
+  async (companyId, thunkAPI) => {
+    try {
+      return await memberService.getSavedStatus(companyId);
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Get saved list
+export const getListSaved = createAsyncThunk(
+  "getListSaved",
+  async (thunkAPI) => {
+    try {
+      return await memberService.getListSaved();
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Post save
+export const postSave = createAsyncThunk(
+  "postSave",
+  async (companyId, thunkAPI) => {
+    try {
+      return await memberService.postSave(companyId);
     } catch (error) {
       const message = error?.response?.data?.message;
       return thunkAPI.rejectWithValue(message);
@@ -56,7 +98,7 @@ export const memberSlice = createSlice({
   reducers: {
     reset: (state) => {
       state.isLoading = false;
-      state.isSuccess = false;
+      state.isSuccess = null;
       state.isError = false;
       state.message = "";
     },
@@ -68,7 +110,7 @@ export const memberSlice = createSlice({
       })
       .addCase(getMemberInfo.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isChecked = "getMember";
+        state.isSuccess = "getMember";
         state.member = action.payload;
       })
       .addCase(getMemberInfo.rejected, (state, action) => {
@@ -77,12 +119,47 @@ export const memberSlice = createSlice({
         state.message = action.payload;
         state.member = null;
       })
+      .addCase(getSavedStatus.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getSavedStatus.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = "getSavedSuccess";
+        state.saved = action.payload;
+      })
+      .addCase(getSavedStatus.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+
+      .addCase(getListSaved.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getListSaved.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = "getListSavedSuccess";
+        state.savedList = action.payload;
+        state.saved = action.payload;
+        console.log(action.payload);
+      })
+      .addCase(getListSaved.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+
+      .addCase(postSave.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = "postSuccess";
+      })
+
       .addCase(updateMemberInfo.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(updateMemberInfo.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
+        state.isSuccess = "updateSuccess";
         state.member = action.payload;
       })
       .addCase(updateMemberInfo.rejected, (state, action) => {
@@ -96,7 +173,7 @@ export const memberSlice = createSlice({
       })
       .addCase(updateMemberAvatar.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = true;
+        state.isSuccess = "updateAvatarSuccess";
         state.member = action.payload;
       })
       .addCase(updateMemberAvatar.rejected, (state, action) => {

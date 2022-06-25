@@ -3,8 +3,13 @@ import classes from "./RatingItem.module.css";
 import { BiFlag, BiDislike, BiLike } from "react-icons/bi";
 import { BsThreeDots } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
-import { likeRating, unlikeRating } from "../../stores/rating/ratingSlice";
+import {
+  likeRating,
+  unlikeRating,
+  deleteRating,
+} from "../../stores/rating/ratingSlice";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 function RatingItem(props) {
   const { isSuccess } = useSelector((state) => state.rating);
@@ -59,6 +64,16 @@ function RatingItem(props) {
     }
   };
 
+  const handleEdit = (id) => {
+    return `/edit/rating/${id}`;
+  };
+
+  const handleDelete = (id) => {
+    console.log("aa");
+    if (id) {
+      dispatch(deleteRating(id));
+    }
+  };
   return (
     <li className={classes.itemSearch} key={item.id}>
       <div className={classes.ratingBody}>
@@ -77,9 +92,14 @@ function RatingItem(props) {
               {option ? (
                 <ul className={classes.optionWrapper}>
                   <li className={classes.editButton}>
-                    <FiEdit></FiEdit> Edit
+                    <Link to={handleEdit(item.id)} className={classes.textLink}>
+                      <FiEdit></FiEdit> Edit
+                    </Link>
                   </li>
-                  <li className={classes.deleteButton}>
+                  <li
+                    className={classes.deleteButton}
+                    onClick={() => handleDelete(item.id)}
+                  >
                     <FiTrash2></FiTrash2> Detete
                   </li>
                 </ul>

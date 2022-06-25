@@ -12,6 +12,7 @@
   color: #222;
 }
 .formWrapper {
+  margin-top: 12px;
   padding: 0px 24px;
   display: flex;
   justify-content: center;
@@ -116,4 +117,20 @@
 }
 .editAvatar {
   margin-bottom: 24px;
+  position: relative;
+}
+
+.verifiedItem {
+  color: rgb(10, 99, 234);
+  font-size: x-large;
+  position: absolute;
+  left: 8px;
+  top: 8px;
+}
+.unVerifiedItem {
+  color: rgb(190, 189, 189);
+  font-size: x-large;
+  position: absolute;
+  left: 8px;
+  top: 8px;
 }

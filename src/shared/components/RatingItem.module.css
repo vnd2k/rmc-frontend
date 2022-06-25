@@ -291,3 +291,7 @@
   background-color: #0969da;
   cursor: pointer;
 }
+.textLink {
+  text-decoration: none;
+  color: black;
+}

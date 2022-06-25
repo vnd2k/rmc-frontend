@@ -1,5 +1,5 @@
 import classes from "./MemberRatings.module.css";
-import RatingList from "../../shared/components/RatingList";
+import RatingList from "../../../shared/components/RatingList";
 import { useSelector } from "react-redux";
 
 function MemberRatings(props) {

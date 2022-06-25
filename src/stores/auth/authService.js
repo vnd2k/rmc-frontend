@@ -5,6 +5,7 @@ const endpoint = ENDPOINT;
 
 // Register user
 const register = async (userData) => {
+  console.log(userData);
   const response = await apiService().post(
     `${endpoint}/auth/register`,
     userData

@@ -20,8 +20,7 @@ function SignUpForm(props) {
 
   const dispatch = useDispatch();
   const handle = (data) => {
-    const role = "MEMBER";
-    dispatch(signUp({ role, ...data }));
+    dispatch(signUp(data));
   };
 
   const history = useHistory();
@@ -66,6 +65,35 @@ function SignUpForm(props) {
               <p className={classes.errorMsg}>
                 {errors?.email && errors.email.message}
               </p>
+            </div>
+
+            <div className={classes.formGroup}>
+              <label htmlFor="radio" className={classes.formLabel}>
+                Take a role
+              </label>
+              <input
+                {...register("role")}
+                type="radio"
+                defaultChecked
+                name="role"
+                value="MEMBER"
+                id="field-member"
+                className={classes.buttonRadio}
+              />
+              <label htmlFor="field-member" className={classes.formLabelRadio}>
+                Member
+              </label>
+              <input
+                {...register("role")}
+                type="radio"
+                name="role"
+                value="COMPANY"
+                id="field-company"
+                className={classes.buttonRadio}
+              />
+              <label htmlFor="field-company" className={classes.formLabelRadio}>
+                Company
+              </label>
             </div>
 
             <div className={classes.formGroup}>

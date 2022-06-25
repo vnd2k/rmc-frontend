@@ -192,6 +192,10 @@ p {
   gap: 24px;
 }
 
+.nameWrapper {
+  display: flex;
+}
+
 .rateButtonWrapper {
   display: flex;
   justify-content: center;
@@ -266,4 +270,37 @@ p {
 .infoWrapper {
   display: flex;
   justify-content: space-between;
+}
+
+.nameCompanyWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.unsavedItem {
+  font-weight: 900;
+  font-size: xx-large;
+}
+.unsavedItem:hover {
+  cursor: pointer;
+  color: #e77373;
+}
+
+.savedItem {
+  font-weight: 900;
+  color: #e77373;
+  font-size: xx-large;
+}
+.verifiedItem {
+  color: rgb(10, 99, 234);
+  font-size: xx-large;
+}
+.unVerifiedItem {
+  color: rgb(228, 228, 228);
+  font-size: xx-large;
+}
+
+.savedItem:hover {
+  cursor: pointer;
 }

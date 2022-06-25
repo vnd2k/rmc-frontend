@@ -8,9 +8,13 @@ import { BsPeople } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { getCompanyById } from "../../stores/company/companySlice";
 import RatingList from "../../shared/components/RatingList";
+import { BsFillBookmarkFill, BsBookmark } from "react-icons/bs";
+import { getSavedStatus, postSave } from "../../stores/member/memberSlice";
+import { MdVerifiedUser, MdOutlineVerifiedUser } from "react-icons/md";
 
 function CompanyPost(props) {
   const { companyById } = useSelector((state) => state.company);
+  const { saved, isSuccess } = useSelector((state) => state.member);
   const [isRead, setRead] = useState(true);
   const { id = "" } = useParams();
   const dispatch = useDispatch();
@@ -33,6 +37,15 @@ function CompanyPost(props) {
     }
   }, [id, dispatch]);
 
+  useEffect(() => {
+    if (id) {
+      dispatch(getSavedStatus(id));
+    }
+  }, [id, dispatch, isSuccess]);
+
+  const handleSave = () => {
+    dispatch(postSave(id));
+  };
   return (
     <div className={classes.container}>
       <div className={classes.row}>
@@ -46,7 +59,31 @@ function CompanyPost(props) {
               ></img>
             </div>
             <div className={classes.infoContainer}>
-              <h1 className={classes.companyName}>{companyById?.name}</h1>
+              <div className={classes.nameCompanyWrapper}>
+                <div className={classes.nameWrapper}>
+                  <h1 className={classes.companyName}>{companyById?.name}</h1>
+                  {companyById?.verified ? (
+                    <MdVerifiedUser
+                      className={classes.verifiedItem}
+                    ></MdVerifiedUser>
+                  ) : (
+                    <MdOutlineVerifiedUser
+                      className={classes.unVerifiedItem}
+                    ></MdOutlineVerifiedUser>
+                  )}
+                </div>
+                {saved?.checked ? (
+                  <BsFillBookmarkFill
+                    onClick={() => handleSave()}
+                    className={classes.savedItem}
+                  ></BsFillBookmarkFill>
+                ) : (
+                  <BsBookmark
+                    onClick={() => handleSave()}
+                    className={classes.unsavedItem}
+                  ></BsBookmark>
+                )}
+              </div>
               <div className={classes.locationWrapper}>
                 <HiOutlineLocationMarker color="#ccc" fontSize="1.3em" />
                 <div className={classes.location}>{companyById?.address}</div>

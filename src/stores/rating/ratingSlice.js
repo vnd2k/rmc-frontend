@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import ratingService from "./ratingService";
 
 const initialState = {
+  rating: null,
   ratingList: [],
   isError: false,
   isSuccess: null,
@@ -15,6 +16,45 @@ export const getRatingList = createAsyncThunk(
   async (request, thunkAPI) => {
     try {
       return await ratingService.getRatingList(request);
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Get rating by id
+export const getRating = createAsyncThunk(
+  "getRating",
+  async (ratingId, thunkAPI) => {
+    try {
+      return await ratingService.getRating(ratingId);
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Edit rating by id
+export const editRating = createAsyncThunk(
+  "editRating",
+  async (request, thunkAPI) => {
+    try {
+      return await ratingService.editRating(request);
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Delete rating by id
+export const deleteRating = createAsyncThunk(
+  "deleteRating",
+  async (ratingId, thunkAPI) => {
+    try {
+      return await ratingService.deleteRating(ratingId);
     } catch (error) {
       const message = error?.response?.data?.message;
       return thunkAPI.rejectWithValue(message);
@@ -127,8 +167,53 @@ export const ratingSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-        state.ratingList = null;
+        state.rating = null;
       })
+      .addCase(getRating.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getRating.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = "getRating";
+        state.rating = action.payload;
+        console.log(action.payload);
+      })
+      .addCase(getRating.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.rating = null;
+      })
+
+      .addCase(editRating.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(editRating.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = "editRatingSuccess";
+      })
+      .addCase(editRating.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.rating = null;
+      })
+
+      .addCase(deleteRating.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteRating.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = "deleteSuccess";
+        state.rating = action.payload;
+      })
+      .addCase(deleteRating.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+        state.rating = null;
+      })
+
       .addCase(postRating.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = "postSuccess";

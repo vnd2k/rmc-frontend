@@ -10,14 +10,18 @@ import SignUpPage from "./pages/SignUp";
 import Start from "./pages/Start";
 import Layout from "./components/layout/Layout";
 import Rating from "./components/companyPost/Rating";
-import CreatePost from "./components/companyPost/CreatePostForm";
 import ConfirmEmail from "./components/auth/ConfirmEmail";
-import EditUser from "./components/user/EditMember";
-import MemberProfile from "./components/user/MemberProfile";
-import MemberRatings from "./components/user/MemberRatings";
-import MemberSaved from "./components/user/MemberSaved";
+import EditMember from "./components/user/member/EditMember";
+import MemberProfile from "./components/user/member/MemberProfile";
+import MemberRatings from "./components/user/member/MemberRatings";
+import MemberSaved from "./components/user/member/MemberSaved";
 import authStorageService from "./stores/authStorageService";
-import CompanyProfile from "./components/user/CompanyProfile";
+import EditCompany from "./components/user/company/EditCompany";
+import CompanyProfile from "./components/user/company/CompanyProfile";
+import CompanyJob from "./components/user/company/CompanyJob";
+import EditRating from "./shared/components/EditRating";
+import AddNewJob from "./shared/components/AddNewJob";
+import EditJob from "./shared/components/EditJob";
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -62,44 +66,72 @@ function App() {
           <Rating />
         </Layout>
       </Route>
-      <Route path="/create-post">
+      <Route path="/add-job/:id">
         <Layout>
-          <CreatePost />
+          <AddNewJob />
         </Layout>
       </Route>
-
+      <Route path="/edit-job/:id">
+        <Layout>
+          <EditJob />
+        </Layout>
+      </Route>
+      <Route path="/edit/rating/:id">
+        <Layout>
+          <EditRating />
+        </Layout>
+      </Route>
       <Route path="/account">
         <Layout>
           {user?.userDetails?.role === "MEMBER" && (
-            <EditUser>
+            <EditMember>
               <MemberProfile />
-            </EditUser>
+            </EditMember>
           )}
 
           {user?.userDetails?.role === "COMPANY" && (
-            <CompanyProfile></CompanyProfile>
+            <EditCompany>
+              <CompanyProfile></CompanyProfile>
+            </EditCompany>
           )}
         </Layout>
       </Route>
-      <Route path="/profile">
+
+      <Route path="/company-profile">
         <Layout>
-          <EditUser>
+          <EditCompany>
+            <CompanyProfile />
+          </EditCompany>
+        </Layout>
+      </Route>
+
+      <Route path="/company-jobs">
+        <Layout>
+          <EditCompany>
+            <CompanyJob />
+          </EditCompany>
+        </Layout>
+      </Route>
+
+      <Route path="/member-profile">
+        <Layout>
+          <EditMember>
             <MemberProfile />
-          </EditUser>
+          </EditMember>
         </Layout>
       </Route>
-      <Route path="/ratings">
+      <Route path="/member-ratings">
         <Layout>
-          <EditUser>
+          <EditMember>
             <MemberRatings />
-          </EditUser>
+          </EditMember>
         </Layout>
       </Route>
-      <Route path="/saved">
+      <Route path="/member-saved">
         <Layout>
-          <EditUser>
+          <EditMember>
             <MemberSaved />
-          </EditUser>
+          </EditMember>
         </Layout>
       </Route>
     </Switch>

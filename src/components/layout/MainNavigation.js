@@ -24,16 +24,11 @@ function MainNavigation() {
           <Logo className={classes.logo} />
         </Link>
       </div>
-      {!(location.pathname === "/") && !(location.pathname === "/rating") && (
-        // <input
-        //   type="text"
-        //   placeholder="Company Name"
-        //   className={classes.searchBox}
-        // ></input>
+      {/* {!(location.pathname === "/") && !(location.pathname === "/rating") && (
         <div className={classes.searchBox}>
           <SearchCompany></SearchCompany>
         </div>
-      )}
+      )} */}
 
       <nav>
         {user ? (
