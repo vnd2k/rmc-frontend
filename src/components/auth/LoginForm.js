@@ -5,12 +5,13 @@ import { useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { login, reset } from "../../stores/auth/authSlice";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function LoginForm(props) {
   const { user, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
-
   const {
     register,
     handleSubmit,
@@ -33,6 +34,12 @@ function LoginForm(props) {
 
     dispatch(reset());
   }, [user, isError, isSuccess, message, history, dispatch]);
+
+  useEffect(() => {
+    if (message) {
+      toast.error(message);
+    }
+  });
 
   return (
     <div className={classes.container}>
@@ -109,6 +116,7 @@ function LoginForm(props) {
           </div>
         </div>
       </div>
+      {/* <ToastContainer /> */}
     </div>
   );
 }

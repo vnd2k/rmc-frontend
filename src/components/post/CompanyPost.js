@@ -13,10 +13,12 @@ import { getSavedStatus, postSave } from "../../stores/member/memberSlice";
 import { MdVerifiedUser, MdOutlineVerifiedUser } from "react-icons/md";
 import { getListJobById } from "../../stores/company/companySlice";
 import { CgArrowRightO } from "react-icons/cg";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function CompanyPost(props) {
   const { companyById, jobList } = useSelector((state) => state.company);
-  const { saved, isSuccess } = useSelector((state) => state.member);
+  const { saved, isSuccess, member } = useSelector((state) => state.member);
   const [isRead, setRead] = useState(true);
   const { id = "" } = useParams();
   const dispatch = useDispatch();
@@ -50,7 +52,16 @@ function CompanyPost(props) {
       dispatch(getListJobById(id));
     }
   }, [dispatch, id]);
-  console.log(jobList);
+  useEffect(() => {
+    if (saved && isSuccess === "postSuccess") {
+      if (!saved?.checked) {
+        toast.info("Added to saved list");
+      } else {
+        toast.info("Removed to saved list");
+      }
+    }
+  }, [dispatch, isSuccess, member]);
+
   const handleSave = () => {
     dispatch(postSave(id));
   };
@@ -264,9 +275,13 @@ function CompanyPost(props) {
             </div>
           </div>
           <div className={classes.rateButtonWrapper}>
-            <Link to={`/rating/${id}`} className={classes.rateButton}>
-              Rate Your Company
-            </Link>
+            {member ? (
+              <Link to={`/rating/${id}`} className={classes.rateButton}>
+                Rate Your Company
+              </Link>
+            ) : (
+              <button className={classes.rateButton}>Login to rate</button>
+            )}
           </div>
         </div>
       </div>

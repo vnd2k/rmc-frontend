@@ -34,14 +34,14 @@ function ManageCompany(props) {
       </div>
       <div className={classes.ratingList}>
         <div className={classes.containerComment}>
+          <Link className={classes.btnAdd} to={"/add-user"}>
+            Add User
+          </Link>
           {companyList &&
             (companyList.length > 0 ? (
               <>
                 <div className={classes.ratingLiWrapper}>
                   <ul className={classes.ratingUl}>
-                    <Link className={classes.btnAdd} to={"/add-user"}>
-                      Add User
-                    </Link>
                     {companyList?.map((item) => (
                       <li className={classes.itemSearch} key={item.id}>
                         <div className={classes.ratingBody}>

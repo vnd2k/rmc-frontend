@@ -9,11 +9,13 @@ import { getCompanyById, reset } from "../../stores/company/companySlice";
 import { useForm } from "react-hook-form";
 import { postRating } from "../../stores/rating/ratingSlice";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Rating() {
   const { member } = useSelector((state) => state.member);
   const { companyById } = useSelector((state) => state.company);
-  const { isSuccess } = useSelector((state) => state.rating);
+  const { isSuccess, isLoading } = useSelector((state) => state.rating);
   const [star, setStar] = useState(5);
   const { id = "" } = useParams();
   const dispatch = useDispatch();
@@ -34,6 +36,7 @@ function Rating() {
 
   useEffect(() => {
     if (isSuccess === "postSuccess") {
+      toast.success("Rate successfully");
       reset();
       history.push(`/company/${id}`);
     }
@@ -207,7 +210,9 @@ function Rating() {
               </div>
             </div>
             <div className={classes.btnWrapper}>
-              <button className={classes.rateButton}>Confirm Rating</button>
+              <button disabled={isLoading} className={classes.rateButton}>
+                Confirm Rating
+              </button>
             </div>
           </form>
         </div>

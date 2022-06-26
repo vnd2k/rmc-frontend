@@ -1,15 +1,18 @@
 import classes from "./MemberProfile.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   updateMemberInfo,
   updateMemberAvatar,
+  reset,
 } from "../../../stores/member/memberSlice";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function MemberProfile(props) {
   const { user } = useSelector((state) => state.auth);
-  const { member } = useSelector((state) => state.member);
+  const { member, isSuccess } = useSelector((state) => state.member);
   const [inputAvatar, setInputAvatar] = useState();
   const [previewAvatar, setPreviewAvatar] = useState("");
   const dispatch = useDispatch();
@@ -22,6 +25,13 @@ function MemberProfile(props) {
       dispatch(updateMemberInfo({ memberId, nickname }));
     }
   };
+
+  useEffect(() => {
+    if (isSuccess === "updateSuccess" || isSuccess === "updateAvatarSuccess") {
+      toast.success("Update successfully");
+      reset();
+    }
+  }, [dispatch, isSuccess, member]);
 
   const handleInputAvatar = (e) => {
     const file = e.target.files[0];

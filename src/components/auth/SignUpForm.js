@@ -4,9 +4,11 @@ import classes from "./LoginForm.module.css";
 import { signUp, reset } from "../../stores/auth/authSlice";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function SignUpForm(props) {
-  const { user, isError, isSuccess, message } = useSelector(
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.auth
   );
   const {
@@ -26,10 +28,10 @@ function SignUpForm(props) {
   const history = useHistory();
   useEffect(() => {
     if (isError) {
-      // toast.error(message);
     }
 
     if (isSuccess || user) {
+      toast.success("Registration successful");
       history.push("/confirm");
     }
 
@@ -139,6 +141,7 @@ function SignUpForm(props) {
 
             <div className={classes.formGroup}>
               <button
+                disabled={isLoading}
                 type="submit"
                 className={`${classes.btn} ${classes.btnPrimary} ${classes.signInBtn} `}
               >
