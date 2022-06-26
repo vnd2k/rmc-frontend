@@ -9,7 +9,6 @@ function ContentRating({ ratingId, close }) {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
   const handle = (data) => {
@@ -23,14 +22,14 @@ function ContentRating({ ratingId, close }) {
     if (isSuccess === "postReport") {
       close();
     }
-  }, [isSuccess, dispatch]);
+  }, [isSuccess, dispatch, close]);
 
   return (
     <div className={classes.container}>
       <form onSubmit={handleSubmit(handle)} className={classes.modal}>
-        <a className={classes.close} onClick={close}>
+        <button className={classes.close} onClick={close}>
           &times;
-        </a>
+        </button>
         <div className={classes.header}> Enter reason to report</div>
         <textarea
           rows={4}

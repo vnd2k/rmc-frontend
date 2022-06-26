@@ -94,7 +94,7 @@ function UpdateCompany(props) {
       reset();
       history.push(`/manage-company`);
     }
-  }, [isSuccess, dispatch]);
+  }, [isSuccess, dispatch, history]);
   return (
     <div className={classes.formWrapper}>
       <div className={classes.formCard}>
@@ -242,7 +242,7 @@ function UpdateCompany(props) {
                     required: "Website is required",
                     pattern: {
                       value:
-                        /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,
+                        /[-a-zA-Z0-9@:%._~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_.~#?&//=]*)/,
                       message: "Website is invalid",
                     },
                   })}

@@ -1,12 +1,10 @@
-import { Link, useLocation, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import classes from "./MainNavigation.module.css";
 import { ReactComponent as Logo } from "../../assets/logo.svg";
 import { useSelector, useDispatch } from "react-redux";
 import { logout, reset } from "../../stores/auth/authSlice";
-import SearchCompany from "../../shared/components/SearchCompany";
 
 function MainNavigation() {
-  const location = useLocation();
   const { user } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
@@ -24,11 +22,6 @@ function MainNavigation() {
           <Logo className={classes.logo} />
         </Link>
       </div>
-      {/* {!(location.pathname === "/") && !(location.pathname === "/rating") && (
-        <div className={classes.searchBox}>
-          <SearchCompany></SearchCompany>
-        </div>
-      )} */}
 
       <nav>
         {user ? (

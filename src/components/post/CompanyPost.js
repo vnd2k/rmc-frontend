@@ -49,7 +49,7 @@ function CompanyPost(props) {
     if (id) {
       dispatch(getListJobById(id));
     }
-  }, [dispatch]);
+  }, [dispatch, id]);
   console.log(jobList);
   const handleSave = () => {
     dispatch(postSave(id));

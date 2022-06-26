@@ -217,7 +217,7 @@ function CompanyProfile(props) {
                   required: "Website is required",
                   pattern: {
                     value:
-                      /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/,
+                      /[-a-zA-Z0-9@:%._~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_.~#?&//=]*)/,
                     message: "Website is invalid",
                   },
                 })}

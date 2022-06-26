@@ -1,9 +1,7 @@
 import classes from "./HomePage.module.css";
 import SearchCompany from "../../shared/components/SearchCompany";
-import { useSelector, useDispatch } from "react-redux";
 
 function Homepage() {
-  const { member } = useSelector((state) => state.member);
   return (
     <div className={classes.container}>
       <img

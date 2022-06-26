@@ -25,7 +25,7 @@ function RatingItem(props) {
   useEffect(() => {
     setLiked(item.liked);
     setUnliked(item.unliked);
-  }, [isSuccess, dispatch]);
+  }, [isSuccess, dispatch, item.liked, item.unliked]);
 
   const checkPoint = (point) => {
     switch (point) {
@@ -38,6 +38,8 @@ function RatingItem(props) {
       case 4:
         return classes.goodRatingValue;
       case 5:
+        return classes.goodRatingValue;
+      default:
         return classes.goodRatingValue;
     }
   };

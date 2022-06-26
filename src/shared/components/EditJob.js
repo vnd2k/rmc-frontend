@@ -42,7 +42,7 @@ function EditJob() {
       reset();
       history.push(`/company-jobs`);
     }
-  }, [isSuccess, dispatch]);
+  }, [isSuccess, dispatch, history]);
   const handleDelete = () => {
     if (id) {
       dispatch(deleteJob(id));

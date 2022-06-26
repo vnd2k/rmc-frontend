@@ -43,7 +43,7 @@ function App() {
     } else if (user?.userDetails?.id && user?.userDetails?.role === "COMPANY") {
       dispatch(getCompanyInfo(user?.userDetails?.id));
     }
-  }, [user]);
+  }, [dispatch, user]);
   return (
     <Switch>
       <Route path="/company/:id">

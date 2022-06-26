@@ -37,7 +37,7 @@ function Rating() {
       reset();
       history.push(`/company/${id}`);
     }
-  }, [isSuccess, dispatch]);
+  }, [isSuccess, dispatch, history, id]);
 
   useEffect(() => {
     if (id) {

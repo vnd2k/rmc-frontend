@@ -28,12 +28,11 @@ function EditRating() {
     }
   };
 
-  //BUG: companyId = undefine
   useEffect(() => {
     if (isSuccess === "editRatingSuccess") {
       history.push(`/company/${rating?.companyId}`);
     }
-  }, [isSuccess, dispatch]);
+  }, [isSuccess, dispatch, history, rating?.companyId]);
 
   useEffect(() => {
     if (id) {

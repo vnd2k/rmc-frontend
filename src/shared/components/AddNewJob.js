@@ -28,7 +28,7 @@ function AddNewJob() {
       reset();
       history.push(`/company-jobs`);
     }
-  }, [isSuccess, dispatch]);
+  }, [isSuccess, dispatch, history]);
 
   return (
     <div>
