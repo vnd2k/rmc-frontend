@@ -1,0 +1,220 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.formCard {
+  margin: 0px 0px 20px;
+  width: 100%;
+}
+.formWrapper {
+  margin-top: 12px;
+  padding: 0px 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.formContent {
+  background: rgb(255, 255, 255);
+  border: 1px solid rgb(228, 228, 228);
+  border-radius: 6px;
+  box-shadow: rgb(126 126 126 / 25%) 0px 4px 4px;
+  padding: 36px 48px 36px;
+  text-align: left;
+}
+.title {
+  margin-bottom: 24px;
+}
+.titleText {
+  font-weight: bold;
+  font-size: 2rem;
+  color: #222;
+}
+.card {
+  position: relative;
+  margin-top: 4px;
+  box-shadow: 0 2px 4px 0 rgb(0 0 0 / 20%);
+  border-radius: 3px;
+  background-color: #fff;
+  /* width: 392px; */
+  padding: 16px 32px;
+}
+
+.link {
+  font-size: 12px;
+  color: #1a1a1a;
+  display: inline-block;
+  line-height: 2.2;
+  margin: auto;
+}
+
+.linkContainer {
+  width: 100%;
+  display: flex;
+}
+
+.link:visited {
+  color: #3e92f2;
+}
+
+.formGroup {
+  margin-bottom: 16px;
+  position: relative;
+}
+.formLabel {
+  font-weight: 600;
+  display: block;
+  font-size: 12px;
+  color: #282828;
+  margin-bottom: 8px;
+}
+
+.formControl {
+  font-size: 14px;
+  height: 40px;
+  color: #282828;
+  border-radius: 3px;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -o-box-shadow: none;
+  -webkit-box-shadow: none;
+  border: 1px solid #d4d4d4;
+  padding: 8px;
+  display: block;
+  width: 100%;
+  line-height: 1.42857143;
+  background-color: #fafafa;
+  background-image: none;
+}
+.formControl:focus {
+  border-color: #e77773;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -o-box-shadow: none;
+  -webkit-box-shadow: none;
+  outline: 0;
+}
+.formControl:focus:hover {
+  outline: 0;
+  border-color: #e77773;
+  box-shadow: none;
+  -moz-box-shadow: none;
+  -o-box-shadow: none;
+  -webkit-box-shadow: none;
+}
+.formControl:hover {
+  border: 1px solid #a9a9a9;
+}
+.formControl.disabled {
+  background-color: #f7f7f7;
+  color: #666;
+  border-color: #e3e3e3;
+}
+
+.inputValidationError {
+  font-size: 12px;
+  color: #c64442;
+  display: none;
+}
+.inputValidationError a {
+  font-size: 12px;
+  font-weight: unset;
+  text-decoration: underline;
+  color: inherit;
+}
+
+.troubleLink {
+  line-height: 1.8;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 16px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 3px;
+}
+.btn[disabled] {
+  opacity: 0.6;
+}
+.btnPrimary {
+  color: #fff;
+  background-color: #e77773;
+  height: 40px;
+  width: 12%;
+}
+
+.btnPrimary:hover {
+  color: #fff;
+  background-color: #e77773;
+}
+.btnPrimary:focus {
+  color: #fff;
+  background-color: #e77773;
+}
+.btnPrimary:active:focus {
+  color: #fff;
+  outline: 0;
+}
+.signInBtn {
+  font-weight: 500;
+  margin-top: 12px;
+}
+
+.awesomeDiv {
+  padding: 0 32px;
+}
+
+.awesome {
+  height: 1px;
+  width: 100%;
+  border-top: solid thin #f0f0f0;
+  margin: 24px 0;
+  text-align: center;
+}
+.awesome:after {
+  content: attr(data-label);
+  display: inline-block;
+  background: #fff;
+  padding: 0 32px;
+  position: relative;
+  top: -10px;
+  font-size: 12px;
+  color: #9b9b9b;
+}
+
+.errorMsg {
+  font-size: small;
+  color: #e71410;
+  margin: 0;
+  margin-top: 4px;
+}
+
+.confirm {
+  font-size: 12px;
+  color: #1a1a1a;
+  margin-top: -16px;
+  margin-bottom: 16px;
+}
+.formLabelRadio {
+  margin-left: 4px;
+  margin-right: 8px;
+}
+
+.buttonRadio {
+  margin-left: 8px;
+}

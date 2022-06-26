@@ -10,6 +10,8 @@ import {
 } from "../../stores/rating/ratingSlice";
 import { FiEdit, FiTrash2 } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import Popup from "reactjs-popup";
+import ContentRating from "./ContentRating";
 
 function RatingItem(props) {
   const { isSuccess } = useSelector((state) => state.rating);
@@ -146,10 +148,25 @@ function RatingItem(props) {
                 {item.dislikeCount}
               </div>
             </div>
-            <div className={classes.report}>
-              <BiFlag className={classes.reportIcon} />
-              <span className={classes.reportText}>Report this rating</span>
-            </div>
+            {!item?.myRating && (
+              <div className={classes.report}>
+                <Popup
+                  modal
+                  trigger={
+                    <div>
+                      <BiFlag className={classes.reportIcon} />
+                      <span className={classes.reportText}>
+                        Report this rating
+                      </span>
+                    </div>
+                  }
+                >
+                  {(close) => (
+                    <ContentRating ratingId={item.id} close={close} />
+                  )}
+                </Popup>
+              </div>
+            )}
           </div>
         </div>
       </div>

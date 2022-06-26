@@ -50,6 +50,14 @@ const getListJob = async () => {
   return response.data;
 };
 
+// Get list jobs by companyId
+const getListJobById = async (companyId) => {
+  const response = await apiService().get(
+    `${endpoint}/company/job-list/${companyId}`
+  );
+  return response.data;
+};
+
 // Get  jobs
 const getJob = async (jobId) => {
   const response = await apiService().get(`${endpoint}/company/job/${jobId}`);
@@ -95,6 +103,7 @@ const companyService = {
   putJob,
   getJob,
   deleteJob,
+  getListJobById,
 };
 
 export default companyService;

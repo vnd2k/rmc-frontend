@@ -73,7 +73,7 @@ function Homepage() {
       </div>
 
       <div className={classes.footer}>
-        <p className={classes.footerText}>Footer</p>
+        <p className={classes.footerText}>Made By VND</p>
       </div>
     </div>
   );

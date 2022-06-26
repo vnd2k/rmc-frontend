@@ -69,7 +69,6 @@ export const postSave = createAsyncThunk(
 export const updateMemberInfo = createAsyncThunk(
   "updateMember",
   async (request, thunkAPI) => {
-    console.log(request);
     try {
       return await memberService.updateMemberInfo(request);
     } catch (error) {
@@ -85,6 +84,19 @@ export const updateMemberAvatar = createAsyncThunk(
   async (request, thunkAPI) => {
     try {
       return await memberService.updateMemberAvatar(request);
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Post report
+export const postReport = createAsyncThunk(
+  "postReport",
+  async (ratingId, thunkAPI) => {
+    try {
+      return await memberService.postReport(ratingId);
     } catch (error) {
       const message = error?.response?.data?.message;
       return thunkAPI.rejectWithValue(message);
@@ -141,7 +153,6 @@ export const memberSlice = createSlice({
         state.isSuccess = "getListSavedSuccess";
         state.savedList = action.payload;
         state.saved = action.payload;
-        console.log(action.payload);
       })
       .addCase(getListSaved.rejected, (state, action) => {
         state.isLoading = false;
@@ -152,6 +163,11 @@ export const memberSlice = createSlice({
       .addCase(postSave.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = "postSuccess";
+      })
+
+      .addCase(postReport.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = "postReport";
       })
 
       .addCase(updateMemberInfo.pending, (state) => {

@@ -53,6 +53,18 @@ const updateMemberAvatar = async (request) => {
   return response.data;
 };
 
+// Post report
+const postReport = async (request) => {
+  console.log(request);
+  const response = await apiService().post(
+    `${endpoint}/member/report/${request.ratingId}`,
+    {
+      reason: request.data.reason,
+    }
+  );
+  return response.data;
+};
+
 const memberService = {
   getMemberInfo,
   updateMemberInfo,
@@ -60,6 +72,7 @@ const memberService = {
   getSavedStatus,
   postSave,
   getListSaved,
+  postReport,
 };
 
 export default memberService;

@@ -63,55 +63,60 @@ function EditJob() {
 
       <div className={classes.formWrapper}>
         <div className={classes.formCard}>
-          <form onSubmit={handleSubmit(handle)} className={classes.formContent}>
-            <div>
-              <div className={classes.titleWrapper}>
+          {id === job?.id && (
+            <form
+              onSubmit={handleSubmit(handle)}
+              className={classes.formContent}
+            >
+              <div>
+                <div className={classes.titleWrapper}>
+                  <p className={classes.titleRate}>
+                    Job title
+                    <span className={classes.spanItem}>*</span>
+                  </p>
+                  <MdCancel
+                    onClick={() => handleDelete()}
+                    className={classes.deleteBtn}
+                  ></MdCancel>
+                </div>
+                <input
+                  defaultValue={job?.title}
+                  className={classes.areaInput}
+                  placeholder="Title of job"
+                  {...register("title", {
+                    required: "Title is required",
+                    maxLength: 100,
+                  })}
+                ></input>
+                <p className={classes.errorMsg}>
+                  {errors?.title && errors.title.message}
+                </p>
+              </div>
+
+              <div className={classes.unlikeThings}>
                 <p className={classes.titleRate}>
-                  Job title
+                  Job description
                   <span className={classes.spanItem}>*</span>
                 </p>
-                <MdCancel
-                  onClick={() => handleDelete()}
-                  className={classes.deleteBtn}
-                ></MdCancel>
+                <textarea
+                  defaultValue={job?.description}
+                  rows={10}
+                  className={classes.areaInput}
+                  placeholder="Description of job"
+                  {...register("description", {
+                    required: "Description is required",
+                    maxLength: 2000,
+                  })}
+                ></textarea>
+                <p className={classes.errorMsg}>
+                  {errors?.description && errors.description.message}
+                </p>
               </div>
-              <input
-                defaultValue={job?.title}
-                className={classes.areaInput}
-                placeholder="Title of job"
-                {...register("title", {
-                  required: "Title is required",
-                  maxLength: 100,
-                })}
-              ></input>
-              <p className={classes.errorMsg}>
-                {errors?.title && errors.title.message}
-              </p>
-            </div>
-
-            <div className={classes.unlikeThings}>
-              <p className={classes.titleRate}>
-                Job description
-                <span className={classes.spanItem}>*</span>
-              </p>
-              <textarea
-                defaultValue={job?.description}
-                rows={10}
-                className={classes.areaInput}
-                placeholder="Description of job"
-                {...register("description", {
-                  required: "Description is required",
-                  maxLength: 2000,
-                })}
-              ></textarea>
-              <p className={classes.errorMsg}>
-                {errors?.description && errors.description.message}
-              </p>
-            </div>
-            <div className={classes.btnWrapper}>
-              <button className={classes.rateButton}>Update</button>
-            </div>
-          </form>
+              <div className={classes.btnWrapper}>
+                <button className={classes.rateButton}>Update</button>
+              </div>
+            </form>
+          )}
         </div>
       </div>
     </div>

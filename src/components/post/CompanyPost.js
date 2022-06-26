@@ -11,9 +11,11 @@ import RatingList from "../../shared/components/RatingList";
 import { BsFillBookmarkFill, BsBookmark } from "react-icons/bs";
 import { getSavedStatus, postSave } from "../../stores/member/memberSlice";
 import { MdVerifiedUser, MdOutlineVerifiedUser } from "react-icons/md";
+import { getListJobById } from "../../stores/company/companySlice";
+import { CgArrowRightO } from "react-icons/cg";
 
 function CompanyPost(props) {
-  const { companyById } = useSelector((state) => state.company);
+  const { companyById, jobList } = useSelector((state) => state.company);
   const { saved, isSuccess } = useSelector((state) => state.member);
   const [isRead, setRead] = useState(true);
   const { id = "" } = useParams();
@@ -43,8 +45,19 @@ function CompanyPost(props) {
     }
   }, [id, dispatch, isSuccess]);
 
+  useEffect(() => {
+    if (id) {
+      dispatch(getListJobById(id));
+    }
+  }, [dispatch]);
+  console.log(jobList);
   const handleSave = () => {
     dispatch(postSave(id));
+  };
+
+  const jobLink = (jobId) => {
+    console.log(jobId);
+    return `/edit-job/${jobId}`;
   };
   return (
     <div className={classes.container}>
@@ -257,8 +270,47 @@ function CompanyPost(props) {
           </div>
         </div>
       </div>
-      <div>
-        <RatingList companyId={id}></RatingList>
+      <div className={classes.row}>
+        <div>
+          <RatingList companyId={id}></RatingList>
+        </div>
+        <div>
+          <div className={classes.jobList}>
+            <div className={classes.jobListTitle}>Jobs</div>
+            {jobList &&
+              (jobList.length > 0 ? (
+                <>
+                  <div className={classes.ratingLiWrapper}>
+                    <ul className={classes.ratingUl}>
+                      {jobList?.map((item) => (
+                        <li className={classes.itemSearch} key={item.id}>
+                          <div className={classes.ratingBody}>
+                            <div className={classes.ratingCommentWrapper}>
+                              <div className={classes.commentTitle}>
+                                <div className={classes.nameWrapper}>
+                                  <div className={classes.nameWrapper}>
+                                    <h4>{item.title}</h4>
+                                  </div>{" "}
+                                  <Link
+                                    to={jobLink(item.id)}
+                                    className={classes.linkJob}
+                                  >
+                                    <CgArrowRightO></CgArrowRightO>
+                                  </Link>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </>
+              ) : (
+                <p></p>
+              ))}
+          </div>
+        </div>
       </div>
     </div>
   );

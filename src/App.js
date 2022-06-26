@@ -22,6 +22,11 @@ import CompanyJob from "./components/user/company/CompanyJob";
 import EditRating from "./shared/components/EditRating";
 import AddNewJob from "./shared/components/AddNewJob";
 import EditJob from "./shared/components/EditJob";
+import ManageHome from "./components/user/admin/ManageHome";
+import ManageCompany from "./components/user/admin/ManageCompany";
+import UpdateCompany from "./shared/components/UpdateCompany";
+import AddUser from "./shared/components/AddUser";
+import ManageReport from "./components/user/admin/ManageReport";
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -39,7 +44,6 @@ function App() {
       dispatch(getCompanyInfo(user?.userDetails?.id));
     }
   }, [user]);
-
   return (
     <Switch>
       <Route path="/company/:id">
@@ -68,7 +72,9 @@ function App() {
       </Route>
       <Route path="/add-job/:id">
         <Layout>
+          {/* <EditCompany> */}
           <AddNewJob />
+          {/* </EditCompany> */}
         </Layout>
       </Route>
       <Route path="/edit-job/:id">
@@ -79,6 +85,13 @@ function App() {
       <Route path="/edit/rating/:id">
         <Layout>
           <EditRating />
+        </Layout>
+      </Route>
+      <Route path="/edit-company/:id">
+        <Layout>
+          <ManageHome>
+            <UpdateCompany />
+          </ManageHome>
         </Layout>
       </Route>
       <Route path="/account">
@@ -94,6 +107,30 @@ function App() {
               <CompanyProfile></CompanyProfile>
             </EditCompany>
           )}
+
+          {user?.userDetails?.role === "ADMIN" && <ManageHome></ManageHome>}
+        </Layout>
+      </Route>
+
+      <Route path="/manage-company">
+        <Layout>
+          <ManageHome>
+            <ManageCompany />
+          </ManageHome>
+        </Layout>
+      </Route>
+      <Route path="/manage-report">
+        <Layout>
+          <ManageHome>
+            <ManageReport />
+          </ManageHome>
+        </Layout>
+      </Route>
+      <Route path="/add-user">
+        <Layout>
+          <ManageHome>
+            <AddUser />
+          </ManageHome>
         </Layout>
       </Route>
 

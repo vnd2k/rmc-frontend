@@ -1,0 +1,74 @@
+/* index.css */
+.container {
+  display: flex;
+  width: 30vw;
+  margin: auto;
+  position: relative;
+  padding: 12px;
+  background: rgb(255, 255, 255);
+  border: 1px solid rgb(228, 228, 228);
+  border-radius: 6px;
+  box-shadow: rgb(126 126 126 / 25%) 0px 4px 4px;
+}
+.modal {
+  font-size: 12px;
+  width: 100%;
+}
+.modal > .header {
+  width: 100%;
+  font-size: 18px;
+}
+.modal > .content {
+  margin-top: 8px;
+  width: 100%;
+  padding: 10px 5px;
+}
+.modal > .actions {
+  margin: auto;
+}
+.modal > .actions {
+  width: 100%;
+  padding: 10px 5px;
+  text-align: center;
+}
+.modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #ffffff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}
+.btnAdd {
+  display: block;
+  background-color: #e67772;
+  font-size: 16px;
+  padding: 8px;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  margin-top: 4px;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  text-decoration: none;
+  width: 26%;
+  text-align: center;
+}
+.btnWrapper {
+  display: flex;
+  justify-content: end;
+}
+.errorMsg {
+  font-size: small;
+  color: #e71410;
+  margin: 0;
+  margin-top: 4px;
+}
