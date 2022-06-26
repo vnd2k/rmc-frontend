@@ -60,7 +60,7 @@ function CompanyPost(props) {
         toast.info("Removed to saved list");
       }
     }
-  }, [dispatch, isSuccess, member]);
+  }, [dispatch, isSuccess, member, saved]);
 
   const handleSave = () => {
     dispatch(postSave(id));
