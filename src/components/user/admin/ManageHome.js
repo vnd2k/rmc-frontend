@@ -7,31 +7,21 @@ function ManageHome(props) {
         <div>
           <nav>
             <ul className={classes.tabWrapper}>
-              <li className={classes.tabItem}>
-                <Link to="/manage-company" className={classes.item}>
-                  Company
-                </Link>
-              </li>
-              <li className={classes.tabItem}>
-                <Link to="/manage-member" className={classes.item}>
-                  Member
-                </Link>
-              </li>
-              <li className={classes.tabItem}>
-                <Link to="/manage-report" className={classes.item}>
-                  Report
-                </Link>
-              </li>
-              <li className={classes.tabItem}>
-                <Link to="/manage-member" className={classes.item}>
-                  Rating
-                </Link>
-              </li>
-              <li className={classes.tabItem}>
-                <Link to="/manage-member" className={classes.item}>
-                  Job
-                </Link>
-              </li>
+              <Link to="/manage-company" className={classes.item}>
+                <li className={classes.tabItem}>Company</li>
+              </Link>
+              <Link to="/manage-member" className={classes.item}>
+                <li className={classes.tabItem}>Member</li>
+              </Link>
+              <Link to="/manage-report" className={classes.item}>
+                <li className={classes.tabItem}>Report</li>
+              </Link>
+              <Link to="/manage-member" className={classes.item}>
+                <li className={classes.tabItem}>Rating</li>
+              </Link>
+              <Link to="/manage-member" className={classes.item}>
+                <li className={classes.tabItem}>Job</li>
+              </Link>
             </ul>
           </nav>
         </div>

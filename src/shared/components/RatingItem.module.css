@@ -212,6 +212,37 @@
   font-size: x-large;
 }
 
+.reported {
+  position: relative;
+  display: inline-block;
+}
+
+.reportedIcon {
+  padding-top: 4px;
+  font-size: x-large;
+  color: #e77373;
+}
+
+.reported .reportText {
+  visibility: hidden;
+  width: 150px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 8px;
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 50%;
+  margin-left: -75px;
+}
+
+.reported:hover .reportText {
+  visibility: visible;
+}
+
 .report .reportText {
   visibility: hidden;
   width: 150px;

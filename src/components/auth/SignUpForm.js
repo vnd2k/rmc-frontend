@@ -3,12 +3,13 @@ import { useSelector, useDispatch } from "react-redux";
 import classes from "./LoginForm.module.css";
 import { signUp, reset } from "../../stores/auth/authSlice";
 import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ReactComponent as Logo } from "../../assets/logo.svg";
 
 function SignUpForm(props) {
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
+  const { user, isLoading, isSuccess, message } = useSelector(
     (state) => state.auth
   );
   const {
@@ -27,22 +28,26 @@ function SignUpForm(props) {
 
   const history = useHistory();
   useEffect(() => {
-    if (isError) {
-    }
-
     if (isSuccess || user) {
       toast.success("Registration successful");
       history.push("/confirm");
     }
 
     dispatch(reset());
-  }, [user, isError, isSuccess, message, history, dispatch]);
+  }, [user, isSuccess, history, dispatch]);
 
+  useEffect(() => {
+    if (message) {
+      toast.error(message);
+    }
+  });
   return (
     <div className={classes.container}>
       <div className={classes.wrap}>
         <div className={classes.card}>
-          <div className={classes.logo}></div>
+          <Link to={"/"}>
+            <Logo className={classes.logo} />
+          </Link>
 
           <div className={classes.heading}></div>
 
@@ -149,6 +154,16 @@ function SignUpForm(props) {
               </button>
             </div>
           </form>
+          <div className={classes.linkContainer}>
+            <div className={classes.link}>
+              <div>
+                Already have an account?{" "}
+                <Link to="/login" className={classes.link}>
+                  Log in
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

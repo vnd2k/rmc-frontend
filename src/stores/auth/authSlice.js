@@ -73,7 +73,7 @@ export const authSlice = createSlice({
       .addCase(signUp.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
+        state.message = "Email already exist";
         state.user = null;
       })
       .addCase(login.pending, (state) => {
@@ -87,7 +87,7 @@ export const authSlice = createSlice({
       .addCase(login.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = "Email or password is invalid";
+        state.message = "Email or password invalid";
         state.user = null;
       })
       .addCase(getUser.pending, (state) => {

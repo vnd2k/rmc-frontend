@@ -7,6 +7,8 @@ import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { getRating, editRating } from "../../stores/rating/ratingSlice";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function EditRating() {
   const { member } = useSelector((state) => state.member);
@@ -30,6 +32,7 @@ function EditRating() {
 
   useEffect(() => {
     if (isSuccess === "editRatingSuccess") {
+      toast.success("Edit successfully");
       history.push(`/company/${rating?.companyId}`);
     }
   }, [isSuccess, dispatch, history, rating?.companyId]);

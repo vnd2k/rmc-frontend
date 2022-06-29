@@ -13,9 +13,13 @@ import {
 } from "../../stores/company/companySlice";
 import { useParams } from "react-router-dom";
 import { MdCancel } from "react-icons/md";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function EditJob() {
-  const { company, job, isSuccess } = useSelector((state) => state.company);
+  const { company, job, isSuccess, isLoading } = useSelector(
+    (state) => state.company
+  );
   const dispatch = useDispatch();
   const history = useHistory();
   const { id = "" } = useParams();
@@ -38,11 +42,19 @@ function EditJob() {
   }, [id, dispatch]);
 
   useEffect(() => {
-    if (isSuccess === "updateJobSuccess" || isSuccess === "deleteJobSuccess") {
-      reset();
+    if (isSuccess === "updateJobSuccess") {
+      toast.success("Update job successfully");
       history.push(`/company-jobs`);
     }
   }, [isSuccess, dispatch, history]);
+
+  useEffect(() => {
+    if (isSuccess === "deleteJobSuccess") {
+      toast.success("Delete job successfully");
+      history.push(`/company-jobs`);
+    }
+  }, [isSuccess, dispatch, history]);
+
   const handleDelete = () => {
     if (id) {
       dispatch(deleteJob(id));
@@ -113,7 +125,9 @@ function EditJob() {
                 </p>
               </div>
               <div className={classes.btnWrapper}>
-                <button className={classes.rateButton}>Update</button>
+                <button disabled={isLoading} className={classes.rateButton}>
+                  Update
+                </button>
               </div>
             </form>
           )}

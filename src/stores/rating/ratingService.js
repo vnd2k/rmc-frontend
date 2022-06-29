@@ -5,7 +5,7 @@ const endpoint = ENDPOINT;
 // Get rating list by companyId
 const getRatingList = async (request) => {
   const response = await apiService().get(
-    `${endpoint}/rating/${request.companyId}/company`
+    `${endpoint}/rating/${request.companyId}/company?page=${request.page}&sortType=${request.sortType}`
   );
   return response.data;
 };

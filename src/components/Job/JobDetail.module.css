@@ -19,7 +19,9 @@
 }
 
 .companyName {
+  text-decoration: none;
   font-weight: 700;
+  color: #222;
 }
 
 .location {
@@ -54,7 +56,7 @@
   border: 1px solid rgb(228, 228, 228);
   border-radius: 6px;
   box-shadow: rgb(126 126 126 / 25%) 0px 4px 4px;
-  padding: 36px 28px 36px;
+  padding: 0px 24px 20px;
   text-align: left;
 }
 .getRating {
@@ -125,7 +127,7 @@
   margin-top: 36px;
 }
 .titleRate {
-  font-size: 16px;
+  font-size: 28px;
   font-weight: bold;
   margin: 0;
 }
@@ -206,9 +208,67 @@ li {
   margin-left: 64px;
   font-weight: 500;
 }
+.titleWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+.deleteBtn {
+  font-size: 1.5rem;
+  margin-top: -20px;
+  color: #edbaba;
+}
+.deleteBtn:hover {
+  cursor: pointer;
+  color: #e85656;
+}
+.jobDescription {
+  margin-left: 16px;
+  margin-top: 16px;
+  color: #000000;
+  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  white-space: pre-line;
+}
 
-.itemLink {
+.ratingBody {
+  padding: 16px;
   width: 100%;
-  text-decoration: none;
-  color: black;
+  display: flex;
+  padding: 18px 24px;
+  position: static;
+  top: 64px;
+  background: white;
+  box-shadow: #e9e9e9 0px 0px 4px;
+  height: auto;
+}
+
+.ratingCommentWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-left: 12px;
+  align-items: center;
+  text-align: left;
+  width: 100%;
+}
+
+.nameWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+
+.linkJob {
+  font-size: 1.3rem;
+  color: #e4aeae;
+}
+.linkJob:hover {
+  cursor: pointer;
+  color: #d25b5b;
+}
+.ratingUl {
+  list-style: none;
 }

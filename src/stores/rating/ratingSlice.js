@@ -134,7 +134,7 @@ export const ratingSlice = createSlice({
   reducers: {
     reset: (state) => {
       state.isLoading = false;
-      state.isSuccess = false;
+      state.isSuccess = "";
       state.isError = false;
       state.message = "";
     },
@@ -213,10 +213,18 @@ export const ratingSlice = createSlice({
         state.message = action.payload;
         state.rating = null;
       })
-
+      .addCase(postRating.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(postRating.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = "postSuccess";
+      })
+      .addCase(postRating.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = "Rating already exist";
+        state.rating = null;
       })
       .addCase(likeRating.fulfilled, (state, action) => {
         state.isLoading = false;

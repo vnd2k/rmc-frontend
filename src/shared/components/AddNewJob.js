@@ -6,9 +6,13 @@ import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { postJob, reset } from "../../stores/company/companySlice";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function AddNewJob() {
-  const { company, isSuccess } = useSelector((state) => state.company);
+  const { company, isSuccess, isLoading } = useSelector(
+    (state) => state.company
+  );
   const dispatch = useDispatch();
   const history = useHistory();
   const {
@@ -25,7 +29,7 @@ function AddNewJob() {
 
   useEffect(() => {
     if (isSuccess === "postJobSuccess") {
-      reset();
+      toast.success("Adding job successfully");
       history.push(`/company-jobs`);
     }
   }, [isSuccess, dispatch, history]);
@@ -83,7 +87,9 @@ function AddNewJob() {
               </p>
             </div>
             <div className={classes.btnWrapper}>
-              <button className={classes.rateButton}>Add</button>
+              <button disabled={isLoading} className={classes.rateButton}>
+                Add
+              </button>
             </div>
           </form>
         </div>

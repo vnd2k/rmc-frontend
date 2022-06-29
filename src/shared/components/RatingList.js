@@ -6,20 +6,30 @@ import {
   getRatingListMember,
 } from "../../stores/rating/ratingSlice";
 import RatingItem from "./RatingItem";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function RatingList(props) {
   const dispatch = useDispatch();
   const { ratingList, isSuccess } = useSelector((state) => state.rating);
   const { user } = useSelector((state) => state.auth);
+  console.log(ratingList);
   useEffect(() => {
     if (props?.companyId) {
       const companyId = props?.companyId;
-      const memberId = user?.id;
-      dispatch(getRatingList({ companyId, memberId }));
+      const page = props?.page;
+      const sortType = props?.sortType;
+      dispatch(getRatingList({ companyId, page, sortType }));
     } else if (props?.memberId) {
       dispatch(getRatingListMember(props.memberId));
     }
-  }, [props.companyId, props.memberId, isSuccess, dispatch, user]);
+  }, [props.companyId, props.page, props.sortType, isSuccess, dispatch, user]);
+
+  useEffect(() => {
+    if (isSuccess === "deleteSuccess") {
+      toast.success("Delete successfully");
+    }
+  }, [isSuccess]);
   return (
     <div className={classes.containerComment}>
       {ratingList &&
@@ -34,7 +44,13 @@ function RatingList(props) {
             </div>
           </>
         ) : (
-          <p></p>
+          <div className={classes.logoWrapper}>
+            <img
+              className={classes.logo}
+              src={"/noData.svg"}
+              alt="No data"
+            ></img>
+          </div>
         ))}
     </div>
   );

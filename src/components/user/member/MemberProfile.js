@@ -12,7 +12,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function MemberProfile(props) {
   const { user } = useSelector((state) => state.auth);
-  const { member, isSuccess } = useSelector((state) => state.member);
+  const { member, isLoading, isSuccess } = useSelector((state) => state.member);
   const [inputAvatar, setInputAvatar] = useState();
   const [previewAvatar, setPreviewAvatar] = useState("");
   const dispatch = useDispatch();
@@ -130,7 +130,11 @@ function MemberProfile(props) {
           </div>
         </div>
         <div className={classes.btnWrapper}>
-          <button type="submit" className={classes.btnItem}>
+          <button
+            disabled={isLoading}
+            type="submit"
+            className={classes.btnItem}
+          >
             <span className={classes.btnWrapper}>Update Profile</span>
           </button>
         </div>

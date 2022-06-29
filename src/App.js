@@ -27,6 +27,7 @@ import ManageCompany from "./components/user/admin/ManageCompany";
 import UpdateCompany from "./shared/components/UpdateCompany";
 import AddUser from "./shared/components/AddUser";
 import ManageReport from "./components/user/admin/ManageReport";
+import JobDetail from "./components/Job/JobDetail";
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -82,6 +83,11 @@ function App() {
           <EditJob />
         </Layout>
       </Route>
+      <Route path="/detail-job/:id">
+        <Layout>
+          <JobDetail />
+        </Layout>
+      </Route>
       <Route path="/edit/rating/:id">
         <Layout>
           <EditRating />
@@ -108,7 +114,11 @@ function App() {
             </EditCompany>
           )}
 
-          {user?.userDetails?.role === "ADMIN" && <ManageHome></ManageHome>}
+          {user?.userDetails?.role === "ADMIN" && (
+            <ManageHome>
+              <ManageCompany></ManageCompany>
+            </ManageHome>
+          )}
         </Layout>
       </Route>
 

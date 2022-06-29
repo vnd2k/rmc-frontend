@@ -1,5 +1,6 @@
 import classes from "./EditCompany.module.css";
 import { Link } from "react-router-dom";
+
 function EditCompany(props) {
   return (
     <div className={classes.container}>
@@ -7,16 +8,12 @@ function EditCompany(props) {
         <div>
           <nav>
             <ul className={classes.tabWrapper}>
-              <li className={classes.tabItem}>
-                <Link to="/company-profile" className={classes.item}>
-                  Profile
-                </Link>
-              </li>
-              <li className={classes.tabItem}>
-                <Link to="/company-jobs" className={classes.item}>
-                  Jobs
-                </Link>
-              </li>
+              <Link to="/company-profile" className={classes.item}>
+                <li className={classes.tabItem}>Profile</li>
+              </Link>
+              <Link to="/company-jobs" className={classes.item}>
+                <li className={classes.tabItem}>Jobs</li>
+              </Link>
             </ul>
           </nav>
         </div>

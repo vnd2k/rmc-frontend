@@ -3,8 +3,13 @@ import classes from "./ContentRating.module.css";
 import { postReport } from "../../stores/member/memberSlice";
 import { useForm } from "react-hook-form";
 import { useSelector, useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function ContentRating({ ratingId, close }) {
-  const { isSuccess } = useSelector((state) => state.member);
+  const { isSuccess, isLoading, message } = useSelector(
+    (state) => state.member
+  );
   const dispatch = useDispatch();
   const {
     register,
@@ -12,14 +17,21 @@ function ContentRating({ ratingId, close }) {
     formState: { errors },
   } = useForm();
   const handle = (data) => {
-    console.log(ratingId);
     if (ratingId) {
       dispatch(postReport({ ratingId, data }));
     }
   };
 
   useEffect(() => {
+    if (message) {
+      toast.error(message);
+      close();
+    }
+  });
+
+  useEffect(() => {
     if (isSuccess === "postReport") {
+      toast.success("Report successfully");
       close();
     }
   }, [isSuccess, dispatch, close]);
@@ -42,7 +54,7 @@ function ContentRating({ ratingId, close }) {
           {errors?.reason && errors.reason.message}
         </p>
         <div className={classes.btnWrapper}>
-          <button type="submit" className={classes.btnAdd}>
+          <button disabled={isLoading} type="submit" className={classes.btnAdd}>
             Submit
           </button>
         </div>

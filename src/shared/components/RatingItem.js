@@ -73,9 +73,9 @@ function RatingItem(props) {
   };
 
   const handleDelete = (id) => {
-    console.log("aa");
     if (id) {
       dispatch(deleteRating(id));
+      setOption(false);
     }
   };
   return (
@@ -150,7 +150,7 @@ function RatingItem(props) {
                 {item.dislikeCount}
               </div>
             </div>
-            {!item?.myRating && (
+            {!item?.myRating && !item?.reported ? (
               <div className={classes.report}>
                 <Popup
                   modal
@@ -168,6 +168,13 @@ function RatingItem(props) {
                   )}
                 </Popup>
               </div>
+            ) : !item?.myRating && item?.reported ? (
+              <div className={classes.reported}>
+                <BiFlag className={classes.reportedIcon} />{" "}
+                <span className={classes.reportText}>Reported</span>
+              </div>
+            ) : (
+              <></>
             )}
           </div>
         </div>

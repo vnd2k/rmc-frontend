@@ -19,7 +19,10 @@ import "react-toastify/dist/ReactToastify.css";
 function CompanyPost(props) {
   const { companyById, jobList } = useSelector((state) => state.company);
   const { saved, isSuccess, member } = useSelector((state) => state.member);
+  const { ratingList, isLoading } = useSelector((state) => state.rating);
   const [isRead, setRead] = useState(true);
+  const [page, setPage] = useState(0);
+  const [sortType, setSortType] = useState("popularity");
   const { id = "" } = useParams();
   const dispatch = useDispatch();
   const calPercent = (percent) => {
@@ -39,7 +42,7 @@ function CompanyPost(props) {
     if (id) {
       dispatch(getCompanyById(id));
     }
-  }, [id, dispatch]);
+  }, [id, dispatch, ratingList]);
 
   useEffect(() => {
     if (id) {
@@ -67,8 +70,12 @@ function CompanyPost(props) {
   };
 
   const jobLink = (jobId) => {
-    console.log(jobId);
-    return `/edit-job/${jobId}`;
+    return `/detail-job/${jobId}`;
+  };
+
+  const handleFilterRating = (e) => {
+    console.log(e.target.value);
+    setSortType(e.target.value);
   };
   return (
     <div className={classes.container}>
@@ -163,6 +170,19 @@ function CompanyPost(props) {
             <p className={classes.numRatingCount}>
               {companyById?.ratings?.length} Ratings
             </p>
+          </div>
+          <div className={classes.selectWrapper}>
+            <label>
+              <select
+                className={classes.selectItem}
+                defaultValue={"popularity"}
+                onChange={handleFilterRating}
+                disabled={isLoading}
+              >
+                <option value="popularity">Sort by popularity</option>
+                <option value="recent">Sort by most recent</option>
+              </select>
+            </label>
           </div>
         </div>
 
@@ -280,43 +300,50 @@ function CompanyPost(props) {
                 Rate Your Company
               </Link>
             ) : (
-              <button className={classes.rateButton}>Login to rate</button>
+              <></>
             )}
           </div>
         </div>
       </div>
       <div className={classes.row}>
         <div>
-          <RatingList companyId={id}></RatingList>
+          <RatingList
+            companyId={id}
+            page={page}
+            sortType={sortType}
+          ></RatingList>
+          <div>Paging</div>
         </div>
         <div>
           <div className={classes.jobList}>
-            <div className={classes.jobListTitle}>Jobs</div>
             {jobList &&
               (jobList.length > 0 ? (
                 <>
+                  <div className={classes.jobListTitle}>Recruitment</div>
                   <div className={classes.ratingLiWrapper}>
                     <ul className={classes.ratingUl}>
                       {jobList?.map((item) => (
-                        <li className={classes.itemSearch} key={item.id}>
-                          <div className={classes.ratingBody}>
-                            <div className={classes.ratingCommentWrapper}>
-                              <div className={classes.commentTitle}>
+                        <Link to={jobLink(item.id)} className={classes.linkJob}>
+                          <li className={classes.itemSearch} key={item.id}>
+                            <div className={classes.ratingBody}>
+                              <div className={classes.ratingTextWrapper}>
+                                <div className={classes.logoWrapper}>
+                                  <img
+                                    className={classes.logoJob}
+                                    src={item?.logo}
+                                    alt="logo"
+                                  ></img>
+                                </div>
+                              </div>
+
+                              <div className={classes.ratingCommentWrapper}>
                                 <div className={classes.nameWrapper}>
-                                  <div className={classes.nameWrapper}>
-                                    <h4>{item.title}</h4>
-                                  </div>{" "}
-                                  <Link
-                                    to={jobLink(item.id)}
-                                    className={classes.linkJob}
-                                  >
-                                    <CgArrowRightO></CgArrowRightO>
-                                  </Link>
+                                  <h4>{item.title}</h4>
                                 </div>
                               </div>
                             </div>
-                          </div>
-                        </li>
+                          </li>
+                        </Link>
                       ))}
                     </ul>
                   </div>

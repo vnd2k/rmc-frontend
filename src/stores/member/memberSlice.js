@@ -160,14 +160,30 @@ export const memberSlice = createSlice({
         state.message = action.payload;
       })
 
+      .addCase(postSave.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(postSave.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = "postSuccess";
       })
+      .addCase(postSave.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
 
+      .addCase(postReport.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(postReport.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isSuccess = "postReport";
+      })
+      .addCase(postReport.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       })
 
       .addCase(updateMemberInfo.pending, (state) => {

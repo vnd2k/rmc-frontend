@@ -26,21 +26,15 @@ function EditMember(props) {
         <div>
           <nav>
             <ul className={classes.tabWrapper}>
-              <li className={classes.tabItem}>
-                <Link to="/member-profile" className={classes.item}>
-                  Profile
-                </Link>
-              </li>
-              <li className={classes.tabItem}>
-                <Link to="/member-ratings" className={classes.item}>
-                  Ratings
-                </Link>
-              </li>
-              <li className={classes.tabItem}>
-                <Link to="/member-saved" className={classes.item}>
-                  Saved Companies
-                </Link>
-              </li>
+              <Link to="/member-profile" className={classes.item}>
+                <li className={classes.tabItem}>Profile</li>
+              </Link>
+              <Link to="/member-ratings" className={classes.item}>
+                <li className={classes.tabItem}>Ratings</li>
+              </Link>
+              <Link to="/member-saved" className={classes.item}>
+                <li className={classes.tabItem}>Saved Companies</li>
+              </Link>
             </ul>
           </nav>
         </div>

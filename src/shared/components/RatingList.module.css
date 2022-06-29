@@ -225,3 +225,7 @@
 .ratingUl {
   list-style: none;
 }
+.logo {
+  height: 50vh;
+  width: 50vw;
+}

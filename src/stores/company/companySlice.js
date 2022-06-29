@@ -165,7 +165,6 @@ export const companySlice = createSlice({
       })
       .addCase(getCompanyInfo.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = "getInfoSuccess";
         state.company = action.payload;
       })
       .addCase(getCompanyInfo.rejected, (state, action) => {

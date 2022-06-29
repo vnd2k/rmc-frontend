@@ -7,9 +7,10 @@ import { login, reset } from "../../stores/auth/authSlice";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ReactComponent as Logo } from "../../assets/logo.svg";
 
 function LoginForm(props) {
-  const { user, isError, isSuccess, message } = useSelector(
+  const { user, isError, isLoading, isSuccess, message } = useSelector(
     (state) => state.auth
   );
   const {
@@ -45,7 +46,9 @@ function LoginForm(props) {
     <div className={classes.container}>
       <div className={classes.wrap}>
         <div className={classes.card}>
-          <div className={classes.logo}></div>
+          <Link to={"/"}>
+            <Logo className={classes.logo} />
+          </Link>
 
           <div className={classes.heading}></div>
 
@@ -96,6 +99,7 @@ function LoginForm(props) {
 
             <div className={classes.formGroup}>
               <button
+                disabled={isLoading}
                 type="submit"
                 className={`${classes.btn} ${classes.btnPrimary} ${classes.signInBtn} `}
               >
@@ -116,7 +120,6 @@ function LoginForm(props) {
           </div>
         </div>
       </div>
-      {/* <ToastContainer /> */}
     </div>
   );
 }

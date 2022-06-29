@@ -5,12 +5,13 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { BsFillStarFill } from "react-icons/bs";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-import { getCompanyById, reset } from "../../stores/company/companySlice";
+import { getCompanyById } from "../../stores/company/companySlice";
 import { useForm } from "react-hook-form";
 import { postRating } from "../../stores/rating/ratingSlice";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 
 function Rating() {
   const { member } = useSelector((state) => state.member);
@@ -37,7 +38,6 @@ function Rating() {
   useEffect(() => {
     if (isSuccess === "postSuccess") {
       toast.success("Rate successfully");
-      reset();
       history.push(`/company/${id}`);
     }
   }, [isSuccess, dispatch, history, id]);
@@ -54,7 +54,12 @@ function Rating() {
     <div>
       <div className={classes.headerWrapper}>
         <p className={classes.title}>
-          Rate: <span className={classes.companyName}>{companyById?.name}</span>
+          Rate:{" "}
+          <span className={classes.companyName}>
+            <Link to={`/company/${id}`} className={classes.itemLink}>
+              {companyById?.name}
+            </Link>
+          </span>
         </p>
         <div className={classes.locationWrapper}>
           <HiOutlineLocationMarker color="#ccc" fontSize="1.3em" />

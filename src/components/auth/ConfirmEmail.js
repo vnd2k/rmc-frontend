@@ -12,10 +12,10 @@ function ConfirmEmail(props) {
         <div className={classes.card}>
           <div className={classes.logo}></div>
 
-          <div className={classes.heading}>Congratulations!</div>
+          <div className={classes.heading}>Verification link sent!</div>
 
           <div className={classes.confirm}>
-            You have successfully registered an account.
+            Please check your email to confirm account.
           </div>
 
           <div className={classes.formGroup}>
