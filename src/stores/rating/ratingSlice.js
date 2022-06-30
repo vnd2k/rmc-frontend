@@ -92,7 +92,6 @@ export const postRating = createAsyncThunk(
 export const likeRating = createAsyncThunk(
   "likeRating",
   async (request, thunkAPI) => {
-    console.log(request);
     try {
       return await ratingService.likeRating(request);
     } catch (error) {
@@ -176,7 +175,6 @@ export const ratingSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = "getRating";
         state.rating = action.payload;
-        console.log(action.payload);
       })
       .addCase(getRating.rejected, (state, action) => {
         state.isLoading = false;

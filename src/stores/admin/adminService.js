@@ -66,14 +66,69 @@ const deleteReport = async (reportId) => {
   return response.data;
 };
 
+// Get list member
+const getListMember = async () => {
+  const response = await apiService().get(`${endpoint}/admin/list-member`);
+  return response.data;
+};
+
+// Delete member
+const deleteMember = async (memberId) => {
+  const response = await apiService().delete(
+    `${endpoint}/admin/member/${memberId}`
+  );
+  return response.data;
+};
+
+// Get list rating
+const getListRating = async () => {
+  const response = await apiService().get(`${endpoint}/admin/list-rating`);
+  return response.data;
+};
+
+// Get report by ratingId
+const getReportByRating = async (ratingId) => {
+  const response = await apiService().get(
+    `${endpoint}/admin/report/${ratingId}`
+  );
+  return response.data;
+};
+
+// Delete rating
+const deleteRating = async (ratingId) => {
+  const response = await apiService().delete(
+    `${endpoint}/admin/rating/${ratingId}`
+  );
+  return response.data;
+};
+
+// Get list job
+const getListJob = async () => {
+  const response = await apiService().get(`${endpoint}/admin/list-job`);
+  return response.data;
+};
+
+// Delete job
+const deleteJob = async (jobId) => {
+  const response = await apiService().delete(`${endpoint}/admin/job/${jobId}`);
+  return response.data;
+};
+
 const adminService = {
   getListCompany,
+  getListMember,
   getCompanyById,
   putCompany,
   putCompanyLogo,
+  deleteMember,
   deleteCompany,
   getListReport,
   deleteReport,
+  getListRating,
+  getListJob,
+  deleteRating,
+  deleteJob,
+  getReportByRating,
 };
 
 export default adminService;

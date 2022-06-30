@@ -16,10 +16,10 @@ function ManageHome(props) {
               <Link to="/manage-report" className={classes.item}>
                 <li className={classes.tabItem}>Report</li>
               </Link>
-              <Link to="/manage-member" className={classes.item}>
+              <Link to="/manage-rating" className={classes.item}>
                 <li className={classes.tabItem}>Rating</li>
               </Link>
-              <Link to="/manage-member" className={classes.item}>
+              <Link to="/manage-job" className={classes.item}>
                 <li className={classes.tabItem}>Job</li>
               </Link>
             </ul>

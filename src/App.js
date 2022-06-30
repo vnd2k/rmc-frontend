@@ -28,6 +28,9 @@ import UpdateCompany from "./shared/components/UpdateCompany";
 import AddUser from "./shared/components/AddUser";
 import ManageReport from "./components/user/admin/ManageReport";
 import JobDetail from "./components/Job/JobDetail";
+import ManageMember from "./components/user/admin/ManageMember";
+import ManageRating from "./components/user/admin/ManageRating";
+import DetailRating from "./shared/components/DetailRating";
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -133,6 +136,27 @@ function App() {
         <Layout>
           <ManageHome>
             <ManageReport />
+          </ManageHome>
+        </Layout>
+      </Route>
+      <Route path="/manage-member">
+        <Layout>
+          <ManageHome>
+            <ManageMember />
+          </ManageHome>
+        </Layout>
+      </Route>
+      <Route path="/manage-rating">
+        <Layout>
+          <ManageHome>
+            <ManageRating />
+          </ManageHome>
+        </Layout>
+      </Route>
+      <Route path="/detail-rating/:id">
+        <Layout>
+          <ManageHome>
+            <DetailRating />
           </ManageHome>
         </Layout>
       </Route>

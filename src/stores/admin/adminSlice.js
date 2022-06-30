@@ -4,6 +4,9 @@ import adminService from "./adminService";
 const initialState = {
   companyList: [],
   reportList: [],
+  memberList: [],
+  ratingList: [],
+  jobList: [],
   company: null,
   isError: false,
   isSuccess: null,
@@ -95,6 +98,94 @@ export const deleteReport = createAsyncThunk(
   async (reportId, thunkAPI) => {
     try {
       return await adminService.deleteReport(reportId);
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Get list member
+export const getListMember = createAsyncThunk(
+  "getListMember",
+  async (thunkAPI) => {
+    try {
+      return await adminService.getListMember();
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Delete member
+export const deleteMember = createAsyncThunk(
+  "deleteMember",
+  async (memberId, thunkAPI) => {
+    try {
+      return await adminService.deleteMember(memberId);
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Get list rating
+export const getListRating = createAsyncThunk(
+  "getListRating",
+  async (thunkAPI) => {
+    try {
+      return await adminService.getListRating();
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Get list report by rating
+export const getReportByRating = createAsyncThunk(
+  "getReportByRating",
+  async (ratingId, thunkAPI) => {
+    try {
+      return await adminService.getReportByRating(ratingId);
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Delete rating
+export const deleteRating = createAsyncThunk(
+  "deleteRating",
+  async (ratingId, thunkAPI) => {
+    try {
+      return await adminService.deleteRating(ratingId);
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Get list job
+export const getListJob = createAsyncThunk("getListJob", async (thunkAPI) => {
+  try {
+    return await adminService.getListJob();
+  } catch (error) {
+    const message = error?.response?.data?.message;
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
+// Delete job
+export const deleteJob = createAsyncThunk(
+  "deleteJob",
+  async (jobId, thunkAPI) => {
+    try {
+      return await adminService.deleteJob(jobId);
     } catch (error) {
       const message = error?.response?.data?.message;
       return thunkAPI.rejectWithValue(message);
@@ -198,6 +289,95 @@ export const adminSlice = createSlice({
         state.isSuccess = "deleteReport";
       })
       .addCase(deleteReport.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(getListMember.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getListMember.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = "getListMember";
+        state.memberList = action.payload;
+      })
+      .addCase(getListMember.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(deleteMember.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteMember.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = "deleteMember";
+      })
+      .addCase(deleteMember.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+
+      .addCase(getListRating.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getListRating.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = "getListRating";
+        state.ratingList = action.payload;
+      })
+      .addCase(getListRating.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(getReportByRating.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getReportByRating.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = "getReportByRating";
+        state.reportList = action.payload;
+      })
+      .addCase(getReportByRating.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(deleteRating.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteRating.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = "deleteRating";
+      })
+      .addCase(deleteRating.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(getListJob.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getListJob.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = "getListJob";
+        state.jobList = action.payload;
+      })
+      .addCase(getListJob.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(deleteJob.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteJob.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = "deleteJob";
+      })
+      .addCase(deleteJob.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

@@ -22,7 +22,7 @@
 }
 
 .ratingLiWrapper {
-  width: 100%;
+  width: 70%;
 }
 
 .ratingUl {
@@ -34,7 +34,6 @@
   padding: 16px;
   width: 100%;
   display: flex;
-  align-items: center;
   margin-top: 24px;
 }
 
@@ -47,23 +46,9 @@
 }
 
 .ratingCommentWrapper {
-  display: flex;
-  flex-direction: column;
   margin-left: 48px;
   text-align: left;
   width: 100%;
-  justify-content: center;
-}
-
-.commentTitle {
-  display: flex;
-  justify-content: space-between;
-}
-.nameWrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 24px;
 }
 .commentName {
   margin: 0;
@@ -78,11 +63,13 @@
   font-size: medium;
   font-weight: 300;
   margin-top: 8px;
+  /* padding: 12px 0px; */
 }
 .logo {
-  height: 130px;
-  aspect-ratio: auto 150 / 130;
-  width: 150px;
+  height: 80px;
+  aspect-ratio: auto 100 / 80;
+  width: 100px;
+  /* border-radius: 50%; */
   border-color: #ddd;
   border-width: 1px;
   border-style: solid;
@@ -109,8 +96,8 @@
   text-decoration: none;
   color: black;
   margin: 0;
+  font-size: 30px;
   font-weight: bold;
-  font-size: 24px;
 }
 .verifiedItem {
   color: rgb(10, 99, 234);
@@ -148,7 +135,6 @@
   outline: none;
   border: none;
   border-radius: 4px;
-  margin-top: 12px;
   color: rgb(255, 255, 255);
   font-weight: 500;
   text-decoration: none;
@@ -160,4 +146,8 @@
 .deleteBtn:hover {
   cursor: pointer;
   color: #e85656;
+}
+.commentTitle {
+  display: flex;
+  justify-content: space-between;
 }
