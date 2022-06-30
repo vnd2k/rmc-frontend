@@ -10,7 +10,6 @@ import {
 } from "../../stores/company/companySlice";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { CgArrowRightO } from "react-icons/cg";
 
 function JobDetail() {
   const { company, job, jobList } = useSelector((state) => state.company);
