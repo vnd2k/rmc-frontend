@@ -12,7 +12,6 @@ import { BsFillBookmarkFill, BsBookmark } from "react-icons/bs";
 import { getSavedStatus, postSave } from "../../stores/member/memberSlice";
 import { MdVerifiedUser, MdOutlineVerifiedUser } from "react-icons/md";
 import { getListJobById } from "../../stores/company/companySlice";
-import { CgArrowRightO } from "react-icons/cg";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -21,7 +20,8 @@ function CompanyPost(props) {
   const { saved, isSuccess, member } = useSelector((state) => state.member);
   const { ratingList, isLoading } = useSelector((state) => state.rating);
   const [isRead, setRead] = useState(true);
-  const [page, setPage] = useState(0);
+  // const [page, setPage] = useState(0);
+  const page = 0;
   const [sortType, setSortType] = useState("popularity");
   const { id = "" } = useParams();
   const dispatch = useDispatch();

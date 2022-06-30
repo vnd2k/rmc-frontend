@@ -190,10 +190,7 @@
   border: 1px solid rgb(228, 228, 228);
   border-radius: 6px;
   box-shadow: rgb(126 126 126 / 25%) 0px 4px 4px;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  padding-left: 30px;
-  padding-right: 12px;
+  padding: 12px;
   text-align: left;
 }
 
@@ -207,10 +204,6 @@ li {
   margin-top: 4px;
   margin-left: 64px;
   font-weight: 500;
-}
-.titleWrapper {
-  display: flex;
-  justify-content: space-between;
 }
 .deleteBtn {
   font-size: 1.5rem;
@@ -234,10 +227,10 @@ li {
 }
 
 .ratingBody {
-  padding: 16px;
   width: 100%;
   display: flex;
-  padding: 18px 24px;
+  padding: 12px;
+  padding-bottom: 8px;
   position: static;
   top: 64px;
   background: white;
@@ -249,26 +242,35 @@ li {
   display: flex;
   flex-direction: column;
   margin-left: 12px;
-  align-items: center;
-  text-align: left;
-  width: 100%;
 }
 
 .nameWrapper {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: flex-start;
   gap: 24px;
+  text-align: start;
 }
-
 .linkJob {
-  font-size: 1.3rem;
-  color: #e4aeae;
+  color: #222;
+  font-size: 16 px;
+  text-decoration: none;
 }
 .linkJob:hover {
   cursor: pointer;
-  color: #d25b5b;
 }
 .ratingUl {
+  width: 100%;
   list-style: none;
+}
+.ratingLiWrapper {
+  width: 100%;
+}
+.logoJob {
+  height: 70px;
+  aspect-ratio: auto 80 / 10;
+  width: 75px;
+  /* border-radius: 50%; */
+  border-color: #ddd;
+  border-width: 1px;
+  border-style: solid;
 }

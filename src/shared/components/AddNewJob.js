@@ -4,7 +4,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import { postJob, reset } from "../../stores/company/companySlice";
+import { postJob } from "../../stores/company/companySlice";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";

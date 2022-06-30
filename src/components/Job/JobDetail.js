@@ -85,7 +85,7 @@ function JobDetail() {
                   <h3>
                     Other jobs in <span>{company?.name}</span>
                   </h3>
-                  <ul className={classes.ratingUl}>
+                  {/* <ul className={classes.ratingUl}>
                     {jobList?.map((item) => (
                       <li className={classes.itemSearch} key={item.id}>
                         <div className={classes.ratingBody}>
@@ -105,7 +105,34 @@ function JobDetail() {
                         </div>
                       </li>
                     ))}
-                  </ul>
+                  </ul> */}
+                  <div className={classes.ratingLiWrapper}>
+                    <ul className={classes.ratingUl}>
+                      {jobList?.map((item) => (
+                        <Link to={jobLink(item.id)} className={classes.linkJob}>
+                          <li className={classes.itemSearch} key={item.id}>
+                            <div className={classes.ratingBody}>
+                              <div className={classes.ratingTextWrapper}>
+                                <div className={classes.logoWrapper}>
+                                  <img
+                                    className={classes.logoJob}
+                                    src={item?.logo}
+                                    alt="logo"
+                                  ></img>
+                                </div>
+                              </div>
+
+                              <div className={classes.ratingCommentWrapper}>
+                                <div className={classes.nameWrapper}>
+                                  <h4>{item.title}</h4>
+                                </div>
+                              </div>
+                            </div>
+                          </li>
+                        </Link>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>

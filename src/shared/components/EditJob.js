@@ -5,12 +5,7 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import {
-  putJob,
-  getJob,
-  reset,
-  deleteJob,
-} from "../../stores/company/companySlice";
+import { putJob, getJob, deleteJob } from "../../stores/company/companySlice";
 import { useParams } from "react-router-dom";
 import { MdCancel } from "react-icons/md";
 import { toast } from "react-toastify";

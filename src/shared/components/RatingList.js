@@ -13,7 +13,6 @@ function RatingList(props) {
   const dispatch = useDispatch();
   const { ratingList, isSuccess } = useSelector((state) => state.rating);
   const { user } = useSelector((state) => state.auth);
-  console.log(ratingList);
   useEffect(() => {
     if (props?.companyId) {
       const companyId = props?.companyId;
@@ -23,7 +22,15 @@ function RatingList(props) {
     } else if (props?.memberId) {
       dispatch(getRatingListMember(props.memberId));
     }
-  }, [props.companyId, props.page, props.sortType, isSuccess, dispatch, user]);
+  }, [
+    props.companyId,
+    props?.memberId,
+    props.page,
+    props.sortType,
+    isSuccess,
+    dispatch,
+    user,
+  ]);
 
   useEffect(() => {
     if (isSuccess === "deleteSuccess") {
