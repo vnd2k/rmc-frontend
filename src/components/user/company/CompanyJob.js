@@ -17,7 +17,6 @@ function CompanyJob(props) {
   };
 
   const jobLink = (jobId) => {
-    console.log(jobId);
     return `/edit-job/${jobId}`;
   };
   return (

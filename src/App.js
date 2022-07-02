@@ -31,6 +31,9 @@ import JobDetail from "./components/Job/JobDetail";
 import ManageMember from "./components/user/admin/ManageMember";
 import ManageRating from "./components/user/admin/ManageRating";
 import DetailRating from "./shared/components/DetailRating";
+import ManageJob from "./components/user/admin/ManageJob";
+import DetailJob from "./shared/components/DetailJob";
+import DetailReport from "./shared/components/DetailReport";
 
 function App() {
   const { user } = useSelector((state) => state.auth);
@@ -153,10 +156,31 @@ function App() {
           </ManageHome>
         </Layout>
       </Route>
+      <Route path="/manage-job">
+        <Layout>
+          <ManageHome>
+            <ManageJob />
+          </ManageHome>
+        </Layout>
+      </Route>
+      <Route path="/detail-report/:id">
+        <Layout>
+          <ManageHome>
+            <DetailReport />
+          </ManageHome>
+        </Layout>
+      </Route>
       <Route path="/detail-rating/:id">
         <Layout>
           <ManageHome>
             <DetailRating />
+          </ManageHome>
+        </Layout>
+      </Route>
+      <Route path="/manage-detail-job/:id">
+        <Layout>
+          <ManageHome>
+            <DetailJob />
           </ManageHome>
         </Layout>
       </Route>

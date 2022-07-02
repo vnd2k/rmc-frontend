@@ -1,0 +1,158 @@
+.container {
+  padding: 24px;
+}
+.title {
+  margin-bottom: 24px;
+}
+.titleText {
+  font-weight: bold;
+  font-size: 2rem;
+  color: #222;
+}
+.ratingList {
+  width: 135%;
+}
+
+.containerComment {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-right: 50px;
+}
+
+.ratingLiWrapper {
+  width: 100%;
+}
+
+.ratingUl {
+  list-style: none;
+}
+
+.ratingBody {
+  background-color: rgba(228, 228, 228, 0.4);
+  padding: 16px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 24px;
+}
+
+.ratingTextWrapper {
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+}
+
+.ratingCommentWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-left: 48px;
+  text-align: left;
+  width: 100%;
+  justify-content: center;
+}
+
+.commentTitle {
+  display: flex;
+  justify-content: space-between;
+}
+.nameWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+.commentName {
+  margin: 0;
+  font-size: 30px;
+  font-weight: bold;
+}
+.commentName:hover {
+  cursor: pointer;
+}
+
+.commentDescription {
+  font-size: medium;
+  font-weight: 300;
+  margin-top: 8px;
+}
+.logo {
+  height: 130px;
+  aspect-ratio: auto 150 / 130;
+  width: 150px;
+  border-color: #ddd;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.location {
+  color: rgb(84, 84, 84);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.locationWrapper {
+  color: rgb(113, 110, 110);
+  margin-bottom: 8px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.infoWrapper {
+  display: flex;
+  justify-content: flex-start;
+  gap: 50px;
+}
+.itemLink {
+  text-decoration: none;
+  color: black;
+  margin: 0;
+  font-size: 30px;
+  font-weight: bold;
+}
+.verifiedItem {
+  color: rgb(10, 99, 234);
+  font-size: x-large;
+  position: absolute;
+  left: 8px;
+  top: 8px;
+}
+.unVerifiedItem {
+  color: rgb(190, 189, 189);
+  font-size: x-large;
+  position: absolute;
+  left: 8px;
+  top: 8px;
+}
+.logoWrapper {
+  position: relative;
+}
+.linkJob {
+  font-size: 1.3rem;
+  color: #f6d4d3;
+}
+.linkJob:hover {
+  cursor: pointer;
+  color: #ed514b;
+}
+
+.btnAdd {
+  background-color: #e67772;
+  font-size: 16px;
+  padding: 8px;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  outline: none;
+  border: none;
+  border-radius: 4px;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  text-decoration: none;
+}
+.ratingItem {
+  text-decoration: none;
+}

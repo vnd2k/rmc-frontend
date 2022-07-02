@@ -10,12 +10,13 @@ import {
   putCompany,
   putCompanyLogo,
   deleteCompany,
-  reset,
 } from "../../stores/admin/adminSlice";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function UpdateCompany(props) {
-  const { company, isSuccess } = useSelector((state) => state.admin);
+  const { company, isSuccessAdmin } = useSelector((state) => state.admin);
   const [inputLogo, setInputLogo] = useState();
   const [previewLogo, setPreviewLogo] = useState("");
   const [verified, setVerified] = useState(!!company?.verified);
@@ -90,11 +91,18 @@ function UpdateCompany(props) {
   };
 
   useEffect(() => {
-    if (isSuccess === "putCompany" || isSuccess === "deleteCompany") {
-      reset();
+    if (isSuccessAdmin === "putCompany") {
+      toast.success("Edit successfully");
       history.push(`/manage-company`);
     }
-  }, [isSuccess, dispatch, history]);
+  }, [isSuccessAdmin, dispatch, history]);
+
+  useEffect(() => {
+    if (isSuccessAdmin === "deleteCompany") {
+      toast.success("Delete successfully");
+      history.push(`/manage-company`);
+    }
+  }, [isSuccessAdmin, dispatch, history]);
   return (
     <div className={classes.formWrapper}>
       <div className={classes.formCard}>
@@ -211,12 +219,13 @@ function UpdateCompany(props) {
                   className={classes.nicknameInput}
                   id="type"
                   name="type"
+                  defaultValue={company.type}
                   {...register("type", {
                     required: "Type is required",
                   })}
                 >
-                  <option value="product">Product</option>
-                  <option value="outsourcing">Outsourcing</option>
+                  <option value="Product">Product</option>
+                  <option value="Outsourcing">Outsourcing</option>
                 </select>
                 <p className={classes.errorMsg}>
                   {errors?.type && errors.type.message}
@@ -288,6 +297,7 @@ function UpdateCompany(props) {
                   className={classes.nicknameInput}
                   id="companySize"
                   name="companySize"
+                  defaultValue={company.companySize}
                   {...register("companySize", {
                     required: "Size of company is required",
                   })}

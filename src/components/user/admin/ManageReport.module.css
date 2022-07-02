@@ -89,12 +89,13 @@
 }
 
 .location {
-  color: rgb(84, 84, 84);
+  color: rgb(59, 59, 59);
   font-size: 14px;
   font-weight: 700;
 }
 
 .locationWrapper {
+  color: rgb(177, 176, 176);
   margin-bottom: 8px;
   display: flex;
   gap: 8px;
@@ -160,4 +161,7 @@
 .deleteBtn:hover {
   cursor: pointer;
   color: #e85656;
+}
+.ratingItem {
+  text-decoration: none;
 }

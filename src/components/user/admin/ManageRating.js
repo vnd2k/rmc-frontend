@@ -1,10 +1,7 @@
 import classes from "./ManageRating.module.css";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  getListRating,
-  // deleteRating,
-} from "../../../stores/admin/adminSlice";
+import { getListRating } from "../../../stores/admin/adminSlice";
 import { Link } from "react-router-dom";
 
 function ManageRating(props) {
@@ -36,8 +33,6 @@ function ManageRating(props) {
         return classes.goodRatingValue;
     }
   };
-
-  console.log(ratingList);
   return (
     <div className={classes.container}>
       <div className={classes.title}>

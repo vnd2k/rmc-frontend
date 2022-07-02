@@ -16,7 +16,6 @@ const getCompanyById = async (companyId) => {
 
 // Update company
 const putCompany = async (request) => {
-  console.log(request);
   const response = await apiService().put(
     `${endpoint}/admin/company/${request.companyId}`,
     {
@@ -89,7 +88,15 @@ const getListRating = async () => {
 // Get report by ratingId
 const getReportByRating = async (ratingId) => {
   const response = await apiService().get(
-    `${endpoint}/admin/report/${ratingId}`
+    `${endpoint}/admin/report/rating/${ratingId}`
+  );
+  return response.data;
+};
+
+// Get report by id
+const getReportById = async (reportId) => {
+  const response = await apiService().get(
+    `${endpoint}/admin/report/${reportId}`
   );
   return response.data;
 };
@@ -114,6 +121,17 @@ const deleteJob = async (jobId) => {
   return response.data;
 };
 
+// Update report
+const putReport = async (request) => {
+  const response = await apiService().put(
+    `${endpoint}/admin/report/${request.reportId}`,
+    {
+      reason: request.data.reason,
+    }
+  );
+  return response.data;
+};
+
 const adminService = {
   getListCompany,
   getListMember,
@@ -129,6 +147,8 @@ const adminService = {
   deleteRating,
   deleteJob,
   getReportByRating,
+  getReportById,
+  putReport,
 };
 
 export default adminService;

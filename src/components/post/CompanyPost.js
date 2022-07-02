@@ -295,12 +295,10 @@ function CompanyPost(props) {
             </div>
           </div>
           <div className={classes.rateButtonWrapper}>
-            {member ? (
+            {member && (
               <Link to={`/rating/${id}`} className={classes.rateButton}>
                 Rate Your Company
               </Link>
-            ) : (
-              <></>
             )}
           </div>
         </div>

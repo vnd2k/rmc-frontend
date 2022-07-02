@@ -72,6 +72,10 @@ function RatingItem(props) {
     return `/edit/rating/${id}`;
   };
 
+  const companyLink = (id) => {
+    return `/company/${id}`;
+  };
+
   const handleDelete = (id) => {
     if (id) {
       dispatch(deleteRating(id));
@@ -116,9 +120,23 @@ function RatingItem(props) {
           )}
           <div className={classes.commentTitle}>
             <div className={classes.nameWrapper}>
-              <div className={classes.nameWrapper}>
-                <p className={classes.commentName}>{item.raterName}</p>
-              </div>
+              {item.companyName ? (
+                <div className={classes.nameWrapper}>
+                  <p className={classes.commentName}>
+                    You have rated at{" "}
+                    <Link
+                      to={companyLink(item.companyId)}
+                      className={classes.companyLink}
+                    >
+                      {item.companyName}
+                    </Link>
+                  </p>
+                </div>
+              ) : (
+                <div className={classes.nameWrapper}>
+                  <p className={classes.commentName}>{item.raterName}</p>
+                </div>
+              )}
             </div>
             <div className={classes.dateRating}>{item.createdAt}</div>
           </div>

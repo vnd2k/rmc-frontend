@@ -7,9 +7,10 @@ const initialState = {
   memberList: [],
   ratingList: [],
   jobList: [],
+  report: null,
   company: null,
   isError: false,
-  isSuccess: null,
+  isSuccessAdmin: null,
   isLoading: false,
   message: "",
 };
@@ -193,13 +194,39 @@ export const deleteJob = createAsyncThunk(
   }
 );
 
+// Get report by id
+export const getReportById = createAsyncThunk(
+  "getReportById",
+  async (reportId, thunkAPI) => {
+    try {
+      return await adminService.getReportById(reportId);
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Put report
+export const putReport = createAsyncThunk(
+  "putReport",
+  async (request, thunkAPI) => {
+    try {
+      return await adminService.putReport(request);
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const adminSlice = createSlice({
   name: "admin",
   initialState,
   reducers: {
     reset: (state) => {
       state.isLoading = false;
-      state.isSuccess = null;
+      state.isSuccessAdmin = null;
       state.isError = false;
       state.message = "";
     },
@@ -211,7 +238,7 @@ export const adminSlice = createSlice({
       })
       .addCase(getListCompany.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = "getListCompany";
+        state.isSuccessAdmin = "getListCompany";
         state.companyList = action.payload;
       })
       .addCase(getListCompany.rejected, (state, action) => {
@@ -224,7 +251,7 @@ export const adminSlice = createSlice({
       })
       .addCase(getCompanyById.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = "getCompanyById";
+        state.isSuccessAdmin = "getCompanyById";
         state.company = action.payload;
       })
       .addCase(getCompanyById.rejected, (state, action) => {
@@ -237,7 +264,7 @@ export const adminSlice = createSlice({
       })
       .addCase(putCompany.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = "putCompany";
+        state.isSuccessAdmin = "putCompany";
       })
       .addCase(putCompany.rejected, (state, action) => {
         state.isLoading = false;
@@ -249,7 +276,7 @@ export const adminSlice = createSlice({
       })
       .addCase(putCompanyLogo.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = "putCompanyLogo";
+        state.isSuccessAdmin = "putCompanyLogo";
       })
       .addCase(putCompanyLogo.rejected, (state, action) => {
         state.isLoading = false;
@@ -261,7 +288,7 @@ export const adminSlice = createSlice({
       })
       .addCase(deleteCompany.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = "deleteCompany";
+        state.isSuccessAdmin = "deleteCompany";
       })
       .addCase(deleteCompany.rejected, (state, action) => {
         state.isLoading = false;
@@ -273,7 +300,7 @@ export const adminSlice = createSlice({
       })
       .addCase(getListReport.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = "getListReport";
+        state.isSuccessAdmin = "getListReport";
         state.reportList = action.payload;
       })
       .addCase(getListReport.rejected, (state, action) => {
@@ -286,7 +313,7 @@ export const adminSlice = createSlice({
       })
       .addCase(deleteReport.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = "deleteReport";
+        state.isSuccessAdmin = "deleteReport";
       })
       .addCase(deleteReport.rejected, (state, action) => {
         state.isLoading = false;
@@ -298,7 +325,7 @@ export const adminSlice = createSlice({
       })
       .addCase(getListMember.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = "getListMember";
+        state.isSuccessAdmin = "getListMember";
         state.memberList = action.payload;
       })
       .addCase(getListMember.rejected, (state, action) => {
@@ -311,7 +338,7 @@ export const adminSlice = createSlice({
       })
       .addCase(deleteMember.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = "deleteMember";
+        state.isSuccessAdmin = "deleteMember";
       })
       .addCase(deleteMember.rejected, (state, action) => {
         state.isLoading = false;
@@ -324,7 +351,7 @@ export const adminSlice = createSlice({
       })
       .addCase(getListRating.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = "getListRating";
+        state.isSuccessAdmin = "getListRating";
         state.ratingList = action.payload;
       })
       .addCase(getListRating.rejected, (state, action) => {
@@ -337,7 +364,7 @@ export const adminSlice = createSlice({
       })
       .addCase(getReportByRating.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = "getReportByRating";
+        state.isSuccessAdmin = "getReportByRating";
         state.reportList = action.payload;
       })
       .addCase(getReportByRating.rejected, (state, action) => {
@@ -350,7 +377,7 @@ export const adminSlice = createSlice({
       })
       .addCase(deleteRating.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = "deleteRating";
+        state.isSuccessAdmin = "deleteRating";
       })
       .addCase(deleteRating.rejected, (state, action) => {
         state.isLoading = false;
@@ -362,7 +389,7 @@ export const adminSlice = createSlice({
       })
       .addCase(getListJob.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = "getListJob";
+        state.isSuccessAdmin = "getListJob";
         state.jobList = action.payload;
       })
       .addCase(getListJob.rejected, (state, action) => {
@@ -375,9 +402,34 @@ export const adminSlice = createSlice({
       })
       .addCase(deleteJob.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = "deleteJob";
+        state.isSuccessAdmin = "deleteJob";
       })
       .addCase(deleteJob.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(getReportById.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getReportById.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccessAdmin = "getReportById";
+        state.report = action.payload;
+      })
+      .addCase(getReportById.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(putReport.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(putReport.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccessAdmin = "putReport";
+      })
+      .addCase(putReport.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

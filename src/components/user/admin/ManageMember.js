@@ -15,7 +15,6 @@ function ManageMember(props) {
   }, [dispatch, isSuccess]);
 
   const handleDelete = (id) => {
-    console.log(id);
     if (id) {
       dispatch(deleteMember(id));
     }

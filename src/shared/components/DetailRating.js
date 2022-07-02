@@ -7,13 +7,15 @@ import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import { getRating, editRating, reset } from "../../stores/rating/ratingSlice";
-import { getReportByRating } from "../../stores/admin/adminSlice";
+import { getReportByRating, deleteRating } from "../../stores/admin/adminSlice";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { MdCancel } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 function DetailRating() {
   const { isSuccess, rating } = useSelector((state) => state.rating);
-  const { reportList } = useSelector((state) => state.admin);
+  const { isSuccessAdmin, reportList } = useSelector((state) => state.admin);
   const [star, setStar] = useState(5);
   const { id = "" } = useParams();
   const dispatch = useDispatch();
@@ -48,16 +50,34 @@ function DetailRating() {
     }
   }, [id, dispatch]);
 
-  console.log(reportList);
-
   const onStarChange = (event) => {
     setStar(event.target.value);
+  };
+
+  const handleDelete = (id) => {
+    if (id) {
+      dispatch(deleteRating(id));
+    }
+  };
+  useEffect(() => {
+    if (isSuccessAdmin === "deleteRating") {
+      toast.success("Delete successfully");
+      history.push(`/manage-rating`);
+      dispatch(reset());
+    }
+  }, [isSuccessAdmin, dispatch, history]);
+  const reportLink = (reportId) => {
+    return `/detail-report/${reportId}`;
   };
   return (
     <div>
       <div className={classes.formWrapper}>
         <div className={classes.formCard}>
           <form onSubmit={handleSubmit(handle)} className={classes.formContent}>
+            <MdCancel
+              onClick={() => handleDelete(rating?.id)}
+              className={classes.deleteBtn}
+            ></MdCancel>
             <div>
               <div className={classes.locationWrapper}>
                 <div className={classes.titleName}>
@@ -227,64 +247,74 @@ function DetailRating() {
             </div>
           </form>
         </div>
-
-        <div className={classes.roleWrapper}>
-          <div className={classes.roleContent}>
-            <div className={classes.titleRole}>
-              <h3>List reported</h3>
-            </div>
-            <ul className={classes.ratingUl}>
-              {reportList?.map((item) => (
-                <li className={classes.itemSearch} key={item.id}>
-                  <div className={classes.ratingBody}>
-                    <div className={classes.ratingTextWrapper}>
-                      <div className={classes.logoWrapper}>
-                        {item?.reporterAvatar ? (
-                          <img
-                            className={classes.logo}
-                            src={item?.reporterAvatar}
-                            alt="avatar"
-                          ></img>
-                        ) : (
-                          <img
-                            className={classes.logo}
-                            src="/avatarReport.jpg"
-                            alt="avatar"
-                          ></img>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className={classes.ratingCommentWrapper}>
-                      <div className={classes.commentTitle}>
-                        <div className={classes.nameWrapper}>
-                          <div className={classes.itemLink}>{item.reason}</div>
-                        </div>
-                      </div>
-                      <div className={classes.commentDescription}>
-                        <div className={classes.locationWrapper}>
-                          <h4>ReportId:</h4>
-                          <div className={classes.location}>
-                            {item.reportId}
+        {reportList && reportList.length > 0 ? (
+          <div className={classes.roleWrapper}>
+            <div className={classes.roleContent}>
+              <div className={classes.titleRole}>
+                <h3>List reported</h3>
+              </div>
+              <ul className={classes.ratingUl}>
+                {reportList?.map((item) => (
+                  <Link
+                    to={reportLink(item.reportId)}
+                    className={classes.ratingItem}
+                  >
+                    <li className={classes.itemSearch} key={item.id}>
+                      <div className={classes.ratingBody}>
+                        <div className={classes.ratingTextWrapper}>
+                          <div className={classes.logoWrapper}>
+                            {item?.reporterAvatar ? (
+                              <img
+                                className={classes.logo}
+                                src={item?.reporterAvatar}
+                                alt="avatar"
+                              ></img>
+                            ) : (
+                              <img
+                                className={classes.logo}
+                                src="/avatarReport.jpg"
+                                alt="avatar"
+                              ></img>
+                            )}
                           </div>
                         </div>
 
-                        <div className={classes.infoWrapper}>
-                          <div className={classes.locationWrapper}>
-                            <h4>Reporter:</h4>
-                            <div className={classes.location}>
-                              {item.reporter}
+                        <div className={classes.ratingCommentWrapper}>
+                          <div className={classes.commentTitle}>
+                            <div className={classes.nameWrapper}>
+                              <div className={classes.itemLink}>
+                                {item.reason}
+                              </div>
+                            </div>
+                          </div>
+                          <div className={classes.commentDescription}>
+                            <div className={classes.locationWrapper}>
+                              <h4>ReportId:</h4>
+                              <div className={classes.location}>
+                                {item.reportId}
+                              </div>
+                            </div>
+
+                            <div className={classes.infoWrapper}>
+                              <div className={classes.locationWrapper}>
+                                <h4>Reporter:</h4>
+                                <div className={classes.location}>
+                                  {item.reporter}
+                                </div>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
+                    </li>
+                  </Link>
+                ))}
+              </ul>
+            </div>
           </div>
-        </div>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

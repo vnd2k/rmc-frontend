@@ -326,3 +326,8 @@
   text-decoration: none;
   color: black;
 }
+.companyLink {
+  text-decoration: none;
+  color: #e77373;
+  font-weight: 700;
+}

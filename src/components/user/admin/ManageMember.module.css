@@ -22,7 +22,7 @@
 }
 
 .ratingLiWrapper {
-  width: 70%;
+  width: 100%;
 }
 
 .ratingUl {
@@ -63,18 +63,15 @@
   font-size: medium;
   font-weight: 300;
   margin-top: 8px;
-  /* padding: 12px 0px; */
 }
 .logo {
-  height: 80px;
-  aspect-ratio: auto 100 / 80;
-  width: 100px;
-  /* border-radius: 50%; */
+  height: 130px;
+  aspect-ratio: auto 150 / 130;
+  width: 150px;
   border-color: #ddd;
   border-width: 1px;
   border-style: solid;
 }
-
 .location {
   color: rgb(84, 84, 84);
   font-size: 14px;
