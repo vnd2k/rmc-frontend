@@ -12,7 +12,9 @@ import "react-toastify/dist/ReactToastify.css";
 
 function MemberProfile(props) {
   const { user } = useSelector((state) => state.auth);
-  const { member, isLoading, isSuccess } = useSelector((state) => state.member);
+  const { member, isLoading, isSuccessMember } = useSelector(
+    (state) => state.member
+  );
   const [inputAvatar, setInputAvatar] = useState();
   const [previewAvatar, setPreviewAvatar] = useState("");
   const dispatch = useDispatch();
@@ -27,11 +29,14 @@ function MemberProfile(props) {
   };
 
   useEffect(() => {
-    if (isSuccess === "updateSuccess" || isSuccess === "updateAvatarSuccess") {
+    if (
+      isSuccessMember === "updateSuccess" ||
+      isSuccessMember === "updateAvatarSuccess"
+    ) {
       toast.success("Update successfully");
       reset();
     }
-  }, [dispatch, isSuccess, member]);
+  }, [dispatch, isSuccessMember, member]);
 
   const handleInputAvatar = (e) => {
     const file = e.target.files[0];

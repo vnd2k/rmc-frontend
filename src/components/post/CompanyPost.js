@@ -17,7 +17,9 @@ import "react-toastify/dist/ReactToastify.css";
 
 function CompanyPost(props) {
   const { companyById, jobList } = useSelector((state) => state.company);
-  const { saved, isSuccess, member } = useSelector((state) => state.member);
+  const { saved, isSuccessMember, member } = useSelector(
+    (state) => state.member
+  );
   const { ratingList, isLoading } = useSelector((state) => state.rating);
   const { user } = useSelector((state) => state.auth);
   const [isRead, setRead] = useState(true);
@@ -57,14 +59,14 @@ function CompanyPost(props) {
     }
   }, [dispatch, id]);
   useEffect(() => {
-    if (saved && isSuccess === "postSuccess") {
+    if (saved && isSuccessMember === "postSuccess") {
       if (!saved?.checked) {
         toast.info("Added to saved list");
       } else {
         toast.info("Removed to saved list");
       }
     }
-  }, [dispatch, isSuccess, member, saved]);
+  }, [dispatch, isSuccessMember, member, saved]);
 
   const handleSave = () => {
     dispatch(postSave(id));
