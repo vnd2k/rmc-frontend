@@ -150,7 +150,7 @@ export const memberSlice = createSlice({
       })
       .addCase(getListSaved.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = "getListSavedSuccess";
+        state.isSuccessMember = "getListSavedSuccess";
         state.savedList = action.payload;
         state.saved = action.payload;
       })
@@ -165,7 +165,7 @@ export const memberSlice = createSlice({
       })
       .addCase(postSave.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccess = "postSuccess";
+        state.isSuccessMember = "postSuccess";
       })
       .addCase(postSave.rejected, (state, action) => {
         state.isLoading = false;

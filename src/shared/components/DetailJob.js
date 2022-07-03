@@ -57,77 +57,81 @@ function DetailJob() {
   }, [isSuccess, dispatch, history]);
   return (
     <div>
-      <div className={classes.formWrapper}>
-        <div className={classes.formCard}>
-          <form onSubmit={handleSubmit(handle)} className={classes.formContent}>
-            <MdCancel
-              onClick={() => handleDelete(job?.id)}
-              className={classes.deleteBtn}
-            ></MdCancel>
-            <div>
-              <div className={classes.locationWrapper}>
-                <div className={classes.titleName}>
-                  <p>Job ID:</p>
+      {id === job?.id && (
+        <div className={classes.formWrapper}>
+          <div className={classes.formCard}>
+            <form
+              onSubmit={handleSubmit(handle)}
+              className={classes.formContent}
+            >
+              <MdCancel
+                onClick={() => handleDelete(job?.id)}
+                className={classes.deleteBtn}
+              ></MdCancel>
+              <div>
+                <div className={classes.locationWrapper}>
+                  <div className={classes.titleName}>
+                    <p>Job ID:</p>
+                  </div>
+                  <div className={classes.location}>{job?.id}</div>
                 </div>
-                <div className={classes.location}>{job?.id}</div>
-              </div>
-              <div className={classes.locationWrapper}>
-                <div className={classes.titleName}>
-                  <p>Company ID:</p>
+                <div className={classes.locationWrapper}>
+                  <div className={classes.titleName}>
+                    <p>Company ID:</p>
+                  </div>
+                  <div className={classes.location}>{job?.companyId}</div>
                 </div>
-                <div className={classes.location}>{job?.companyId}</div>
+                <p className={classes.titleRate}>
+                  Title
+                  <span className={classes.spanItem}>*</span>
+                </p>
+                <input
+                  className={classes.areaInput}
+                  defaultValue={job?.title}
+                  placeholder="Title of job"
+                  {...register("title", {
+                    required: "Title is required",
+                    maxLength: 500,
+                  })}
+                ></input>
+                <p className={classes.errorMsg}>
+                  {errors?.title && errors.title.message}
+                </p>
               </div>
-              <p className={classes.titleRate}>
-                Title
-                <span className={classes.spanItem}>*</span>
-              </p>
-              <input
-                className={classes.areaInput}
-                defaultValue={job?.title}
-                placeholder="Title of job"
-                {...register("title", {
-                  required: "Title is required",
-                  maxLength: 500,
-                })}
-              ></input>
-              <p className={classes.errorMsg}>
-                {errors?.title && errors.title.message}
-              </p>
-            </div>
 
-            <div className={classes.unlikeThings}>
-              <p className={classes.titleRate}>
-                Description
-                <span className={classes.spanItem}>*</span>
-              </p>
-              <textarea
-                rows={10}
-                className={classes.areaInput}
-                defaultValue={job?.description}
-                placeholder="Description of job"
-                {...register("description", {
-                  required: "Description is required",
-                  maxLength: 500,
-                })}
-              ></textarea>
-              <p className={classes.errorMsg}>
-                {errors?.description && errors.description.message}
-              </p>
-            </div>
+              <div className={classes.unlikeThings}>
+                <p className={classes.titleRate}>
+                  Description
+                  <span className={classes.spanItem}>*</span>
+                </p>
+                <textarea
+                  rows={10}
+                  className={classes.areaInput}
+                  defaultValue={job?.description}
+                  placeholder="Description of job"
+                  {...register("description", {
+                    required: "Description is required",
+                    maxLength: 500,
+                  })}
+                ></textarea>
+                <p className={classes.errorMsg}>
+                  {errors?.description && errors.description.message}
+                </p>
+              </div>
 
-            <div className={classes.btnWrapper}>
-              <button className={classes.rateButton}>Update</button>
-            </div>
-          </form>
-        </div>
+              <div className={classes.btnWrapper}>
+                <button className={classes.rateButton}>Update</button>
+              </div>
+            </form>
+          </div>
 
-        <div className={classes.roleWrapper}>
-          <div className={classes.roleContent}>
-            <div className={classes.titleRole}>
-              <h3>List CV</h3>
-            </div>
-            <ul className={classes.ratingUl}>
-              {/* {reportList?.map((item) => (
+          <div className={classes.roleWrapper}>
+            <div className={classes.roleContent}>
+              <div className={classes.titleRole}>
+                <h3>List CV</h3>
+              </div>
+              <ul className={classes.ratingUl}>
+                {/* {reportList?.map((item) => (
                 <li className={classes.itemSearch} key={item.id}>
                   <div className={classes.ratingBody}>
                     <div className={classes.ratingTextWrapper}>
@@ -175,10 +179,11 @@ function DetailJob() {
                   </div>
                 </li>
               ))} */}
-            </ul>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

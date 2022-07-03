@@ -8,6 +8,7 @@ import {
 import RatingItem from "./RatingItem";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Spinner from "./Spinner";
 
 function RatingList(props) {
   const dispatch = useDispatch();
@@ -44,7 +45,7 @@ function RatingList(props) {
   return (
     <>
       {isLoading ? (
-        <></>
+        <Spinner />
       ) : (
         <>
           <div className={classes.containerComment}>

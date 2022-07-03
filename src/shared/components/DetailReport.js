@@ -20,7 +20,7 @@ function DetailReport() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  
+
   const handle = (data) => {
     if (report) {
       const reportId = report?.id;
@@ -46,54 +46,59 @@ function DetailReport() {
   };
   return (
     <div>
-      <div className={classes.formWrapper}>
-        <div className={classes.formCard}>
-          <form onSubmit={handleSubmit(handle)} className={classes.formContent}>
-            <div>
-              <div className={classes.locationWrapper}>
-                <div className={classes.titleName}>
-                  <p>Report ID:</p>
-                </div>
-                <div className={classes.location}>{report?.reportId}</div>
-              </div>
-              <Link
-                to={ratingLink(report?.ratingId)}
-                className={classes.ratingItem}
-              >
+      {id === report?.reportId && (
+        <div className={classes.formWrapper}>
+          <div className={classes.formCard}>
+            <form
+              onSubmit={handleSubmit(handle)}
+              className={classes.formContent}
+            >
+              <div>
                 <div className={classes.locationWrapper}>
                   <div className={classes.titleName}>
-                    <p>Rating ID:</p>
+                    <p>Report ID:</p>
                   </div>
-                  <div className={classes.location}>{report?.ratingId}</div>
+                  <div className={classes.location}>{report?.reportId}</div>
                 </div>
-              </Link>
+                <Link
+                  to={ratingLink(report?.ratingId)}
+                  className={classes.ratingItem}
+                >
+                  <div className={classes.locationWrapper}>
+                    <div className={classes.titleName}>
+                      <p>Rating ID:</p>
+                    </div>
+                    <div className={classes.location}>{report?.ratingId}</div>
+                  </div>
+                </Link>
 
-              <p className={classes.titleRate}>
-                Reason
-                <span className={classes.spanItem}>*</span>
-              </p>
-              <input
-                className={classes.areaInput}
-                defaultValue={report?.reason}
-                placeholder="Reason of report"
-                {...register("reason", {
-                  required: "Reason is required",
-                  maxLength: 500,
-                })}
-              ></input>
-              <p className={classes.errorMsg}>
-                {errors?.reason && errors.reason.message}
-              </p>
-            </div>
+                <p className={classes.titleRate}>
+                  Reason
+                  <span className={classes.spanItem}>*</span>
+                </p>
+                <input
+                  className={classes.areaInput}
+                  defaultValue={report?.reason}
+                  placeholder="Reason of report"
+                  {...register("reason", {
+                    required: "Reason is required",
+                    maxLength: 500,
+                  })}
+                ></input>
+                <p className={classes.errorMsg}>
+                  {errors?.reason && errors.reason.message}
+                </p>
+              </div>
 
-            <div className={classes.btnWrapper}>
-              <button disabled={isLoading} className={classes.rateButton}>
-                Update
-              </button>
-            </div>
-          </form>
+              <div className={classes.btnWrapper}>
+                <button disabled={isLoading} className={classes.rateButton}>
+                  Update
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

@@ -3,10 +3,13 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getListRating } from "../../../stores/admin/adminSlice";
 import { Link } from "react-router-dom";
+import Spinner from "../../../shared/components/Spinner";
 
 function ManageRating(props) {
   const dispatch = useDispatch();
-  const { ratingList, isSuccess } = useSelector((state) => state.admin);
+  const { ratingList, isSuccess, isLoading } = useSelector(
+    (state) => state.admin
+  );
   useEffect(() => {
     dispatch(getListRating());
   }, [dispatch, isSuccess]);
@@ -40,70 +43,78 @@ function ManageRating(props) {
       </div>
       <div className={classes.ratingList}>
         <div className={classes.containerComment}>
-          {ratingList &&
-            (ratingList.length > 0 ? (
-              <>
-                <div className={classes.ratingLiWrapper}>
-                  <ul className={classes.ratingUl}>
-                    {ratingList?.map((item) => (
-                      <Link
-                        to={ratingLink(item.id)}
-                        className={classes.ratingItem}
-                      >
-                        <li className={classes.itemSearch} key={item.id}>
-                          <div className={classes.ratingBody}>
-                            <div className={classes.ratingTextWrapper}>
-                              <div className={classes.ratingTitle}>QUALITY</div>
-                              <div className={checkPoint(item.ratingPoint)}>
-                                {item.ratingPoint}
-                              </div>
-                            </div>
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            <>
+              {ratingList &&
+                (ratingList.length > 0 ? (
+                  <>
+                    <div className={classes.ratingLiWrapper}>
+                      <ul className={classes.ratingUl}>
+                        {ratingList?.map((item) => (
+                          <Link
+                            to={ratingLink(item.id)}
+                            className={classes.ratingItem}
+                          >
+                            <li className={classes.itemSearch} key={item.id}>
+                              <div className={classes.ratingBody}>
+                                <div className={classes.ratingTextWrapper}>
+                                  <div className={classes.ratingTitle}>
+                                    QUALITY
+                                  </div>
+                                  <div className={checkPoint(item.ratingPoint)}>
+                                    {item.ratingPoint}
+                                  </div>
+                                </div>
 
-                            <div className={classes.ratingCommentWrapper}>
-                              <div className={classes.locationWrapper}>
-                                <div className={classes.titleName}>
-                                  <p>ID:</p>
-                                </div>
-                                <div className={classes.location}>
-                                  {item.id}
-                                </div>
-                              </div>
+                                <div className={classes.ratingCommentWrapper}>
+                                  <div className={classes.locationWrapper}>
+                                    <div className={classes.titleName}>
+                                      <p>ID:</p>
+                                    </div>
+                                    <div className={classes.location}>
+                                      {item.id}
+                                    </div>
+                                  </div>
 
-                              <div className={classes.locationWrapper}>
-                                <div className={classes.titleName}>
-                                  <p>Rated by:</p>
-                                </div>
-                                <div className={classes.location}>
-                                  {item.raterName}
+                                  <div className={classes.locationWrapper}>
+                                    <div className={classes.titleName}>
+                                      <p>Rated by:</p>
+                                    </div>
+                                    <div className={classes.location}>
+                                      {item.raterName}
+                                    </div>
+                                  </div>
+                                  <div className={classes.locationWrapper}>
+                                    <div className={classes.titleName}>
+                                      <p>Rate in:</p>
+                                    </div>
+                                    <div className={classes.location}>
+                                      {item.companyName}
+                                    </div>
+                                  </div>
+                                  <div className={classes.locationWrapper}>
+                                    <div className={classes.reportedCount}>
+                                      <p>Reported count:</p>
+                                    </div>
+                                    <div className={classes.location}>
+                                      {item.reportedCount}
+                                    </div>
+                                  </div>
                                 </div>
                               </div>
-                              <div className={classes.locationWrapper}>
-                                <div className={classes.titleName}>
-                                  <p>Rate in:</p>
-                                </div>
-                                <div className={classes.location}>
-                                  {item.companyName}
-                                </div>
-                              </div>
-                              <div className={classes.locationWrapper}>
-                                <div className={classes.reportedCount}>
-                                  <p>Reported count:</p>
-                                </div>
-                                <div className={classes.location}>
-                                  {item.reportedCount}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                      </Link>
-                    ))}
-                  </ul>
-                </div>
-              </>
-            ) : (
-              <p></p>
-            ))}
+                            </li>
+                          </Link>
+                        ))}
+                      </ul>
+                    </div>
+                  </>
+                ) : (
+                  <p></p>
+                ))}
+            </>
+          )}
         </div>
       </div>
     </div>
