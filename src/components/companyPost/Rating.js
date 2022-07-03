@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { getCompanyById } from "../../stores/company/companySlice";
 import { useForm } from "react-hook-form";
-import { postRating } from "../../stores/rating/ratingSlice";
+import { postRating, reset } from "../../stores/rating/ratingSlice";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,7 +16,9 @@ import { Link } from "react-router-dom";
 function Rating() {
   const { member } = useSelector((state) => state.member);
   const { companyById } = useSelector((state) => state.company);
-  const { isSuccess, isLoading } = useSelector((state) => state.rating);
+  const { isSuccess, isLoading, isError } = useSelector(
+    (state) => state.rating
+  );
   const [star, setStar] = useState(5);
   const { id = "" } = useParams();
   const dispatch = useDispatch();
@@ -47,6 +49,14 @@ function Rating() {
       dispatch(getCompanyById(id));
     }
   }, [id, dispatch]);
+
+  useEffect(() => {
+    if (isError) {
+      toast.error("You already rating this company");
+      dispatch(reset());
+    }
+  }, [isError, dispatch]);
+
   const onStarChange = (event) => {
     setStar(event.target.value);
   };

@@ -200,13 +200,15 @@ function App() {
         </Layout>
       </Route>
 
-      <Route path="/company-jobs">
-        <Layout>
-          <EditCompany>
-            <CompanyJob />
-          </EditCompany>
-        </Layout>
-      </Route>
+      {user?.userDetails?.role === "COMPANY" && (
+        <Route path="/company-jobs">
+          <Layout>
+            <EditCompany>
+              <CompanyJob />
+            </EditCompany>
+          </Layout>
+        </Route>
+      )}
 
       <Route path="/member-profile">
         <Layout>

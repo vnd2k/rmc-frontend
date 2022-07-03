@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function ContentRating({ ratingId, close }) {
-  const { isSuccess, isLoading, message } = useSelector(
+  const { isSuccessMember, isLoading, message } = useSelector(
     (state) => state.member
   );
   const dispatch = useDispatch();
@@ -30,11 +30,11 @@ function ContentRating({ ratingId, close }) {
   });
 
   useEffect(() => {
-    if (isSuccess === "postReport") {
+    if (isSuccessMember === "postReport") {
       toast.success("Report successfully");
       close();
     }
-  }, [isSuccess, dispatch, close]);
+  }, [isSuccessMember, dispatch, close]);
 
   return (
     <div className={classes.container}>

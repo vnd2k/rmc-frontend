@@ -11,7 +11,10 @@ import "react-toastify/dist/ReactToastify.css";
 
 function RatingList(props) {
   const dispatch = useDispatch();
-  const { ratingList, isSuccess } = useSelector((state) => state.rating);
+  const { ratingList, isSuccess, isLoading } = useSelector(
+    (state) => state.rating
+  );
+  const { isSuccessMember } = useSelector((state) => state.member);
   const { user } = useSelector((state) => state.auth);
   useEffect(() => {
     if (props?.companyId) {
@@ -28,6 +31,7 @@ function RatingList(props) {
     props.page,
     props.sortType,
     isSuccess,
+    isSuccessMember,
     dispatch,
     user,
   ]);
@@ -38,28 +42,36 @@ function RatingList(props) {
     }
   }, [isSuccess]);
   return (
-    <div className={classes.containerComment}>
-      {ratingList &&
-        (ratingList.length > 0 ? (
-          <>
-            <div className={classes.ratingLiWrapper}>
-              <ul className={classes.ratingUl}>
-                {ratingList?.map((item) => (
-                  <RatingItem item={item}></RatingItem>
-                ))}
-              </ul>
-            </div>
-          </>
-        ) : (
-          <div className={classes.logoWrapper}>
-            <img
-              className={classes.logo}
-              src={"/noData.svg"}
-              alt="No data"
-            ></img>
+    <>
+      {isLoading ? (
+        <></>
+      ) : (
+        <>
+          <div className={classes.containerComment}>
+            {ratingList &&
+              (ratingList.length > 0 ? (
+                <>
+                  <div className={classes.ratingLiWrapper}>
+                    <ul className={classes.ratingUl}>
+                      {ratingList?.map((item) => (
+                        <RatingItem item={item}></RatingItem>
+                      ))}
+                    </ul>
+                  </div>
+                </>
+              ) : (
+                <div className={classes.logoWrapper}>
+                  <img
+                    className={classes.logo}
+                    src={"/noData.svg"}
+                    alt="No data"
+                  ></img>
+                </div>
+              ))}
           </div>
-        ))}
-    </div>
+        </>
+      )}
+    </>
   );
 }
 

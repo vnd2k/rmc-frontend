@@ -19,6 +19,7 @@ function CompanyPost(props) {
   const { companyById, jobList } = useSelector((state) => state.company);
   const { saved, isSuccess, member } = useSelector((state) => state.member);
   const { ratingList, isLoading } = useSelector((state) => state.rating);
+  const { user } = useSelector((state) => state.auth);
   const [isRead, setRead] = useState(true);
   // const [page, setPage] = useState(0);
   const page = 0;
@@ -184,6 +185,15 @@ function CompanyPost(props) {
               </select>
             </label>
           </div>
+
+          <div>
+            <RatingList
+              companyId={id}
+              page={page}
+              sortType={sortType}
+            ></RatingList>
+            <div>Paging</div>
+          </div>
         </div>
 
         <div>
@@ -295,24 +305,13 @@ function CompanyPost(props) {
             </div>
           </div>
           <div className={classes.rateButtonWrapper}>
-            {member && (
+            {user?.userDetails?.role === "MEMBER" && (
               <Link to={`/rating/${id}`} className={classes.rateButton}>
                 Rate Your Company
               </Link>
             )}
           </div>
-        </div>
-      </div>
-      <div className={classes.row}>
-        <div>
-          <RatingList
-            companyId={id}
-            page={page}
-            sortType={sortType}
-          ></RatingList>
-          <div>Paging</div>
-        </div>
-        <div>
+
           <div className={classes.jobList}>
             {jobList &&
               (jobList.length > 0 ? (
