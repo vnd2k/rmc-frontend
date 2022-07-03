@@ -9,6 +9,7 @@ import RatingItem from "./RatingItem";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Spinner from "./Spinner";
+import Pagination from "./Pagination";
 
 function RatingList(props) {
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ function RatingList(props) {
     dispatch,
     user,
   ]);
-
+  console.log(ratingList);
   useEffect(() => {
     if (isSuccess === "deleteSuccess") {
       toast.success("Delete successfully");
@@ -58,6 +59,13 @@ function RatingList(props) {
                         <RatingItem item={item}></RatingItem>
                       ))}
                     </ul>
+                    <div className={classes.pagination}>
+                      <Pagination
+                        currentPage={props.page}
+                        totalPages={ratingList[0].totalPage}
+                        pageChange={props.pageChange}
+                      />
+                    </div>
                   </div>
                 </>
               ) : (

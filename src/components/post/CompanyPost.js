@@ -23,8 +23,7 @@ function CompanyPost(props) {
   const { ratingList, isLoading } = useSelector((state) => state.rating);
   const { user } = useSelector((state) => state.auth);
   const [isRead, setRead] = useState(true);
-  // const [page, setPage] = useState(0);
-  const page = 0;
+  const [page, setPage] = useState(1);
   const [sortType, setSortType] = useState("popularity");
   const { id = "" } = useParams();
   const dispatch = useDispatch();
@@ -35,6 +34,10 @@ function CompanyPost(props) {
     } else {
       return 0;
     }
+  };
+
+  const pageChange = (page) => {
+    setPage(page);
   };
 
   const onReadMoreClicked = () => {
@@ -77,7 +80,6 @@ function CompanyPost(props) {
   };
 
   const handleFilterRating = (e) => {
-    console.log(e.target.value);
     setSortType(e.target.value);
   };
   return (
@@ -193,8 +195,8 @@ function CompanyPost(props) {
               companyId={id}
               page={page}
               sortType={sortType}
+              pageChange={pageChange}
             ></RatingList>
-            <div>Paging</div>
           </div>
         </div>
 

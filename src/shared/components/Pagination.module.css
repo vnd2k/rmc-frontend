@@ -1,0 +1,34 @@
+.list {
+  display: flex;
+  list-style: none;
+  gap: 12px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.item {
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+  background-color: white;
+  border: 0;
+  font-size: medium;
+}
+.active {
+  display: block;
+  cursor: pointer;
+  animation-duration: 100;
+  background-color: white;
+  font-size: medium;
+  background-color: #e77373;
+  color: white;
+  padding: 4px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border: 0;
+}
+
+.active {
+  /* @apply text-white bg-primary; */
+  pointer-events: none;
+}
