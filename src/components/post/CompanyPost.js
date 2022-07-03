@@ -51,7 +51,7 @@ function CompanyPost(props) {
     if (id) {
       dispatch(getSavedStatus(id));
     }
-  }, [id, dispatch, isSuccess]);
+  }, [id, dispatch, isSuccessMember]);
 
   useEffect(() => {
     if (id) {
