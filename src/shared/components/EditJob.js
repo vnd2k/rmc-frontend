@@ -152,7 +152,7 @@ function EditJob() {
                   <a
                     href={item.cvUrl}
                     target={"_blank"}
-                    rel={"noopener"}
+                    rel={"noreferrer"}
                     className={classes.ratingItem}
                   >
                     <li className={classes.itemSearch} key={item.id}>
