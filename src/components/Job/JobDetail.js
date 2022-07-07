@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./JobDetail.module.css";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { HiOutlineLocationMarker } from "react-icons/hi";
@@ -10,9 +10,14 @@ import {
 } from "../../stores/company/companySlice";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { postCv, reset } from "../../stores/member/memberSlice";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function JobDetail() {
   const { company, job, jobList } = useSelector((state) => state.company);
+  const { isSuccessMember, isError } = useSelector((state) => state.member);
+  const [cvFile, setCvFile] = useState();
   const dispatch = useDispatch();
   const { id = "" } = useParams();
 
@@ -44,6 +49,45 @@ function JobDetail() {
     return `/detail-job/${jobId}`;
   };
 
+  const handleInputCv = (e) => {
+    const file = e.target.files[0];
+    if (!file) {
+      return;
+    }
+    setCvFile(file);
+  };
+
+  const handleSubmitCv = () => {
+    if (cvFile === undefined) {
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.readAsDataURL(cvFile);
+    reader.onloadend = () => {
+      if (reader.result) {
+        const jobId = id;
+        const cv = reader?.result;
+        dispatch(postCv({ jobId, cv }));
+      }
+    };
+    reader.onerror = () => {};
+  };
+
+  useEffect(() => {
+    if (isSuccessMember === "postCv") {
+      toast.success("Update successfully");
+      dispatch(reset());
+    }
+  }, [dispatch, isSuccessMember]);
+
+  useEffect(() => {
+    if (isError) {
+      toast.error("You're already apply this job");
+      dispatch(reset());
+    }
+  }, [dispatch, isError]);
+
   return (
     <div>
       <div className={classes.headerWrapper}>
@@ -71,7 +115,22 @@ function JobDetail() {
                 <p className={classes.jobDescription}>{job?.description}</p>
               </div>
               <div className={classes.btnWrapper}>
-                <button className={classes.rateButton}>Apply CV</button>
+                <input
+                  type={"file"}
+                  accept={"application/pdf"}
+                  onChange={handleInputCv}
+                ></input>
+              </div>
+
+              <div className={classes.btnWrapper}>
+                <button
+                  type="submit"
+                  disabled={!cvFile}
+                  className={classes.rateButton}
+                  onClick={handleSubmitCv}
+                >
+                  Apply CV
+                </button>
               </div>
             </div>
           )}
@@ -84,27 +143,6 @@ function JobDetail() {
                   <h3>
                     Other jobs in <span>{company?.name}</span>
                   </h3>
-                  {/* <ul className={classes.ratingUl}>
-                    {jobList?.map((item) => (
-                      <li className={classes.itemSearch} key={item.id}>
-                        <div className={classes.ratingBody}>
-                          <div className={classes.ratingCommentWrapper}>
-                            <div className={classes.commentTitle}>
-                              <div className={classes.nameWrapper}>
-                                <h4>{item.title}</h4>
-                              </div>{" "}
-                              <Link
-                                to={jobLink(item.id)}
-                                className={classes.linkJob}
-                              >
-                                <CgArrowRightO></CgArrowRightO>
-                              </Link>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                    ))}
-                  </ul> */}
                   <div className={classes.ratingLiWrapper}>
                     <ul className={classes.ratingUl}>
                       {jobList?.map((item) => (

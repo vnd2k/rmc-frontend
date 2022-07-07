@@ -65,6 +65,17 @@ const postReport = async (request) => {
   return response.data;
 };
 
+// Post cv
+const postCv = async (request) => {
+  const response = await apiService().post(
+    `${endpoint}/member/job/${request.jobId}/cv`,
+    {
+      cv: request.cv,
+    }
+  );
+  return response.data;
+};
+
 const memberService = {
   getMemberInfo,
   updateMemberInfo,
@@ -73,6 +84,7 @@ const memberService = {
   postSave,
   getListSaved,
   postReport,
+  postCv,
 };
 
 export default memberService;

@@ -8,6 +8,7 @@ const initialState = {
   isLoading: false,
   companySearch: [],
   jobList: [],
+  cvList: [],
   job: null,
   companyById: null,
   message: "",
@@ -140,6 +141,19 @@ export const deleteJob = createAsyncThunk(
   async (jobId, thunkAPI) => {
     try {
       return await companyService.deleteJob(jobId);
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Get list cv
+export const getListCvByJobId = createAsyncThunk(
+  "getListCvByJobId",
+  async (jobId, thunkAPI) => {
+    try {
+      return await companyService.getListCvByJobId(jobId);
     } catch (error) {
       const message = error?.response?.data?.message;
       return thunkAPI.rejectWithValue(message);
@@ -306,6 +320,19 @@ export const companySlice = createSlice({
         state.job = action.payload;
       })
       .addCase(getJob.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(getListCvByJobId.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getListCvByJobId.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = "getListCvByJobId";
+        state.cvList = action.payload;
+      })
+      .addCase(getListCvByJobId.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

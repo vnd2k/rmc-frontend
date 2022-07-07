@@ -5,14 +5,20 @@ import { HiOutlineLocationMarker } from "react-icons/hi";
 import { useSelector, useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import { putJob, getJob, deleteJob } from "../../stores/company/companySlice";
+import {
+  putJob,
+  getJob,
+  deleteJob,
+  getListCvByJobId,
+} from "../../stores/company/companySlice";
 import { useParams } from "react-router-dom";
 import { MdCancel } from "react-icons/md";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { BsFileEarmarkPerson } from "react-icons/bs";
 
 function EditJob() {
-  const { company, job, isSuccess, isLoading } = useSelector(
+  const { company, job, isSuccess, isLoading, cvList } = useSelector(
     (state) => state.company
   );
   const dispatch = useDispatch();
@@ -55,6 +61,14 @@ function EditJob() {
       dispatch(deleteJob(id));
     }
   };
+
+  useEffect(() => {
+    if (id) {
+      dispatch(getListCvByJobId(id));
+    }
+  }, [id, dispatch]);
+
+  console.log(cvList);
   return (
     <div>
       <div className={classes.headerWrapper}>
@@ -127,6 +141,37 @@ function EditJob() {
             </form>
           )}
         </div>
+        {cvList && cvList.length > 0 ? (
+          <div className={classes.roleWrapper}>
+            <div className={classes.roleContent}>
+              <div className={classes.titleRole}>
+                <h3>List CV</h3>
+              </div>
+              <ul className={classes.ratingUl}>
+                {cvList?.map((item) => (
+                  <a
+                    href={item.cvUrl}
+                    target={"_blank"}
+                    className={classes.ratingItem}
+                  >
+                    <li className={classes.itemSearch} key={item.id}>
+                      <div className={classes.ratingBody}>
+                        <div className={classes.itemLink}>
+                          <BsFileEarmarkPerson
+                            className={classes.cvIcon}
+                          ></BsFileEarmarkPerson>
+                          {item.email}
+                        </div>
+                      </div>
+                    </li>
+                  </a>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

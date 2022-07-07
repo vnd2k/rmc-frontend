@@ -104,6 +104,16 @@ export const postReport = createAsyncThunk(
   }
 );
 
+// Post save
+export const postCv = createAsyncThunk("postCv", async (request, thunkAPI) => {
+  try {
+    return await memberService.postCv(request);
+  } catch (error) {
+    const message = error?.response?.data?.message;
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
 export const memberSlice = createSlice({
   name: "member",
   initialState,
@@ -213,6 +223,18 @@ export const memberSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
         state.member = null;
+      })
+      .addCase(postCv.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(postCv.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccessMember = "postCv";
+      })
+      .addCase(postCv.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
       });
   },
 });

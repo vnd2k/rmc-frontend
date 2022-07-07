@@ -169,6 +169,9 @@
   -ms-transform: none;
   transform: none;
 }
+.rateButton:disabled {
+  background: #5e5b5b;
+}
 .btnWrapper {
   display: flex;
   justify-content: center;

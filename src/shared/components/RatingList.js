@@ -37,7 +37,6 @@ function RatingList(props) {
     dispatch,
     user,
   ]);
-  console.log(ratingList);
   useEffect(() => {
     if (isSuccess === "deleteSuccess") {
       toast.success("Delete successfully");

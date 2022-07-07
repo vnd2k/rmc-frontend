@@ -219,3 +219,54 @@ li {
   cursor: pointer;
   color: #e85656;
 }
+.ratingItem {
+  text-decoration: none;
+}
+.ratingBody {
+  background-color: #a5bfd1;
+  padding: 8px;
+  width: 60%;
+  margin-top: 12px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.737);
+}
+.ratingBody:hover {
+  background-color: #87aad2;
+  color: #ffffff;
+}
+.ratingCommentWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-left: 8px;
+  text-align: left;
+  width: 100%;
+  justify-content: center;
+}
+.itemSearch {
+  display: flex;
+  justify-content: center;
+}
+.commentTitle {
+  display: flex;
+  justify-content: space-between;
+}
+.nameWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+}
+.itemLink {
+  text-decoration: none;
+  margin: 0;
+  font-weight: bold;
+  font-size: 14px;
+}
+.ratingUl {
+  list-style: none;
+}
+.cvIcon {
+  font-weight: bold;
+  font-size: 20px;
+  margin-right: 4px;
+}
