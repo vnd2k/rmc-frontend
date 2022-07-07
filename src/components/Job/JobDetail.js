@@ -76,7 +76,7 @@ function JobDetail() {
 
   useEffect(() => {
     if (isSuccessMember === "postCv") {
-      toast.success("Update successfully");
+      toast.success("Apply successfully");
       dispatch(reset());
     }
   }, [dispatch, isSuccessMember]);
@@ -119,6 +119,7 @@ function JobDetail() {
                   type={"file"}
                   accept={"application/pdf"}
                   onChange={handleInputCv}
+                  className={classes.inputCV}
                 ></input>
               </div>
 
