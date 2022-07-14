@@ -9,14 +9,16 @@ import {
   getJob,
   putJob,
   deleteJob,
+  getListCvByJobId,
   reset,
 } from "../../stores/company/companySlice";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { MdCancel } from "react-icons/md";
+import { BsFileEarmarkPerson } from "react-icons/bs";
 
 function DetailJob() {
-  const { isSuccess, job } = useSelector((state) => state.company);
+  const { isSuccess, job, cvList } = useSelector((state) => state.company);
   const { id = "" } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -55,6 +57,12 @@ function DetailJob() {
       dispatch(reset());
     }
   }, [isSuccess, dispatch, history]);
+
+  useEffect(() => {
+    if (id) {
+      dispatch(getListCvByJobId(id));
+    }
+  }, [id, dispatch]);
   return (
     <div>
       {id === job?.id && (
@@ -125,63 +133,38 @@ function DetailJob() {
             </form>
           </div>
 
-          <div className={classes.roleWrapper}>
-            <div className={classes.roleContent}>
-              <div className={classes.titleRole}>
-                <h3>List CV</h3>
+          {cvList && cvList.length > 0 ? (
+            <div className={classes.roleWrapper}>
+              <div className={classes.roleContent}>
+                <div className={classes.titleRole}>
+                  <h3>List CV</h3>
+                </div>
+                <ul className={classes.ratingUl}>
+                  {cvList?.map((item) => (
+                    <a
+                      href={item.cvUrl}
+                      target={"_blank"}
+                      rel={"noreferrer"}
+                      className={classes.ratingItem}
+                    >
+                      <li className={classes.itemSearch} key={item.id}>
+                        <div className={classes.ratingBody}>
+                          <div className={classes.itemLink}>
+                            <BsFileEarmarkPerson
+                              className={classes.cvIcon}
+                            ></BsFileEarmarkPerson>
+                            {item.email}
+                          </div>
+                        </div>
+                      </li>
+                    </a>
+                  ))}
+                </ul>
               </div>
-              <ul className={classes.ratingUl}>
-                {/* {reportList?.map((item) => (
-                <li className={classes.itemSearch} key={item.id}>
-                  <div className={classes.ratingBody}>
-                    <div className={classes.ratingTextWrapper}>
-                      <div className={classes.logoWrapper}>
-                        {item?.reporterAvatar ? (
-                          <img
-                            className={classes.logo}
-                            src={item?.reporterAvatar}
-                            alt="avatar"
-                          ></img>
-                        ) : (
-                          <img
-                            className={classes.logo}
-                            src="/avatarReport.jpg"
-                            alt="avatar"
-                          ></img>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className={classes.ratingCommentWrapper}>
-                      <div className={classes.commentTitle}>
-                        <div className={classes.nameWrapper}>
-                          <div className={classes.itemLink}>{item.reason}</div>
-                        </div>
-                      </div>
-                      <div className={classes.commentDescription}>
-                        <div className={classes.locationWrapper}>
-                          <h4>ReportId:</h4>
-                          <div className={classes.location}>
-                            {item.reportId}
-                          </div>
-                        </div>
-
-                        <div className={classes.infoWrapper}>
-                          <div className={classes.locationWrapper}>
-                            <h4>Reporter:</h4>
-                            <div className={classes.location}>
-                              {item.reporter}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              ))} */}
-              </ul>
             </div>
-          </div>
+          ) : (
+            <></>
+          )}
         </div>
       )}
     </div>

@@ -4,10 +4,17 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { getReportById, putReport } from "../../stores/admin/adminSlice";
+import {
+  getReportById,
+  putReport,
+  deleteReport,
+  reset,
+} from "../../stores/admin/adminSlice";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Link } from "react-router-dom";
+import { MdCancel } from "react-icons/md";
+import { useHistory } from "react-router-dom";
 
 function DetailReport() {
   const { isSuccessAdmin, report, isLoading } = useSelector(
@@ -20,10 +27,17 @@ function DetailReport() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const history = useHistory();
+
+  const handleDelete = () => {
+    if (id) {
+      dispatch(deleteReport(id));
+    }
+  };
 
   const handle = (data) => {
     if (report) {
-      const reportId = report?.id;
+      const reportId = report?.reportId;
       dispatch(putReport({ data, reportId }));
     }
   };
@@ -36,8 +50,18 @@ function DetailReport() {
   useEffect(() => {
     if (isSuccessAdmin === "putReport") {
       toast.success("Edit successfully");
+      history.push(`/manage-report`);
+      dispatch(reset());
     }
-  }, [isSuccessAdmin, dispatch]);
+  }, [isSuccessAdmin, dispatch, history]);
+
+  useEffect(() => {
+    if (isSuccessAdmin === "deleteReport") {
+      toast.success("Delete successfully");
+      history.push(`/manage-report`);
+      dispatch(reset());
+    }
+  }, [isSuccessAdmin, dispatch, history]);
 
   const ratingLink = (id) => {
     if (id) {
@@ -60,6 +84,10 @@ function DetailReport() {
                   </div>
                   <div className={classes.location}>{report?.reportId}</div>
                 </div>
+                <MdCancel
+                  onClick={() => handleDelete()}
+                  className={classes.deleteBtn}
+                ></MdCancel>
                 <Link
                   to={ratingLink(report?.ratingId)}
                   className={classes.ratingItem}

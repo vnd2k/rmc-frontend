@@ -225,9 +225,8 @@ li {
 .ratingBody {
   background-color: #a5bfd1;
   padding: 8px;
-  width: 60%;
+  width: 100%;
   margin-top: 12px;
-  text-align: center;
   color: rgba(255, 255, 255, 0.737);
 }
 .ratingBody:hover {
@@ -259,6 +258,7 @@ li {
 .itemLink {
   text-decoration: none;
   margin: 0;
+  margin-left: 20%;
   font-weight: bold;
   font-size: 14px;
 }

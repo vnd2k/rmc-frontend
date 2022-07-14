@@ -17,7 +17,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function CompanyPost(props) {
   const { companyById, jobList } = useSelector((state) => state.company);
-  const { saved, isSuccessMember, member } = useSelector(
+  const { saved, isSuccessSaved, member } = useSelector(
     (state) => state.member
   );
   const { ratingList, isLoading } = useSelector((state) => state.rating);
@@ -54,7 +54,7 @@ function CompanyPost(props) {
     if (id) {
       dispatch(getSavedStatus(id));
     }
-  }, [id, dispatch, isSuccessMember]);
+  }, [id, dispatch, isSuccessSaved]);
 
   useEffect(() => {
     if (id) {
@@ -62,14 +62,14 @@ function CompanyPost(props) {
     }
   }, [dispatch, id]);
   useEffect(() => {
-    if (saved && isSuccessMember === "postSuccess") {
+    if (saved && isSuccessSaved === "postSuccess") {
       if (!saved?.checked) {
         toast.info("Added to saved list");
       } else {
         toast.info("Removed to saved list");
       }
     }
-  }, [dispatch, isSuccessMember, member, saved]);
+  }, [dispatch, isSuccessSaved, member, saved]);
 
   const handleSave = () => {
     dispatch(postSave(id));
@@ -145,7 +145,12 @@ function CompanyPost(props) {
               </div>
               <div className={classes.locationWrapper}>
                 <BiLink color="#ccc" fontSize="1.3em" />
-                <a className={classes.location} href={companyById?.website}>
+                <a
+                  className={classes.location}
+                  target={"_blank"}
+                  rel={"noreferrer"}
+                  href={companyById?.website}
+                >
                   <span>{companyById?.website}</span>
                 </a>
               </div>
@@ -324,8 +329,12 @@ function CompanyPost(props) {
                   <div className={classes.ratingLiWrapper}>
                     <ul className={classes.ratingUl}>
                       {jobList?.map((item) => (
-                        <Link to={jobLink(item.id)} className={classes.linkJob}>
-                          <li className={classes.itemSearch} key={item.id}>
+                        <Link
+                          to={jobLink(item.id)}
+                          className={classes.linkJob}
+                          key={item.id}
+                        >
+                          <li className={classes.itemSearch}>
                             <div className={classes.ratingBody}>
                               <div className={classes.ratingTextWrapper}>
                                 <div className={classes.logoWrapper}>

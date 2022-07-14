@@ -1,8 +1,8 @@
 import classes from "./ManageReport.module.css";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getListReport, deleteReport } from "../../../stores/admin/adminSlice";
-import { MdCancel } from "react-icons/md";
+import { getListReport } from "../../../stores/admin/adminSlice";
+
 import { Link } from "react-router-dom";
 import Spinner from "../../../shared/components/Spinner";
 
@@ -14,11 +14,7 @@ function ManageReport(props) {
   useEffect(() => {
     dispatch(getListReport());
   }, [dispatch, isSuccess]);
-  const handleDelete = (reportId) => {
-    if (reportId) {
-      dispatch(deleteReport(reportId));
-    }
-  };
+
   const reportLink = (reportId) => {
     return `/detail-report/${reportId}`;
   };
@@ -70,12 +66,12 @@ function ManageReport(props) {
                                         {item.reason}
                                       </div>
                                     </div>
-                                    <MdCancel
+                                    {/* <MdCancel
                                       onClick={() =>
                                         handleDelete(item.reportId)
                                       }
                                       className={classes.deleteBtn}
-                                    ></MdCancel>
+                                    ></MdCancel> */}
                                   </div>
                                   <div className={classes.commentDescription}>
                                     <div className={classes.locationWrapper}>

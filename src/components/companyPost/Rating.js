@@ -237,10 +237,11 @@ function Rating() {
               <h3>RATING ROLE</h3>
             </div>
             <ul>
-              <li>Không sử dụng từ ngữ mang ý xúc phạm, miệt thị</li>
-              <li>Không cung cấp thông tin cá nhân</li>
+              <li>Do not use offensive words or hate speech</li>
+              <li>Do not provide personal information</li>
               <li>
-                Không cung cấp thông tin bảo mật, bí mật kinh doanh của công ty
+                Do not provide confidential information, business secrets of the
+                company
               </li>
             </ul>
           </div>

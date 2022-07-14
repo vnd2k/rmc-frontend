@@ -15,9 +15,13 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function JobDetail() {
+  const { user } = useSelector((state) => state.auth);
   const { company, job, jobList } = useSelector((state) => state.company);
-  const { isSuccessMember, isError } = useSelector((state) => state.member);
+  const { isSuccessMember, message, isLoading } = useSelector(
+    (state) => state.member
+  );
   const [cvFile, setCvFile] = useState();
+  const [fileName, setFileName] = useState("No CV choosen ");
   const dispatch = useDispatch();
   const { id = "" } = useParams();
 
@@ -51,6 +55,8 @@ function JobDetail() {
 
   const handleInputCv = (e) => {
     const file = e.target.files[0];
+    console.log(e);
+    setFileName(e.target.files[0].name);
     if (!file) {
       return;
     }
@@ -82,11 +88,11 @@ function JobDetail() {
   }, [dispatch, isSuccessMember]);
 
   useEffect(() => {
-    if (isError) {
+    if (message === "You're already apply for this job!") {
       toast.error("You're already apply this job");
       dispatch(reset());
     }
-  }, [dispatch, isError]);
+  }, [dispatch, message]);
 
   return (
     <div>
@@ -114,25 +120,6 @@ function JobDetail() {
                 <p className={classes.titleRate}>Job description</p>
                 <p className={classes.jobDescription}>{job?.description}</p>
               </div>
-              <div className={classes.btnWrapper}>
-                <input
-                  type={"file"}
-                  accept={"application/pdf"}
-                  onChange={handleInputCv}
-                  className={classes.inputCV}
-                ></input>
-              </div>
-
-              <div className={classes.btnWrapper}>
-                <button
-                  type="submit"
-                  disabled={!cvFile}
-                  className={classes.rateButton}
-                  onClick={handleSubmitCv}
-                >
-                  Apply CV
-                </button>
-              </div>
             </div>
           )}
         </div>
@@ -147,8 +134,12 @@ function JobDetail() {
                   <div className={classes.ratingLiWrapper}>
                     <ul className={classes.ratingUl}>
                       {jobList?.map((item) => (
-                        <Link to={jobLink(item.id)} className={classes.linkJob}>
-                          <li className={classes.itemSearch} key={item.id}>
+                        <Link
+                          to={jobLink(item.id)}
+                          className={classes.linkJob}
+                          key={item.id}
+                        >
+                          <li className={classes.itemSearch}>
                             <div className={classes.ratingBody}>
                               <div className={classes.ratingTextWrapper}>
                                 <div className={classes.logoWrapper}>
@@ -177,6 +168,43 @@ function JobDetail() {
           ) : (
             <></>
           ))}
+      </div>
+
+      <div className={classes.formWrapper}>
+        {user?.userDetails?.role === "MEMBER" && (
+          <div className={classes.formCard}>
+            <div className={classes.formContent}>
+              <div className={classes.applyForm}>
+                <div className={classes.titleCV}>
+                  <p className={classes.titleRate}>Apply now</p>
+                </div>
+                <div className={classes.titleCV}>
+                  <span className={classes.fileChosen}>{fileName}</span>
+                  <label className={classes.labelCV} htmlFor="files">
+                    Choose CV
+                  </label>
+                  <input
+                    type={"file"}
+                    id={"files"}
+                    accept={"application/pdf"}
+                    onChange={handleInputCv}
+                    hidden
+                  ></input>
+                </div>
+              </div>
+              <div className={classes.btnWrapper}>
+                <button
+                  type="submit"
+                  disabled={!cvFile || isLoading}
+                  className={classes.rateButton}
+                  onClick={handleSubmitCv}
+                >
+                  Submit CV
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -141,12 +141,12 @@ function RatingItem(props) {
             <div className={classes.dateRating}>{item.createdAt}</div>
           </div>
           <div className={classes.commentDescription}>
-            <p className={classes.comment}>
+            <div className={classes.comment}>
               <h4>What i liked</h4>
               {item.positivePoint}
               <h4>Suggestions for improvement</h4>
               {item.pointToImprove}
-            </p>
+            </div>
           </div>
           <div className={classes.ratingFooter}>
             <div className={classes.voteRatingWrapper}>

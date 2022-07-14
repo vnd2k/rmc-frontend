@@ -14,7 +14,6 @@ function MainNavigation() {
     dispatch(reset());
     history.push("/");
   };
-
   return (
     <header className={classes.header}>
       <div>
@@ -28,7 +27,11 @@ function MainNavigation() {
           <ul>
             <li className={classes.buttonWrapper}>
               <Link to={"/account"}>
-                <button className={classes.button1}>Profile</button>
+                {user?.userDetails?.role === "ADMIN" ? (
+                  <button className={classes.button1}>Manage</button>
+                ) : (
+                  <button className={classes.button1}>Profile</button>
+                )}
               </Link>
             </li>
             <li className={classes.buttonWrapper}>

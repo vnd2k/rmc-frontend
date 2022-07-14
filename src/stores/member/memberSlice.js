@@ -7,6 +7,7 @@ const initialState = {
   saved: null,
   isError: false,
   isSuccessMember: null,
+  isSuccessSaved: null,
   isChecked: null,
   isLoading: false,
   isSaved: null,
@@ -121,6 +122,7 @@ export const memberSlice = createSlice({
     reset: (state) => {
       state.isLoading = false;
       state.isSuccessMember = null;
+      state.isSuccessSaved = null;
       state.isError = false;
       state.message = "";
     },
@@ -146,7 +148,7 @@ export const memberSlice = createSlice({
       })
       .addCase(getSavedStatus.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccessMember = "getSavedSuccess";
+        state.isSuccessSaved = "getSavedSuccess";
         state.saved = action.payload;
       })
       .addCase(getSavedStatus.rejected, (state, action) => {
@@ -175,7 +177,7 @@ export const memberSlice = createSlice({
       })
       .addCase(postSave.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSuccessMember = "postSuccess";
+        state.isSuccessSaved = "postSuccess";
       })
       .addCase(postSave.rejected, (state, action) => {
         state.isLoading = false;

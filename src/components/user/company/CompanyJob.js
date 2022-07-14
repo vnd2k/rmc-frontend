@@ -79,7 +79,13 @@ function CompanyJob(props) {
                     </div>
                   </>
                 ) : (
-                  <p></p>
+                  <div className={classes.logoWrapper}>
+                    <img
+                      className={classes.noData}
+                      src={"/noData.svg"}
+                      alt="No data"
+                    ></img>
+                  </div>
                 ))}
             </>
           )}

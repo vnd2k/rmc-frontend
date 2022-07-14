@@ -17,7 +17,6 @@ function RatingList(props) {
     (state) => state.rating
   );
   const { isSuccessMember } = useSelector((state) => state.member);
-  const { user } = useSelector((state) => state.auth);
   useEffect(() => {
     if (props?.companyId) {
       const companyId = props?.companyId;
@@ -35,7 +34,6 @@ function RatingList(props) {
     isSuccess,
     isSuccessMember,
     dispatch,
-    user,
   ]);
   useEffect(() => {
     if (isSuccess === "deleteSuccess") {
@@ -55,7 +53,7 @@ function RatingList(props) {
                   <div className={classes.ratingLiWrapper}>
                     <ul className={classes.ratingUl}>
                       {ratingList?.map((item) => (
-                        <RatingItem item={item}></RatingItem>
+                        <RatingItem item={item} key={item.id}></RatingItem>
                       ))}
                     </ul>
                     <div className={classes.pagination}>

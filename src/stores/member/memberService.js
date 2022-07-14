@@ -55,7 +55,6 @@ const updateMemberAvatar = async (request) => {
 
 // Post report
 const postReport = async (request) => {
-  console.log(request);
   const response = await apiService().post(
     `${endpoint}/member/report/${request.ratingId}`,
     {

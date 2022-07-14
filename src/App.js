@@ -27,7 +27,7 @@ import ManageCompany from "./components/user/admin/ManageCompany";
 import UpdateCompany from "./shared/components/UpdateCompany";
 import AddUser from "./shared/components/AddUser";
 import ManageReport from "./components/user/admin/ManageReport";
-import JobDetail from "./components/Job/JobDetail";
+import JobDetail from "./components/job/JobDetail";
 import ManageMember from "./components/user/admin/ManageMember";
 import ManageRating from "./components/user/admin/ManageRating";
 import DetailRating from "./shared/components/DetailRating";

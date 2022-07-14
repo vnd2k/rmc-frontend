@@ -45,8 +45,9 @@ function SearchCompany() {
                     <Link
                       to={companyLink(item.id)}
                       className={classes.itemLink}
+                      key={item.id}
                     >
-                      <li className={classes.itemSearch} key={item.id}>
+                      <li className={classes.itemSearch}>
                         <GrTechnology
                           className={classes.resultIcon}
                         ></GrTechnology>

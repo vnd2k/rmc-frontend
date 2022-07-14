@@ -114,3 +114,7 @@
   font-size: 30px;
   font-weight: bold;
 }
+.noData {
+  height: 50vh;
+  width: 50vw;
+}

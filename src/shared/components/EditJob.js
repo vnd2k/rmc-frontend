@@ -67,8 +67,6 @@ function EditJob() {
       dispatch(getListCvByJobId(id));
     }
   }, [id, dispatch]);
-
-  console.log(cvList);
   return (
     <div>
       <div className={classes.headerWrapper}>

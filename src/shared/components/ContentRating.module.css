@@ -64,7 +64,7 @@
 }
 .btnWrapper {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
 }
 .errorMsg {
   font-size: small;
