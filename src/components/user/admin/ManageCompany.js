@@ -3,20 +3,26 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { CgArrowRightO } from "react-icons/cg";
-import { getListCompany } from "../../../stores/admin/adminSlice";
+import {
+  getListCompany,
+  searchListCompany,
+} from "../../../stores/admin/adminSlice";
 import {
   HiOutlineIdentification,
   HiOutlineLocationMarker,
   HiOutlineCog,
 } from "react-icons/hi";
-import { BiMailSend, BiBuildings, BiLink } from "react-icons/bi";
+import { BiMailSend, BiBuildings, BiLink, BiSearchAlt } from "react-icons/bi";
 import { BsPeople } from "react-icons/bs";
 import { MdVerifiedUser, MdOutlineVerifiedUser } from "react-icons/md";
 import Spinner from "../../../shared/components/Spinner";
+import { useForm } from "react-hook-form";
 
 function ManageCompany(props) {
   const dispatch = useDispatch();
   const { companyList, isLoading } = useSelector((state) => state.admin);
+  const { register, handleSubmit } = useForm();
+
   useEffect(() => {
     dispatch(getListCompany());
   }, [dispatch]);
@@ -28,6 +34,12 @@ function ManageCompany(props) {
   const editCompanyLink = (id) => {
     return `/edit-company/${id}`;
   };
+
+  const handle = (character) => {
+    if (character) {
+      dispatch(searchListCompany(character));
+    }
+  };
   return (
     <div className={classes.container}>
       <div className={classes.title}>
@@ -35,9 +47,26 @@ function ManageCompany(props) {
       </div>
       <div className={classes.ratingList}>
         <div className={classes.containerComment}>
-          <Link className={classes.btnAdd} to={"/add-user"}>
-            Add User
-          </Link>
+          <div className={classes.headerWrapper}>
+            <Link className={classes.btnAdd} to={"/add-user"}>
+              Add User
+            </Link>
+            <form
+              className={classes.searchForm}
+              onSubmit={handleSubmit(handle)}
+            >
+              <input
+                type={"text"}
+                className={classes.searchArea}
+                placeholder={"Search by Id or Name"}
+                {...register("character")}
+              ></input>
+              <button type={"submit"} className={classes.searchBtn}>
+                <BiSearchAlt />
+              </button>
+            </form>
+          </div>
+
           {isLoading ? (
             <Spinner />
           ) : (
@@ -175,7 +204,13 @@ function ManageCompany(props) {
                     </div>
                   </>
                 ) : (
-                  <p></p>
+                  <div className={classes.logoWrapper}>
+                    <img
+                      className={classes.noData}
+                      src={"/noData.svg"}
+                      alt="No data"
+                    ></img>
+                  </div>
                 ))}
             </>
           )}

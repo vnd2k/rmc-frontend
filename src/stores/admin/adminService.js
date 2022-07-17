@@ -8,6 +8,14 @@ const getListCompany = async () => {
   return response.data;
 };
 
+// Search company
+const searchListCompany = async (param) => {
+  const response = await apiService().get(
+    `${endpoint}/admin/search/company/${param.character}`
+  );
+  return response.data;
+};
+
 // Get company by id
 const getCompanyById = async (companyId) => {
   const response = await apiService().get(`${endpoint}/company/${companyId}`);
@@ -68,6 +76,14 @@ const deleteReport = async (reportId) => {
 // Get list member
 const getListMember = async () => {
   const response = await apiService().get(`${endpoint}/admin/list-member`);
+  return response.data;
+};
+
+// Search member
+const searchListMember = async (param) => {
+  const response = await apiService().get(
+    `${endpoint}/admin/search/member/${param.character}`
+  );
   return response.data;
 };
 
@@ -149,6 +165,8 @@ const adminService = {
   getReportByRating,
   getReportById,
   putReport,
+  searchListCompany,
+  searchListMember,
 };
 
 export default adminService;

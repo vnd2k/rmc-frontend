@@ -28,6 +28,19 @@ export const getListCompany = createAsyncThunk(
   }
 );
 
+// Search company
+export const searchListCompany = createAsyncThunk(
+  "searchListCompany",
+  async (character, thunkAPI) => {
+    try {
+      return await adminService.searchListCompany(character);
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 // Get company by id
 export const getCompanyById = createAsyncThunk(
   "getCompanyById",
@@ -112,6 +125,19 @@ export const getListMember = createAsyncThunk(
   async (thunkAPI) => {
     try {
       return await adminService.getListMember();
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
+// Search member
+export const searchListMember = createAsyncThunk(
+  "searchListMember",
+  async (character, thunkAPI) => {
+    try {
+      return await adminService.searchListMember(character);
     } catch (error) {
       const message = error?.response?.data?.message;
       return thunkAPI.rejectWithValue(message);
@@ -246,6 +272,19 @@ export const adminSlice = createSlice({
         state.isError = true;
         state.message = action.payload;
       })
+      .addCase(searchListCompany.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(searchListCompany.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccessAdmin = "searchListCompany";
+        state.companyList = action.payload;
+      })
+      .addCase(searchListCompany.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
       .addCase(getCompanyById.pending, (state) => {
         state.isLoading = true;
       })
@@ -329,6 +368,19 @@ export const adminSlice = createSlice({
         state.memberList = action.payload;
       })
       .addCase(getListMember.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      .addCase(searchListMember.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(searchListMember.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccessAdmin = "searchListMember";
+        state.memberList = action.payload;
+      })
+      .addCase(searchListMember.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;

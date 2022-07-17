@@ -2,17 +2,24 @@ import classes from "./ManageMember.module.css";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { getListMember, deleteMember } from "../../../stores/admin/adminSlice";
+import {
+  getListMember,
+  deleteMember,
+  searchListMember,
+} from "../../../stores/admin/adminSlice";
 import { HiOutlineIdentification } from "react-icons/hi";
-import { BiMailSend } from "react-icons/bi";
+import { BiMailSend, BiSearchAlt } from "react-icons/bi";
 import { MdCancel } from "react-icons/md";
 import Spinner from "../../../shared/components/Spinner";
+import { useForm } from "react-hook-form";
 
 function ManageMember(props) {
   const dispatch = useDispatch();
   const { memberList, isSuccess, isLoading } = useSelector(
     (state) => state.admin
   );
+  const { register, handleSubmit } = useForm();
+
   useEffect(() => {
     dispatch(getListMember());
   }, [dispatch, isSuccess]);
@@ -22,6 +29,12 @@ function ManageMember(props) {
       dispatch(deleteMember(id));
     }
   };
+
+  const handle = (character) => {
+    if (character) {
+      dispatch(searchListMember(character));
+    }
+  };
   return (
     <div className={classes.container}>
       <div className={classes.title}>
@@ -29,9 +42,25 @@ function ManageMember(props) {
       </div>
       <div className={classes.ratingList}>
         <div className={classes.containerComment}>
-          <Link className={classes.btnAdd} to={"/add-user"}>
-            Add User
-          </Link>
+          <div className={classes.headerWrapper}>
+            <Link className={classes.btnAdd} to={"/add-user"}>
+              Add User
+            </Link>
+            <form
+              className={classes.searchForm}
+              onSubmit={handleSubmit(handle)}
+            >
+              <input
+                type={"text"}
+                className={classes.searchArea}
+                placeholder={"Search by Id or Nickname"}
+                {...register("character")}
+              ></input>
+              <button type={"submit"} className={classes.searchBtn}>
+                <BiSearchAlt />
+              </button>
+            </form>
+          </div>
           {isLoading ? (
             <Spinner />
           ) : (
@@ -96,7 +125,13 @@ function ManageMember(props) {
                     </div>
                   </>
                 ) : (
-                  <p></p>
+                  <div className={classes.logoWrapper}>
+                    <img
+                      className={classes.noData}
+                      src={"/noData.svg"}
+                      alt="No data"
+                    ></img>
+                  </div>
                 ))}
             </>
           )}
