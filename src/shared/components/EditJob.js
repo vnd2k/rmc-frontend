@@ -10,6 +10,7 @@ import {
   getJob,
   deleteJob,
   getListCvByJobId,
+  deleteCv,
 } from "../../stores/company/companySlice";
 import { useParams } from "react-router-dom";
 import { MdCancel } from "react-icons/md";
@@ -66,7 +67,19 @@ function EditJob() {
     if (id) {
       dispatch(getListCvByJobId(id));
     }
-  }, [id, dispatch]);
+  }, [id, dispatch, isSuccess]);
+
+  const handleDeleteCV = (cvId) => {
+    if (cvId) {
+      dispatch(deleteCv(cvId));
+    }
+  };
+
+  useEffect(() => {
+    if (isSuccess === "deleteCv") {
+      toast.success("Delete CV successfully");
+    }
+  }, [isSuccess]);
   return (
     <div>
       <div className={classes.headerWrapper}>
@@ -147,23 +160,25 @@ function EditJob() {
               </div>
               <ul className={classes.ratingUl}>
                 {cvList?.map((item) => (
-                  <a
-                    href={item.cvUrl}
-                    target={"_blank"}
-                    rel={"noreferrer"}
-                    className={classes.ratingItem}
-                  >
-                    <li className={classes.itemSearch} key={item.id}>
-                      <div className={classes.ratingBody}>
-                        <div className={classes.itemLink}>
-                          <BsFileEarmarkPerson
-                            className={classes.cvIcon}
-                          ></BsFileEarmarkPerson>
-                          {item.email}
-                        </div>
-                      </div>
-                    </li>
-                  </a>
+                  <li className={classes.itemSearch} key={item.id}>
+                    <div className={classes.ratingBody}>
+                      <a
+                        href={item.cvUrl}
+                        target={"_blank"}
+                        rel={"noreferrer"}
+                        className={classes.itemLink}
+                      >
+                        <BsFileEarmarkPerson
+                          className={classes.cvIcon}
+                        ></BsFileEarmarkPerson>
+                        {item.email}
+                      </a>
+                      <MdCancel
+                        onClick={() => handleDeleteCV(item.id)}
+                        className={classes.deleteBtnCV}
+                      ></MdCancel>
+                    </div>
+                  </li>
                 ))}
               </ul>
             </div>

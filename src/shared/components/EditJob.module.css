@@ -219,10 +219,22 @@ li {
   cursor: pointer;
   color: #e85656;
 }
+
+.deleteBtnCV {
+  font-size: 1rem;
+  margin-left: 5%;
+  color: #ecdada;
+}
+.deleteBtnCV:hover {
+  cursor: pointer;
+  color: #fb0e0e;
+}
+
 .ratingItem {
   text-decoration: none;
 }
 .ratingBody {
+  display: flex;
   background-color: #a5bfd1;
   padding: 8px;
   width: 100%;
@@ -257,6 +269,7 @@ li {
 }
 .itemLink {
   text-decoration: none;
+  color: white;
   margin: 0;
   margin-left: 20%;
   font-weight: bold;
@@ -266,6 +279,7 @@ li {
   list-style: none;
 }
 .cvIcon {
+  color: white;
   font-weight: bold;
   font-size: 20px;
   margin-right: 4px;

@@ -161,6 +161,19 @@ export const getListCvByJobId = createAsyncThunk(
   }
 );
 
+// Delete cv
+export const deleteCv = createAsyncThunk(
+  "deleteCv",
+  async (cvId, thunkAPI) => {
+    try {
+      return await companyService.deleteCv(cvId);
+    } catch (error) {
+      const message = error?.response?.data?.message;
+      return thunkAPI.rejectWithValue(message);
+    }
+  }
+);
+
 export const companySlice = createSlice({
   name: "company",
   initialState,
@@ -336,7 +349,20 @@ export const companySlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = action.payload;
-      });
+      })
+      .addCase(deleteCv.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(deleteCv.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSuccess = "deleteCv";
+      })
+      .addCase(deleteCv.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = action.payload;
+      })
+      ;
   },
 });
 

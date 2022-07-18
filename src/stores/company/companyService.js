@@ -101,6 +101,12 @@ const getListCvByJobId = async (jobId) => {
   return response.data;
 };
 
+// Delete cv
+const deleteCv = async (cvId) => {
+  const response = await apiService().delete(`${endpoint}/company/cv/${cvId}`);
+  return response.data;
+};
+
 const companyService = {
   getCompanyInfo,
   searchCompany,
@@ -113,6 +119,7 @@ const companyService = {
   deleteJob,
   getListJobById,
   getListCvByJobId,
+  deleteCv,
 };
 
 export default companyService;
